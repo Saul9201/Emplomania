@@ -1,0 +1,121 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.QueriesViews.BankDepositUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:model="clr-namespace:Emplomania.UI.Model"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="787.5" d:DesignWidth="1300">
+
+    <StackPanel Width="1170">
+        <DockPanel Width="702" Margin="{StaticResource StackPanelItemMargin}">
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Fecha de Inicio"/>
+                <DatePicker Style="{StaticResource EMDatePickerStyle}"
+                                Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Fecha Final"/>
+                <DatePicker Style="{StaticResource EMDatePickerStyle}"
+                                Width="200"/>
+            </StackPanel>
+            <Button Content="BUSCAR" VerticalAlignment="Bottom"/>
+        </DockPanel>
+        <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
+               Content="Resultados de la búsqueda"
+               Margin="{StaticResource StackPanelItemMargin}"/>
+
+        <Grid Height="520" VerticalAlignment="Top" Margin="{StaticResource StackPanelItemMargin}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Label Content="Usuario" Width="94" Margin="1,0,1,0"/>
+                <Label Content="Tipo de usuario" Width="127" Margin="1,0,1,0"/>
+                <Label Content="No. transacción" Width="127" Margin="1,0,1,0"/>
+                <Label Content="Monto" Width="94" Margin="1,0,1,0"/>
+                <Label Content="Servicio que paga" Width="127" Margin="1,0,1,0"/>
+                <Label Content="Fecha" Width="94" Margin="1,0,40,0"/>
+            </StackPanel>
+
+            <telerik:RadDataPager Grid.Row="3"
+                              x:Name="radDataPager1"
+                              NumericButtonCount="5"
+                              HorizontalAlignment="Center"
+                              BorderThickness="0"
+							  PageSize="15" FontSize="12" 
+							  DisplayMode="FirstLastPreviousNextNumeric"
+							  Source="{Binding UserClientCollection}"
+							  IsTotalItemCountFixed="True"
+                              Margin="0,10,0,10"/>
+
+            <ListView  ItemsSource="{Binding PagedSource, ElementName=radDataPager1}"
+                       Grid.Row="1"
+                       HorizontalAlignment="Center" 
+                       Style="{StaticResource EMBasicListViewStyle}" >
+
+                <ListView.Resources>
+                    <Style x:Key="{x:Type Label}" TargetType="{x:Type Label}" BasedOn="{StaticResource {x:Type Label}}">
+                        <Setter Property="Margin" Value="0,-2,0,0"/>
+                        <Setter Property="FontSize" Value="13"/>
+                    </Style>
+                </ListView.Resources>
+
+                <ListView.ItemTemplate>
+                    <ItemContainerTemplate DataType="{x:Type model:UserClientModel}">
+                        <StackPanel x:Name="CentralElement" Orientation="Horizontal" Background="Transparent">
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="94" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding ID}"/>
+                            </Border>
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="127" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding TipoUsuario}"/>
+                            </Border>
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="127" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding NoTransaccion}"/>
+                            </Border>
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="94" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding Monto}"/>
+                            </Border>
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="127" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding ServicioQuePaga}" />
+                            </Border>
+                            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="94" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                                <Label Content="{Binding Date}" />
+                            </Border>
+                            <Button x:Name="ButtonMoney" Style="{StaticResource EMMoneyIconButtonStyle}"
+                                    Height="25"  Margin="1,0,1,0" Visibility="Hidden"/>
+                        </StackPanel>
+
+                        <ItemContainerTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True" SourceName="CentralElement">
+                                <Setter Property="Visibility" Value="Visible" TargetName="ButtonMoney"/>
+
+                            </Trigger>
+                        </ItemContainerTemplate.Triggers>
+                    </ItemContainerTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Separator Grid.Row="2" Style="{StaticResource EMSearchHeaderSeparatorStyle}" Margin="0,2,0,2"/>
+
+        </Grid>
+        <StackPanel Orientation="Horizontal" Grid.Row="4" 
+                        HorizontalAlignment="Center">
+            <Button Content="EXPORTAR" Margin="0,0,30,0"/>
+            <Button Content="IMPRIMIR"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

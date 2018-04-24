@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.FormViews.InsertCoursView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Emplomania.UI.Views.FormViews"
+             mc:Ignorable="d" 
+             d:DesignHeight="1173" d:DesignWidth="1300">
+    
+    <StackPanel Width="970">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Nombre del curso"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Categoría"/>
+            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}" Width="Auto" Height="215"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Detalles del curso o materia"/>
+            <TextBox Width="Auto" Height="125" Style="{StaticResource EMLargeTextBoxStyle}"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Duración del curso"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Frecuencia"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Nombre del curso"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Costo"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Tiempo para matricular"/>
+            <TextBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Contactar a"/>
+            <TextBox Width="Auto" Height="90" Style="{StaticResource EMLargeTextBoxStyle}"/>
+        </StackPanel>
+        <Button Content="INSERTAR"/>
+
+    </StackPanel>
+</UserControl>

@@ -1,0 +1,159 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientViews.InsertClient_CreatePerfil2View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="735.038" d:DesignWidth="1300">
+
+    <StackPanel Width="970" DataContext="{Binding InsertWorkerModel}">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="CURRÍCULUM" 
+                   Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <Label>Nivel de escolariad *</Label>
+                    <ComboBox Width="570"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=SchoolGrades}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding SchoolGrade}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <Label>Graduado de *</Label>
+                    <ComboBox Width="570"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Specialities}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Specialty}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <Label>Otros cursos</Label>
+                    <!--<ComboBox Width="570"/>-->
+                    <telerik:RadComboBox Width="570" EmptyText="Selecciona los cursos" FontFamily="Segoe UI"
+                             AllowMultipleSelection="True"
+                             ClearSelectionButtonContent="Deseleccionar todo"
+					         ClearSelectionButtonVisibility="Visible"
+                             ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Courses}"
+                             DisplayMemberPath="Name"
+                             MultipleSelectionSeparator=","
+                             TextSearch.TextPath="Name" 
+                             IsEditable="false">
+                        <i:Interaction.Behaviors>
+                            <nomencl:MultiselectBehavior SelectedItems="{Binding SelectedCourses}"/>
+                        </i:Interaction.Behaviors>
+                    </telerik:RadComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <Label>Otros</Label>
+                    <TextBox Width="570"
+                             Text="{Binding WorkerVO.OtherCourses}"/>
+                    
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <Label>Conozco el idioma</Label>
+                        <ComboBox Width="240" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl0.Language}"/>
+                        <ComboBox Width="240" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl1.Language}"/>
+                        <ComboBox Width="240" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl2.Language}"/>
+                        <ComboBox Width="240" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl3.Language}"/>
+                        <ComboBox Width="240" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl4.Language}"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <Label>Nivel de idioma</Label>
+                        <ComboBox Width="327" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl0.LanguageLevel}"/>
+                        <ComboBox Width="327" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl1.LanguageLevel}"/>
+                        <ComboBox Width="327" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl2.LanguageLevel}"/>
+                        <ComboBox Width="327" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl3.LanguageLevel}"/>
+                        <ComboBox Width="327" 
+                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                  DisplayMemberPath="Name"
+                                  SelectedValue="{Binding Wl4.LanguageLevel}"/>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="TRAYECTORIA LABORAL Y REFERENCIAS" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <StackPanel Margin="0,10,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Lugar"/>
+                    <TextBox Width="165" Text="{Binding Wr0.Place}"/>
+                    <TextBox Width="165" Text="{Binding Wr1.Place}"/>
+                    <TextBox Width="165" Text="{Binding Wr2.Place}"/>
+                    <TextBox Width="165" Text="{Binding Wr3.Place}"/>
+                    <TextBox Width="165" Text="{Binding Wr4.Place}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Ocupación"/>
+                    <TextBox Width="165" Text="{Binding Wr0.Occupation}"/>
+                    <TextBox Width="165" Text="{Binding Wr1.Occupation}"/>
+                    <TextBox Width="165" Text="{Binding Wr2.Occupation}"/>
+                    <TextBox Width="165" Text="{Binding Wr3.Occupation}"/>
+                    <TextBox Width="165" Text="{Binding Wr4.Occupation}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Tiempo"/>
+                    <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  Text="{Binding Wr0.WorkedTime}"/>
+                    <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  Text="{Binding Wr1.WorkedTime}"/>
+                    <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  Text="{Binding Wr2.WorkedTime}"/>
+                    <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  Text="{Binding Wr3.WorkedTime}"/>
+                    <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  Text="{Binding Wr4.WorkedTime}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Persona de contacto"/>
+                    <TextBox Width="165"  Text="{Binding Wr0.ContactPerson}"/>
+                    <TextBox Width="165"  Text="{Binding Wr1.ContactPerson}"/>
+                    <TextBox Width="165"  Text="{Binding Wr2.ContactPerson}"/>
+                    <TextBox Width="165"  Text="{Binding Wr3.ContactPerson}"/>
+                    <TextBox Width="165"  Text="{Binding Wr4.ContactPerson}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Teléfono"/>
+                    <TextBox Width="165" Text="{Binding Wr0.Phone}"/>
+                    <TextBox Width="165" Text="{Binding Wr1.Phone}"/>
+                    <TextBox Width="165" Text="{Binding Wr2.Phone}"/>
+                    <TextBox Width="165" Text="{Binding Wr3.Phone}"/>
+                    <TextBox Width="165" Text="{Binding Wr4.Phone}"/>
+                </StackPanel>
+
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="0,0,40,0" Content="CANCELAR"
+                    Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
+            <Button Content="GUARDAR"
+                    Command="{Binding DataContext.DisplayInsertClientWorker3View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

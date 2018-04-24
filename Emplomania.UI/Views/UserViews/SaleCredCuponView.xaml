@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.SaleCredCuponView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1300">
+    <StackPanel Width="970" 
+                HorizontalAlignment="Center">
+        <DockPanel Width="702" Margin="{StaticResource StackPanelItemMargin}">
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Tipo de Usuario"/>
+                <ComboBox Width="200"
+                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type nomencl:UserClientRole}}}"
+                          SelectedValue="{Binding SelectedClientType}"
+                          DisplayMemberPath="Description"
+                          SelectedValuePath="Value"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Usuario"/>
+                <TextBox Width="200" Text="{Binding UserName}"/>
+            </StackPanel>
+            <Button Content="BUSCAR" VerticalAlignment="Bottom"/>
+        </DockPanel>
+        <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
+               Content="Resultados de la búsqueda"
+               Margin="{StaticResource StackPanelItemMargin}"/>
+        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                Margin="{StaticResource StackPanelItemMargin}">
+
+        </Border>
+        <StackPanel HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="Crédito"/>
+            <ComboBox/>
+        </StackPanel>
+        <Button Content="VENDER"/>
+
+    </StackPanel>                             
+</UserControl>

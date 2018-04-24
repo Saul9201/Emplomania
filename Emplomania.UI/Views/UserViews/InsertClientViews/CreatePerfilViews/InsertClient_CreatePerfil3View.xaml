@@ -1,0 +1,173 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientViews.InsertClient_CreatePerfil3View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:infr="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="674.436" d:DesignWidth="1300">
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="CheckBoxItemTemplate">
+            <CheckBox Content="{Binding Workplace.Name}" Width="250" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=telerik:RadListBoxItem}, Path=IsSelected}"/>
+        </DataTemplate>
+        <DataTemplate x:Key="WorkAspirationTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="0" Text="{Binding Workplace.Name}" Width="Auto" Margin="3"/>
+                <TextBox Grid.Column="1" Width="Auto"/>
+                <TextBox Grid.Column="2" Width="Auto"/>
+                <TextBox Grid.Column="3" Width="Auto"/>
+                <TextBox Grid.Column="4" Width="Auto"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel Width="970">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="MIS ASPIRACIONES" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center">
+                <Label Content="Quiero trabajar como *"/>
+                <telerik:RadListBox Width="570" Height="400" Margin="10"
+                                    ItemsSource="{Binding WorkAspirationsSource}"
+                                    ItemTemplate="{StaticResource CheckBoxItemTemplate}"
+                                    SelectionMode="Multiple">
+                    <telerik:RadListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" Height="380"/>
+                        </ItemsPanelTemplate>
+                    </telerik:RadListBox.ItemsPanel>
+                    <i:Interaction.Behaviors>
+                        <infr:ListBoxMultiselectBehavior SelectedItems="{Binding InsertWorkerModel.SelectedWorkAspirations}"/>
+                    </i:Interaction.Behaviors>
+                </telerik:RadListBox>
+                <!--<ScrollViewer Width="570" Height="400" Background="AliceBlue">
+                    <StackPanel Orientation="Horizontal" Margin="10">
+                        <StackPanel Orientation="Vertical">
+                            <RadioButton GroupName="WorksInterest" Content="Abogado/a" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Analista financiero" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Alfarero/a" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Artesano/a" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Administrador de red" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Administrador integral" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguridad" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Actriz/actor" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Actriz/actor" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Administrador integral" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguridad" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
+                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Margin="70,0,0,0">
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Abogado/a"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Analista financiero"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Alfarero/a"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Artesano/a"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador de red"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador integral"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguridad"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Actriz/actor"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Actriz/actor"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador integral"/>
+                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguridad"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>-->
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}" DataContext="{Binding InsertWorkerModel}">
+            <Label Content="DETALLES DE CADA PLAZA" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <ItemsControl ItemsSource="{Binding SelectedWorkAspirations}"
+                          ItemTemplate="{StaticResource WorkAspirationTemplate}"
+                          HorizontalContentAlignment="Center"
+                          HorizontalAlignment="Center">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+                <!--<StackPanel Orientation="Vertical">
+                    <Label Content="Plaza"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa0.Workplace}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa1.Workplace}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa2.Workplace}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Experiencia"/>
+                    <ComboBox Width="165" 
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
+                              SelectedValue="{Binding Wa0.Experience}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
+                              SelectedValue="{Binding Wa1.Experience}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
+                              SelectedValue="{Binding Wa2.Experience}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Habilidad"/>
+                    <TextBox Width="165"
+                             Text="{Binding Wa0.Abilities}"/>
+                    <TextBox Width="165"
+                             Text="{Binding Wa1.Abilities}"/>
+                    <TextBox Width="165"
+                             Text="{Binding Wa2.Abilities}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Horario"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa0.Schedule}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa1.Schedule}"/>
+                    <ComboBox Width="165"
+                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Wa2.Schedule}"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical">
+                    <Label Content="Observaciones"/>
+                    <TextBox Width="165" Text="{Binding Wa0.Observations}"/>
+                    <TextBox Width="165" Text="{Binding Wa1.Observations}"/>
+                    <TextBox Width="165" Text="{Binding Wa2.Observations}"/>
+                </StackPanel>-->
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button Margin="0,0,40,0" Content="CANCELAR"
+                    Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
+            <Button Content="GUARDAR"
+                    Command="{Binding DataContext.DisplayWorkerSheetView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext.InsertClientModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

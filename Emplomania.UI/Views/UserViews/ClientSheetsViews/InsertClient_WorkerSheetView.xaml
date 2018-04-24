@@ -1,0 +1,343 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientViews.InsertClient_WorkerSheetView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="1024" d:DesignWidth="1300">
+
+    <UserControl.Resources>
+        <converters:IntStringToLevelRecomendationConverter x:Key="intStringToLevelRecomendationConverter"/>
+    </UserControl.Resources>
+
+    <Grid Width="970" DataContext="{Binding InsertClientModel}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="600*"/>
+            <ColumnDefinition Width="380*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid Margin="0,0,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+            </Grid.RowDefinitions>
+            <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
+                   Content="DATOS GENERALES" Grid.ColumnSpan="3"
+                   VerticalAlignment="Bottom"/>
+            <Button Grid.Column="2"
+                    Style="{StaticResource EMPencilIconButtonStyle}"
+                    Command="{Binding DataContext.DisplayInsertClientWorkerView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <Label Content="Nombre y Apellidos:"
+                       Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding ClientName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding ClientLastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <Label Content="Sexo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientSex}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Vertical">
+                <Label Content="Edad:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="28 años" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4" Orientation="Vertical">
+                <Label Content="Estatura:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="{Binding ClientStature}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Content="m" Margin="-5,0,0,0" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Grid.Row="5" Orientation="Vertical">
+                <Label Content="Complexión:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientComplexion}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+                <Label Content="Color de la piel:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientSkinColor}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
+                <Label Content="Color de los ojos:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientEyesColor}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
+                <Label Content="Reside en la provincia:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="La Habana" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
+                <Label Content="En el municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="La Lisa" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Vertical">
+                <Label Content="Licencia de conducción:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="Auto ligero" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical">
+                <Label Content="Posee vehículo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="Lada" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical">
+                <Label Content="Estado civil:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientCivilStatus}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Vertical">
+                <Label Content="¿Tiene hijos?" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Content="{Binding ClientHaveSons}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+            </StackPanel>
+        </Grid>
+
+        <StackPanel Grid.Column="1">
+            <Image Stretch="Fill" Height="168" Width="168" 
+                   Source="{Binding ClientImagePath}"
+                   HorizontalAlignment="Left" Margin="40,0,0,0">
+                <Image.Clip>
+                    <EllipseGeometry Center="84,84" RadiusX="84" RadiusY="84"/>
+                </Image.Clip>
+            </Image>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <Label Content="EVALUACIÓN" Style="{StaticResource EMGroupHeader2LabelStyle}"/>
+                <Label Content="8,7" Foreground="#3a3a3a"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Content="0" Foreground="#b2b2b2" TextElement.FontStyle="Italic"/>
+                <ProgressBar Height="10" Width="230"/>
+                <Label Content="10" Foreground="#b2b2b2" TextElement.FontStyle="Italic"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Foreground="#c231af" Content="Evaluaciones:"/>
+                <Label Foreground="#c231af" Content="5"/>
+                <Label Margin="30,0,0,0" Foreground="#c231af" Content="Evaluadores:"/>
+                <Label Foreground="#c231af" Content="1"/>
+            </StackPanel>
+            <Label Style="{StaticResource EMGroupHeader2LabelStyle}" Content="NIVEL DE RECOMENDACIÓN" Margin="0,20,0,0"/>
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal" Width="170">
+                    <Image Stretch="None" Margin="25,0,0,0" Source="{Binding ClientLevelRecomendation, ConverterParameter=1, Converter={StaticResource intStringToLevelRecomendationConverter}}"/>
+                    <Image Stretch="None" Margin="15,0,0,0" Source="{Binding ClientLevelRecomendation, ConverterParameter=2, Converter={StaticResource intStringToLevelRecomendationConverter}}"/>
+                    <Image Stretch="None" Margin="15,0,0,0" Source="{Binding ClientLevelRecomendation, ConverterParameter=3, Converter={StaticResource intStringToLevelRecomendationConverter}}"/>
+                </StackPanel>
+                <Button Background="#fbcd05" Content="LEER" Width="100"/>
+            </StackPanel>
+        </StackPanel>
+
+        <Grid Grid.Row="1" Margin="0,0,30,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+            </Grid.RowDefinitions>
+
+            <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
+                   Content="CURRÍCULUM" Grid.ColumnSpan="3"
+                   VerticalAlignment="Bottom"/>
+            <Button Grid.Column="2"
+                    Style="{StaticResource EMPencilIconButtonStyle}"
+                    Command="{Binding DataContext.DisplayInsertClientWorker2View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel de escolaridad:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Universitario"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Graduado de:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Arquitectura"/>
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical" Margin="0,25,0,0">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Otros cursos:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Diplomado Internacional de Luminarias Ecológicas"/>
+            </StackPanel>
+
+            <Label Grid.Row="3" VerticalAlignment="Bottom"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                   Content="Conozco el idioma:"/>
+
+            <StackPanel Grid.Row="4">
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Inglés"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Avanzado"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Row="4" Grid.Column="1">
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Portugués"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Avanzado"/>
+                </StackPanel>
+            </StackPanel>
+            
+            <StackPanel Grid.Row="4" Grid.Column="2">
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Italiano"/>
+                <StackPanel Orientation="Horizontal">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Solo práctica"/>
+                </StackPanel>
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="1" Grid.Column="1" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+                <RowDefinition Height="67"/>
+            </Grid.RowDefinitions>
+            
+            <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
+                   Content="CONTACTOS" Grid.ColumnSpan="3"
+                   VerticalAlignment="Bottom"/>
+            <Button Grid.Column="1"
+                    Style="{StaticResource EMPencilIconButtonStyle}"
+                    Command="{Binding DataContext.DisplayInsertClientWorkerView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            <Label Grid.Row="1" Content="PRIVADOS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+            <Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+
+            <StackPanel Grid.Row="2">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="8769876"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="54897069"/>
+            </StackPanel>
+            <StackPanel Grid.Row="4">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="slkdfj@djklzf.com"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="8768987"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="54987098"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="dlfkhlkxgb@dsflkg.cu"/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            
+            <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
+                   Content="TRAYECTORIA LABORAL Y REFERENCIAS"
+                   VerticalAlignment="Bottom"/>
+            <Button Style="{StaticResource EMPencilIconButtonStyle}"
+                    Command="{Binding DataContext.DisplayInsertClientWorker2View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            
+            <Grid Grid.Row="1" Margin="40,10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Lugar" Margin="0,0,0,5"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Ocupación" Margin="0,0,0,5"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Tiempo" Margin="0,0,0,5"/>
+                    <ComboBox Width="Auto" Margin="2"/>
+                    <ComboBox Width="Auto" Margin="2"/>
+                    <ComboBox Width="Auto" Margin="2"/>
+                    <ComboBox Width="Auto" Margin="2"/>
+                    <ComboBox Width="Auto" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Persona de contacto" Margin="0,0,0,5"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                </StackPanel>
+                <StackPanel Grid.Column="4">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono" Margin="0,0,0,5"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2"/>
+                </StackPanel>
+            </Grid>
+        
+        </Grid>
+
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" >
+            <Separator Style="{StaticResource EMSearchHeaderSeparatorStyle}" Margin="0,10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="PASO 3" Width="150"
+                        Command="{Binding DataContext.DisplayInsertClientWorker3View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                <Button Style="{StaticResource EMMoneyIconButtonStyle}" Margin="40,0,0,0"
+                        Command="{Binding DataContext.DisplayPaymentGatewayView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
+                
+                <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
+                        Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"/>
+                <Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>
+            </StackPanel>
+        </StackPanel>
+        
+    </Grid>
+
+</UserControl>

@@ -1,0 +1,86 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.ServicesViews.QueryClientByUserView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:utils="clr-namespace:Emplomania.UI.Views.UtilsTemplatesViews"
+             xmlns:convert="clr-namespace:Emplomania.UI.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="1416" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <convert:ObjectToVisibilityConverter x:Key="objectToVisibilityConverter"/>
+    </UserControl.Resources>
+    
+    <StackPanel Width="1200">
+        <DockPanel Width="500" Margin="{StaticResource StackPanelItemMargin}">
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0" >
+                <Label Content="Usuario"/>
+                <TextBox Text="{Binding ClientName}"/>
+            </StackPanel>
+            <Button Content="BUSCAR" VerticalAlignment="Bottom"
+                    Command="{Binding SearchCommand}"/>
+        </DockPanel>
+
+        <StackPanel Visibility="{Binding UserClientCollection, Converter={StaticResource objectToVisibilityConverter}}">
+            <StackPanel Width="970" HorizontalAlignment="Center">
+                <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
+                   Content="Resultados de la búsqueda" 
+                   Margin="{StaticResource StackPanelItemMargin}"/>
+
+                <Grid Margin="{StaticResource StackPanelItemMargin}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left">
+                        <Image Width="26" Height="59" Source="/Emplomania.UI;component/Images/vip.png"
+                           HorizontalAlignment="Left" Margin="7,0,0,10"/>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Nombre del negocio:"/>
+                            <Label Content="DISCOTECA LA RUMBA" Margin="-7,0,0,0" TextElement.FontWeight="Bold"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Label Content="Usuario:"/>
+                            <Label Content="Fultales" Margin="-7,0,0,0" TextElement.FontWeight="Bold"/>
+                        </StackPanel>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+                        <Label Content="Información de la entrevista" HorizontalAlignment="Left"/>
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                            Width="Auto" Height="120">
+                            <StackPanel Margin="5,10,0,0">
+                                <StackPanel.Resources>
+                                    <Thickness x:Key="InternalMargin">0,0,0,5</Thickness>
+                                </StackPanel.Resources>
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource InternalMargin}">
+                                    <Label Content="Cuándo:" TextElement.FontWeight="Bold"/>
+                                    <Label Content="5/5/2017" Margin="-7,0,0,0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource InternalMargin}">
+                                    <Label Content="Dónde:" TextElement.FontWeight="Bold"/>
+                                    <Label Content="Incididunt ut labore et dolore magna aliqua. " Margin="-7,0,0,0" />
+                                </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="{StaticResource InternalMargin}">
+                                    <Label Content="Con quién:" TextElement.FontWeight="Bold"/>
+                                    <Label Content="Exercitation ullamco laboris nisi ut aliquip ex ea " Margin="-7,0,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </Grid>
+
+            </StackPanel>
+
+            <Label Content="Usuarios a localizar" HorizontalAlignment="Center"/>
+
+            <utils:ResultPagesPresenter DataContext="{Binding UserClientCollection}"
+                                        Margin="{StaticResource StackPanelItemMargin}"/>
+
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Center">
+                <Button Content="SERVICIO TERMINADO" Margin="0,0,30,0"/>
+                <Button Content="IMPRIMIR"/>
+            </StackPanel>
+        </StackPanel>
+    </StackPanel>
+</UserControl>

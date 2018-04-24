@@ -1,0 +1,78 @@
+﻿<Window x:Class="Emplomania.UI.Views.UtilsTemplatesViews.ClientContactWindowsView"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Emplomania.UI.Views.UtilsTemplatesViews"
+        Background="Transparent"
+        mc:Ignorable="d"
+        Title="ClientContactWindowsView" Height="320" Width="510">
+
+    <Border Background="White" Width="510" Height="320" CornerRadius="10"
+                MouseLeftButtonDown="TitleBarMouseLeftButtonDown"
+            BorderThickness="1"
+            BorderBrush="#761874">
+        <Grid Margin="0,0,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Button Style="{StaticResource EMCloseIconButtonStyle}"
+                Click="Close_Button" HorizontalAlignment="Right"
+                    Margin="0,0,5,0"/>
+
+            <Grid Grid.Row="1" Grid.Column="1" 
+                  Margin="80,0,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="67"/>
+                    <RowDefinition Height="67"/>
+                    <RowDefinition Height="67"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="DATOS DE CONTACTO" FontSize="18" Foreground="#ca2b92" FontWeight="Medium"/>
+
+                <Label Grid.Row="1" Content="PRIVADOS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                <Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+
+                <StackPanel Grid.Row="2">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding PrivateHomeTelephone}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding PrivateMovilTelephone}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding PrivateEmail}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding OtherHomeTelephone}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding OtherMovilTelephone}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding OtherEmail}"/>
+                </StackPanel>
+            </Grid>
+
+        </Grid>
+
+
+    </Border>
+
+</Window>

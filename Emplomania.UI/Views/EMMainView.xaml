@@ -1,0 +1,172 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.EMMainView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:infrastucture="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" 
+             d:DesignWidth="1300">
+
+
+    <UserControl.Resources>
+        <converters:UserTypeToVisibilityConverter x:Key="userTypeToVisibilityConverter"/>
+        <converters:UserTypeToEnabilityConverter x:Key="userTypeToEnabilityConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" Style="{StaticResource EMMenuStyle}">
+            <Menu.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="1.0*"/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="0.2*"/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </Menu.ItemsPanel>
+
+            <MenuItem Grid.Column="0" Header="INICIO">
+                <MenuItem Header="Crear usuario" 
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"
+                          Command="{Binding DisplayCreateUserView}"/>
+                <MenuItem Header="Actualizar BD"
+                          Command="{Binding UpdateDBCommand}"/>
+                <MenuItem Header="Salir" 
+                          Command="{Binding DataContext.CloseWindowsCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:MainView}}, Mode=OneWay}"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="1" Header="USUARIO">
+                <MenuItem Header="Insertar cliente" 
+                          Command="{Binding DisplayInsertClientView}"/>
+                <MenuItem Header="Modificar cliente"
+                          Command="{Binding DisplayAlterClientView}"/>
+                <MenuItem Header="Vender cupón de crédito"
+                          Command="{Binding DisplaySaleCredCuponView}"/>
+                <MenuItem Header="Insertar deposito bancario"
+                          Command="{Binding DisplayInsertBankDepositView}"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="2" Header="SERVICIOS">
+                <MenuItem Header="Insertar NR"
+                          Command="{Binding DisplayInsertRecomendationLevelView}"/>
+                <MenuItem Header="Usurios NR"
+                          Command="{Binding DisplayQueryUserRecomendationLevelView}"/>
+                <MenuItem Header="Asistencia Técnica M"
+                          Command="{Binding DisplayQueryClientByUserView}"/>
+                <MenuItem Header="Asistencia Técnica SA"
+                          Command="{Binding DisplayQueryWorkerForPlaceView}"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="3" Header="PASARELA DE PAGO"
+                      Command="{Binding DisplayPaymentGatewayView}"/>
+
+            <MenuItem Grid.Column="4" Header="FORMULARIOS">
+                <MenuItem Header="Insertar Cursos"
+                          Command="{Binding DisplayInsertCoursView}"/>
+                <MenuItem Header="Insertar Ofertas de Empleo"
+                          Command="{Binding DisplayInsertJobVacanciesView}"/>
+                <MenuItem Header="Insertar Rifas"
+                          Command="{Binding DisplayInsertRafflesView}"/>
+                <MenuItem Header="Insertar Ofrezco"
+                          Command="{Binding DisplayInsertOfferView}"/>
+                <MenuItem Header="Insertar Necesito"
+                          Command="{Binding DisplayInsertNeedView}"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="5" Header="SECCIONES">
+                <MenuItem Header="Acerca de"/>
+                <MenuItem Header="FAQ"/>
+                <MenuItem Header="Actualidad"/>
+                <MenuItem Header="Otros servicios"/>
+                <MenuItem Header="Comentarios"/>
+                <MenuItem Header="Encuesta"/>
+                <MenuItem Header="Condiciones de uso"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="6" Header="NOMENCLADORES" 
+                      IsEnabled="{Binding CurrentUserType, Converter={StaticResource userTypeToEnabilityConverter}}"
+                      Command="{Binding DisplayNomenclatorsView}"/>
+
+            <MenuItem Grid.Column="7" Header="CONSULTAS">
+                <MenuItem Header="Listar usuarios no verificados"
+                          Command="{Binding DisplayQueryNoVerificUserView}"/>
+                <MenuItem Header="Listar usuarios ganadores de rifas"
+                          Command="{Binding DisplayRaffleWinnersView}"/>
+                <MenuItem Header="Listar usuarios depósito bancario"
+                          Command="{Binding DisplayBankDepositUserView}"/>
+                <MenuItem Header="Listar todos los clientes"
+                          Command="{Binding DisplayAllClientsView}"/>
+                <MenuItem Header="Listar usuarios por membresías"
+                          Command="{Binding DisplayUserByMembresyView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar personas evaluadas"
+                          Command="{Binding DisplayEvaluatesPersonsView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar trabajadores contratados" 
+                          Command="{Binding DisplayContractedWorkersView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar usuarios conectados"
+                          Command="{Binding DisplayConnectedUsersView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar cupones vendidos"
+                          Command="{Binding DisplaySalledCuponsView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar análisis de encuesta" 
+                          Command="{Binding DisplaySurveyAnalysisViewModel}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+                <MenuItem Header="Listar ventas por trabajador" 
+                          Command="{Binding DisplaySalesForWorkerView}"
+                          Visibility="{Binding CurrentUserType, Converter={StaticResource userTypeToVisibilityConverter}}"/>
+            </MenuItem>
+
+            <MenuItem Grid.Column="8" Header="REPORTE CONTABLE"
+                      IsEnabled="{Binding CurrentUserType, Converter={StaticResource userTypeToEnabilityConverter}}"
+                      Command="{Binding DisplayAccountingReportView}"/>
+        </Menu>
+
+        <Grid Grid.Row="1" Background="#fbcd05" Visibility="{Binding IsBasicView}">
+            <Label Style="{StaticResource EMHeaderLabelStyle}" 
+                   Content="{Binding Subitle}"/>
+        </Grid>
+
+        <ScrollViewer Grid.Row="2" BorderBrush="Transparent"
+                      Padding="0,20,0,0"
+                      infrastucture:ScrollViewerBehavior.AutoScrollToTop="{Binding ScrollOffsetReset, Mode=TwoWay}">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </ScrollViewer>
+
+        <Viewbox Grid.Row="3" Visibility="{Binding IsBasicView}">
+            <Grid Width="610">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="219*"/>
+                    <ColumnDefinition Width="175*"/>
+                    <ColumnDefinition Width="216*"/>
+                </Grid.ColumnDefinitions>
+                <Label HorizontalAlignment="Center" TextElement.FontFamily="Ubuntu" TextElement.FontWeight="Regular" Foreground="#b1b1b1" VerticalAlignment="Center" Height="28" Margin="6,60,3,61" Width="210">©Copyright 2017 EMPLOMANiA</Label>
+                <Image  HorizontalAlignment="Center" Stretch="None" Source="/Emplomania.UI;component/Images/logo chico.png" Grid.ColumnSpan="3" Margin="206,0,214,0" Width="190"/>
+                <Label HorizontalAlignment="Center" TextElement.FontFamily="Ubuntu" TextElement.FontWeight="Regular" Foreground="#b1b1b1" Grid.Column="2" VerticalAlignment="Center" Height="28" Margin="8,60,10,61" Width="198">Todos los derechos reservados</Label>
+            </Grid>
+        </Viewbox>
+
+    </Grid>
+
+</UserControl>

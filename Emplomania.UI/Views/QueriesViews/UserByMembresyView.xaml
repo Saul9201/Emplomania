@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.QueriesViews.UserByMembresyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Emplomania.UI.Views.QueriesViews"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
+             xmlns:modelvo="clr-namespace:Emplomania.Data.VO;assembly=Emplomania.Data"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1300">
+    
+    <StackPanel Width="970">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin}">
+            <Label Content="{Binding ClientsTotal}" FontWeight="Bold"/>
+            <Label Content="Total de clientes" FontWeight="Bold"/>
+        </StackPanel>
+
+        <Grid Margin="{StaticResource StackPanelItemMargin}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" FontWeight="Bold"/>
+                    <Label Content="Trabajadores" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Gratis"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Turqueza"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Esmeralda"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Zafiro"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Rubí"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Diamante"/>
+                </StackPanel>
+                <Button Content="DETALLES"
+                        Command="{Binding DataContext.DisplayUserByMembresy_DetailsView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                        CommandParameter="{Binding Source={x:Static enums:UserClientRole.Trabajador}}"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" FontWeight="Bold"/>
+                    <Label Content="Empleadores" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Gratis"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Turqueza"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Esmeralda"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Zafiro"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Rubí"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Diamante"/>
+                </StackPanel>
+                <Button Content="DETALLES"
+                        Command="{Binding DataContext.DisplayUserByMembresy_DetailsView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                        CommandParameter="{Binding Source={x:Static enums:UserClientRole.Empleador}}"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" FontWeight="Bold"/>
+                    <Label Content="Profesores" FontWeight="Bold"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Gratis"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Turqueza"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Esmeralda"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Zafiro"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Rubí"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin2}">
+                    <Label Content="{Binding ClientsTotal}" />
+                    <Label Content="Diamante"/>
+                </StackPanel>
+                <Button Content="DETALLES"
+                        Command="{Binding DataContext.DisplayUserByMembresy_DetailsView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                        CommandParameter="{Binding Source={x:Static enums:UserClientRole.Profesor}}"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Button Content="IMPRIMIR" />
+
+    </StackPanel>
+</UserControl>

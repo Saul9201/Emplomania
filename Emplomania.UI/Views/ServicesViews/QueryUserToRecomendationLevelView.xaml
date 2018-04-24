@@ -1,0 +1,80 @@
+﻿<UserControl   x:Class="Emplomania.UI.Views.ServicesViews.QueryUserToRecomendationLevelView" 
+    xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Emplomania.UI.Views.ServicesViews"
+             xmlns:model="clr-namespace:Emplomania.UI.Model"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1300">
+
+
+    <Grid Width="1165" Height="520" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            <Label Content="Usuario" Width="100" Height="25" Margin="1,0,1,0"/>
+            <Label Content="Nombre y Apellidos" Width="257" Height="25" Margin="1,0,1,0"/>
+            <Label Content="Telefonos" Width="167" Height="25" Margin="1,0,1,0"/>
+            <Label Content="Correo" Width="167" Height="25" Margin="1,0,1,0"/>
+            <Label Content="Referencias" Width="327" Height="25" Margin="1,0,1,0"/>
+        </StackPanel>
+
+        <telerik:RadDataPager Grid.Row="3"
+                              x:Name="radDataPager1"
+                              NumericButtonCount="5"
+                              HorizontalAlignment="Center"
+                              BorderThickness="0"
+							  PageSize="15" FontSize="12" 
+							  DisplayMode="FirstLastPreviousNextNumeric"
+							  Source="{Binding UserClientCollection}"
+							  IsTotalItemCountFixed="True"
+                              Margin="0,10,0,10"/>
+
+        <ListView  ItemsSource="{Binding PagedSource, ElementName=radDataPager1}"
+                   Grid.Row="1"
+                   HorizontalAlignment="Center" Style="{StaticResource EMBasicListViewStyle}">
+            <ListView.Resources>
+                <DataTemplate DataType="{x:Type model:UserClientModel}">
+                    <StackPanel Orientation="Horizontal" Margin="0,-2,0,-2">
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="100" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                            <Label Content="{Binding ID}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                        </Border>
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="257" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                            <Label Content="{Binding NombreyApellidos}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                        </Border>
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="167" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                            <Label Content="{Binding Telefono}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                        </Border>
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="167" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                            <Label Content="{Binding Correo}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                        </Border>
+                        <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                                    Width="327" Height="25" Margin="1,0,1,0" CornerRadius="0">
+                            <Label Content="{Binding Referencias}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                        </Border>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.Resources>
+        </ListView>
+
+        <Separator Grid.Row="2" Style="{StaticResource EMSearchHeaderSeparatorStyle}" Margin="0,2,0,2"/>
+
+        <DockPanel Grid.Row="4" HorizontalAlignment="Center">
+            <Button Content="EXPORTAR" Margin="0,0,30,0"/>
+            <Button Content="IMPRIMIR"/>
+        </DockPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,893 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{AA67123A-628C-4D47-98A4-DC73C1D37905}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emplomania.UI</RootNamespace>
+    <AssemblyName>Emplomania.UI</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>icono.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EQATEC.Analytics.Monitor, Version=3.2.1.0, Culture=neutral, PublicKeyToken=213c7c68adb58a17, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\EQATEC.Analytics.Monitor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="SharpDX">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.D3DCompiler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.Direct2D1.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D10">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.Direct3D10.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.Direct3D9">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.Direct3D9.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SharpDX.DXGI">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\SharpDX\SharpDX.DXGI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="Telerik.Documents.SpreadsheetStreaming, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Documents.SpreadsheetStreaming.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Pivot.Core, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Pivot.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Pivot.DataProviders.Adomd, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Pivot.DataProviders.Adomd.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Pivot.DataProviders.Queryable, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Pivot.DataProviders.Queryable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Pivot.DataProviders.Xmla, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Pivot.DataProviders.Xmla.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Analytics, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Analytics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Cloud, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Cloud.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Cloud.Controls, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Cloud.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Chart.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Chart.Direct2D, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Chart.Direct2D.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Data, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataServices, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.DataServices.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataServices50, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.DataServices50.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataServices60, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.DataServices60.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.DataVisualization, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.DataVisualization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Diagrams, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Diagrams.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Diagrams.Extensions, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Diagrams.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Docking, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Docking.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.EntityFramework, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.EntityFramework60, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.EntityFramework60.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Expressions, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Expressions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewers, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.FixedDocumentViewers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.FixedDocumentViewersUI, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.FixedDocumentViewersUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GanttView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.GanttView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.GridView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.GridView.Export, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.GridView.Export.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.ImageEditor, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.ImageEditor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Input, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Input.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Navigation, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Navigation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Pivot, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Pivot.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.PivotFieldList, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.PivotFieldList.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.RibbonView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.RibbonView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.RichTextBoxUI, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.RichTextBoxUI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.ScheduleView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.ScheduleView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.Spreadsheet, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.Spreadsheet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Controls.VirtualGrid, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Controls.VirtualGrid.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Data, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Diagrams.Core, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Diagrams.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Core, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Fixed, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Fixed.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Flow, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Flow.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Flow.FormatProviders.Pdf, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Flow.FormatProviders.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Html, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.Html.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.MsRichTextBoxXaml, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.MsRichTextBoxXaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.OpenXml, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Pdf, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Rtf, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.Rtf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.FormatProviders.Xaml, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.FormatProviders.Xaml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Proofing, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Proofing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Proofing.Dictionaries.En-US, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Proofing.Dictionaries.En-US.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Proofing.RadGridView, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Proofing.RadGridView.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Spreadsheet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Spreadsheet.FormatProviders.OpenXml.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Documents.Spreadsheet.FormatProviders.Pdf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.PersistenceFramework, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.PersistenceFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Scheduling.Core, Version=2017.2.503.45, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Scheduling.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Telerik.Windows.Themes.Windows8">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
+    </Reference>
+    <Reference Include="Telerik.Windows.Zip, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Zip.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\BoolToVisibilityConverter2.cs" />
+    <Compile Include="Converters\BoolVisibilityConverter.cs" />
+    <Compile Include="Converters\EnumBooleanConverter.cs" />
+    <Compile Include="Converters\EnumToDescriptionConverter.cs" />
+    <Compile Include="Converters\ImageConverter.cs" />
+    <Compile Include="Converters\InverterBoolToVisibilityConverter2.cs" />
+    <Compile Include="Converters\NegationConverter.cs" />
+    <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
+    <Compile Include="Converters\IntStringToLevelRecomendationConverter.cs" />
+    <Compile Include="Converters\UserTypeToEnabilityConverter.cs" />
+    <Compile Include="Converters\UserTypeToVisibilityConverter.cs" />
+    <Compile Include="Infrastucture\DataAdministrator.cs" />
+    <Compile Include="Infrastucture\MultiselectBehavior.cs" />
+    <Compile Include="Infrastucture\NomenclatorsProvider.cs" />
+    <Compile Include="Infrastucture\RelayCommand.cs" />
+    <Compile Include="Infrastucture\ScrollViewerBehavior.cs" />
+    <Compile Include="Infrastucture\SeviceLocator.cs" />
+    <Compile Include="Model\ContactDataModel.cs" />
+    <Compile Include="Model\InsertClientModel.cs" />
+    <Compile Include="Model\InsertEmployerModel.cs" />
+    <Compile Include="Model\InsertTeacherModel.cs" />
+    <Compile Include="Model\InsertWorkerModel.cs" />
+    <Compile Include="Model\UserClientModel.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AccountingReportViewModels\AccountingReportViewModel.cs" />
+    <Compile Include="ViewModels\Base\EMViewModelBase.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\EMMainViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\InsertCoursViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\InsertJobVacanciesViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\InsertNeedViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\InsertOfferViewModel.cs" />
+    <Compile Include="ViewModels\FormViewModels\InsertRafflesViewModel.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="ViewModels\NomenclatorsViewModels\NomenclatorsViewModel.cs" />
+    <Compile Include="ViewModels\PaymentGatewayViewModels\PaymentGatewayViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\AllClientsViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\BankDepositUserViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\ConnectedUsersViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\ContractedWorkersViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\EvaluatesPersonsViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\EvaluatesPersons_WorkerDetailsViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\QueryNoVerificUserViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\RaffleWinnersViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\SalesForWorkerViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\SalledCuponsViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\SurveyAnalysisViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\UserByMembresyViewModel.cs" />
+    <Compile Include="ViewModels\QueriesViewModels\UserByMembresy_DetailsViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\InsertRecomendationViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\QueryClientByUserViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\QueryUserRecomendationLevelViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\QueryUserToRecomendationLevelViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\QueryUserWithRecomendationLevelViewModel.cs" />
+    <Compile Include="ViewModels\ServicesViewModels\QueryWorkerForPlaceViewModel.cs" />
+    <Compile Include="ViewModels\StartViewModels\BasicViewModel.cs" />
+    <Compile Include="ViewModels\StartViewModels\CreateUserViewModel.cs" />
+    <Compile Include="ViewModels\StartViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\AlterClientViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\ClientFormsViewModels\EmployerFormViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\ClientFormsViewModels\TeacherFormViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertBankDepositViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\InsertClient_ByInvitationViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\CreatePerfilViewModels\InsertClient_CreatePerfil1ViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\CreatePerfilViewModels\InsertClient_CreatePerfil2ViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\CreatePerfilViewModels\InsertClient_CreatePerfil3ViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\ClientSheetsViewModels\InsertClient_EmployerSheetViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\InsertClient_NaturalViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\ClientSheetsViewModels\InsertClient_TeacherSheetViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\ClientSheetsViewModels\InsertClient_WorkerSheetViewModel.cs" />
+    <Compile Include="ViewModels\UserViewMoldels\SaleCredCuponViewModel.cs" />
+    <Compile Include="Views\AccountingReportViews\AccountingReportView.xaml.cs">
+      <DependentUpon>AccountingReportView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EMMainView.xaml.cs">
+      <DependentUpon>EMMainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\InsertCoursView.xaml.cs">
+      <DependentUpon>InsertCoursView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\InsertJobVacanciesView.xaml.cs">
+      <DependentUpon>InsertJobVacanciesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\InsertNeedView.xaml.cs">
+      <DependentUpon>InsertNeedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\InsertOfferView.xaml.cs">
+      <DependentUpon>InsertOfferView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormViews\InsertRafflesView.xaml.cs">
+      <DependentUpon>InsertRafflesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\NomenclatorsViews\NomenclatorsView.xaml.cs">
+      <DependentUpon>NomenclatorsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PaymentGatewayViews\PaymentGatewayView.xaml.cs">
+      <DependentUpon>PaymentGatewayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\AllClientsView.xaml.cs">
+      <DependentUpon>AllClientsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\BankDepositUserView.xaml.cs">
+      <DependentUpon>BankDepositUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\ConnectedUsersView.xaml.cs">
+      <DependentUpon>ConnectedUsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\ContractedWorkersView.xaml.cs">
+      <DependentUpon>ContractedWorkersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\EvaluatesPersonsView.xaml.cs">
+      <DependentUpon>EvaluatesPersonsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\EvaluatesPersons_WorkerDetailsView.xaml.cs">
+      <DependentUpon>EvaluatesPersons_WorkerDetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\QueryNoVerificUserView.xaml.cs">
+      <DependentUpon>QueryNoVerificUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\RaffleWinnersView.xaml.cs">
+      <DependentUpon>RaffleWinnersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\SalesForWorkerView.xaml.cs">
+      <DependentUpon>SalesForWorkerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\SalledCuponsView.xaml.cs">
+      <DependentUpon>SalledCuponsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\SurveyAnalysisView.xaml.cs">
+      <DependentUpon>SurveyAnalysisView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\UserByMembresyView.xaml.cs">
+      <DependentUpon>UserByMembresyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\QueriesViews\UserByMembresy_DetailsView.xaml.cs">
+      <DependentUpon>UserByMembresy_DetailsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\InsertRecomendationView.xaml.cs">
+      <DependentUpon>InsertRecomendationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\QueryClientByUserView.xaml.cs">
+      <DependentUpon>QueryClientByUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\QueryUserRecomendationLevelView.xaml.cs">
+      <DependentUpon>QueryUserRecomendationLevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\QueryUserToRecomendationLevelView.xaml.cs">
+      <DependentUpon>QueryUserToRecomendationLevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\QueryUserWithRecomendationLevelView.xaml.cs">
+      <DependentUpon>QueryUserWithRecomendationLevelView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ServicesViews\QueryWorkerForPlaceView.xaml.cs">
+      <DependentUpon>QueryWorkerForPlaceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartViews\BasicView.xaml.cs">
+      <DependentUpon>BasicView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartViews\CreateUserView.xaml.cs">
+      <DependentUpon>CreateUserView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\StartViews\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\AlterClientView.xaml.cs">
+      <DependentUpon>AlterClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\ClientFormsViews\EmployerFormView.xaml.cs">
+      <DependentUpon>EmployerFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\ClientFormsViews\TeacherFormView.xaml.cs">
+      <DependentUpon>TeacherFormView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertBankDepositView.xaml.cs">
+      <DependentUpon>InsertBankDepositView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientView.xaml.cs">
+      <DependentUpon>InsertClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\InsertClient_ByInvitationView.xaml.cs">
+      <DependentUpon>InsertClient_ByInvitationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil1View.xaml.cs">
+      <DependentUpon>InsertClient_CreatePerfil1View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil2View.xaml.cs">
+      <DependentUpon>InsertClient_CreatePerfil2View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil3View.xaml.cs">
+      <DependentUpon>InsertClient_CreatePerfil3View.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\ClientSheetsViews\InsertClient_EmployerSheetView.xaml.cs">
+      <DependentUpon>InsertClient_EmployerSheetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\InsertClientViews\InsertClient_NaturalView.xaml.cs">
+      <DependentUpon>InsertClient_NaturalView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\ClientSheetsViews\InsertClient_TeacherSheetView.xaml.cs">
+      <DependentUpon>InsertClient_TeacherSheetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\ClientSheetsViews\InsertClient_WorkerSheetView.xaml.cs">
+      <DependentUpon>InsertClient_WorkerSheetView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserViews\SaleCredCuponView.xaml.cs">
+      <DependentUpon>SaleCredCuponView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UtilsTemplatesViews\CardClientView.xaml.cs">
+      <DependentUpon>CardClientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UtilsTemplatesViews\CircularProgressBar.xaml.cs">
+      <DependentUpon>CircularProgressBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UtilsTemplatesViews\ClientContactWindowsView.xaml.cs">
+      <DependentUpon>ClientContactWindowsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UtilsTemplatesViews\ResultPagesPresenter.xaml.cs">
+      <DependentUpon>ResultPagesPresenter.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controls\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Resources\EMStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AccountingReportViews\AccountingReportView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EMMainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\InsertCoursView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\InsertJobVacanciesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\InsertNeedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\InsertOfferView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\FormViews\InsertRafflesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\NomenclatorsViews\NomenclatorsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PaymentGatewayViews\PaymentGatewayView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\AllClientsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\BankDepositUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\ConnectedUsersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\ContractedWorkersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\EvaluatesPersonsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\EvaluatesPersons_WorkerDetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\QueryNoVerificUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\RaffleWinnersView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\SalesForWorkerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\SalledCuponsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\SurveyAnalysisView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\UserByMembresyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\QueriesViews\UserByMembresy_DetailsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\InsertRecomendationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\QueryClientByUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\QueryUserRecomendationLevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\QueryUserToRecomendationLevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\QueryUserWithRecomendationLevelView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ServicesViews\QueryWorkerForPlaceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartViews\BasicView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartViews\CreateUserView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\StartViews\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\AlterClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\ClientFormsViews\EmployerFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\ClientFormsViews\TeacherFormView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertBankDepositView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\InsertClient_ByInvitationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil1View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil2View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\CreatePerfilViews\InsertClient_CreatePerfil3View.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\ClientSheetsViews\InsertClient_EmployerSheetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\InsertClientViews\InsertClient_NaturalView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\ClientSheetsViews\InsertClient_TeacherSheetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\ClientSheetsViews\InsertClient_WorkerSheetView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserViews\SaleCredCuponView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UtilsTemplatesViews\CardClientView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UtilsTemplatesViews\CircularProgressBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UtilsTemplatesViews\ClientContactWindowsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UtilsTemplatesViews\ResultPagesPresenter.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\10.png" />
+    <Resource Include="Images\estrella-llena.png" />
+    <Resource Include="Images\estrella-vacia.png" />
+    <Resource Include="Images\logo chico.png" />
+    <Resource Include="Images\logo grande.png" />
+    <Resource Include="Images\seleccion-no.png" />
+    <Resource Include="Images\seleccion-si.png" />
+    <Resource Include="Images\vip.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\11.png" />
+    <Resource Include="Images\11a.png" />
+    <Resource Include="Images\12.png" />
+    <Resource Include="Images\12a.png" />
+    <Resource Include="Images\13.png" />
+    <Resource Include="Images\13a.png" />
+    <Resource Include="Images\14.png" />
+    <Resource Include="Images\14a.png" />
+    <Resource Include="Images\15-a.png" />
+    <Resource Include="Images\15.png" />
+    <Resource Include="Images\16-a.png" />
+    <Resource Include="Images\16.png" />
+    <Resource Include="Images\17.png" />
+    <Resource Include="Images\17a.png" />
+    <Resource Include="Images\1a.png" />
+    <Resource Include="Images\1b.png" />
+    <Resource Include="Images\2.png" />
+    <Resource Include="Images\2a.png" />
+    <Resource Include="Images\4.png" />
+    <Resource Include="Images\4a.png" />
+    <Resource Include="Images\5.png" />
+    <Resource Include="Images\5a.png" />
+    <Resource Include="Images\6.png" />
+    <Resource Include="Images\6a.png" />
+    <Resource Include="Images\7.png" />
+    <Resource Include="Images\7a.png" />
+    <Resource Include="Images\8.png" />
+    <Resource Include="Images\8a.png" />
+    <Resource Include="Images\9.png" />
+    <Resource Include="Images\9a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Emplomania.Data.ApiClient\Emplomania.Data.ApiClient.csproj">
+      <Project>{CB17AA26-1A94-4911-9C34-774F742042E8}</Project>
+      <Name>Emplomania.Data.ApiClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emplomania.Data\Emplomania.Data.csproj">
+      <Project>{07ad95cc-128c-47ea-926e-7a39e568f373}</Project>
+      <Name>Emplomania.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emplomania.Infrastucture\Emplomania.Infrastucture.csproj">
+      <Project>{e448c0f2-5dda-44a3-be7b-1baa86a16a95}</Project>
+      <Name>Emplomania.Infrastucture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emplomania.Model\Emplomania.Model.csproj">
+      <Project>{A9FE05E1-1708-42D8-96B3-92999BC3B1B3}</Project>
+      <Name>Emplomania.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sin-imagen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icono.ico" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

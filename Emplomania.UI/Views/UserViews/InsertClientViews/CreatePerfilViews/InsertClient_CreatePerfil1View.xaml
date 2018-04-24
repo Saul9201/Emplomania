@@ -1,0 +1,275 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientViews.InsertClient_CreatePerfil1View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             mc:Ignorable="d" 
+             d:DesignHeight="1024" d:DesignWidth="1300">
+
+    <UserControl.Resources>
+        <converters:ImageConverter x:Key="imageConverter"/>
+
+        <DataTemplate x:Key="CheckBoxItemTemplate">
+            <CheckBox Content="{Binding Name}" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=telerik:RadListBoxItem}, Path=IsSelected}"/>
+        </DataTemplate>
+    </UserControl.Resources>
+    <StackPanel Width="970" DataContext="{Binding InsertWorkerModel}">
+        <StackPanel.Resources>
+            <Thickness x:Key="MarginRight1">0,0,50,0</Thickness>
+            <Thickness x:Key="MarginRight2">0,0,120,0</Thickness>
+            <converters:EnumBooleanConverter x:Key="enumBooleanConverter"/>
+        </StackPanel.Resources>
+        <StackPanel>
+            <Label Content="DATOS GENERALES" 
+                   Style="{DynamicResource EMGroupHeaderLabelStyle}"/>
+            <Grid Height="500">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Margin="{StaticResource MarginRight1}">
+                    <Label>Nombre (s) *</Label>
+                    <TextBox Width="Auto" Text="{Binding UserVO.Name}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1"  Margin="{StaticResource MarginRight1}">
+                    <Label>Apellido (s) *</Label>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <TextBox Width="Auto" Margin="0,0,5,0" Tag="Primero" Text="{Binding UserVO.LastName}"/>
+                        <TextBox Grid.Column="1" Margin="5,0,0,0" Tag="Segundo" Width="Auto" Text="{Binding UserVO.LastName2}"/>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Grid.Row="2"  Margin="{StaticResource MarginRight1}">
+                    <Label>Fecha de nacimiento *</Label>
+                    <!--<Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="70*"/>
+                            <ColumnDefinition Width="130*"/>
+                            <ColumnDefinition Width="70*"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox Grid.Column="0" Width="Auto"/>
+                        <ComboBox Grid.Column="1" Width="Auto"/>
+                        <ComboBox Grid.Column="2" Width="Auto"/>
+                    </Grid>-->
+                    <DatePicker Width="Auto" Height="28" Style="{DynamicResource EMDatePickerStyle}"
+                                Text="{Binding WorkerVO.BornDate}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Orientation="Vertical">
+                    <Label>Sexo *</Label>
+                    <StackPanel Orientation="Horizontal" >
+                        <RadioButton Content="F" IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Femenino}"/>
+                        <RadioButton Margin="20,0,0,0" Content="M" IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Masculino}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Margin="{StaticResource MarginRight2}">
+                    <Label>Estatura</Label>
+                    <ComboBox Width="Auto" 
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Statures}"
+                              SelectedValue="{Binding WorkerVO.Stature}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Margin="{StaticResource MarginRight2}">
+                    <Label>Complexión</Label>
+                    <ComboBox Width="Auto"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Complexions}"
+                              SelectedValue="{Binding Complexion}"
+                              DisplayMemberPath="Name"/>
+                    
+                </StackPanel>
+                <StackPanel Grid.Row="6" Margin="{StaticResource MarginRight2}">
+                    <Label>Color de la Piel</Label>
+                    <ComboBox Width="Auto" 
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=SkinColors}"
+                              SelectedValue="{Binding SkinColor}"
+                              DisplayMemberPath="Name"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" Margin="{StaticResource MarginRight2}">
+                    <Label>Color de los ojos</Label>
+                    <ComboBox Width="Auto"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=EyeColors}"
+                              SelectedValue="{Binding EyeColor}"
+                              DisplayMemberPath="Name"/>
+                </StackPanel>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource MarginRight2}">
+                    <Label >Estado civil</Label>
+                    <ComboBox Width="Auto"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=CivilStatuses}"
+                              SelectedValue="{Binding CivilStatus}"
+                              DisplayMemberPath="Name"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
+                    <Label>¿Tienes hijos?</Label>
+                    <StackPanel Orientation="Horizontal" >
+                        <RadioButton Content="Si" IsChecked="{Binding Path=Childrens, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Yes}"/>
+                        <RadioButton Margin="20,0,0,0" Content="No" IsChecked="{Binding Path=Childrens, Converter={StaticResource enumBooleanConverter}, ConverterParameter=No}"/>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label>Provincia *</Label>
+                    <ComboBox Width="Auto"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Provinces}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding DataContext.Province, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="4" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label>Municipio *</Label>
+                    <ComboBox Width="Auto" 
+                              ItemsSource="{Binding DataContext.Municipalities, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                              SelectedValue="{Binding Municipality}"
+                              DisplayMemberPath="Name"/>
+                </StackPanel>
+                <StackPanel Grid.Row="5" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label>Reparto o barriada</Label>
+                    <TextBox Width="Auto"
+                             Text="{Binding WorkerVO.Barriada}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10" Grid.RowSpan="4">
+                    <Label >Licencia de conducción</Label>
+                    <telerik:RadListBox Height="185"
+                                        ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=DriverLicenses}"
+                                        SelectionMode="Multiple"
+                                        ItemTemplate="{StaticResource CheckBoxItemTemplate}">
+                        
+                        <i:Interaction.Behaviors>
+                            <nomencl:ListBoxMultiselectBehavior SelectedItems="{Binding SelectedLicenses}"/>
+                        </i:Interaction.Behaviors>
+                    </telerik:RadListBox>
+                    <!--<ListBox Background="AliceBlue" Height="185">
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                    </ListBox>-->
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="2" Grid.RowSpan="4">
+                    <Label>Licencia de conducción</Label>
+                    <telerik:RadListBox Height="185"
+                                        ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Vehicles}"
+                                        SelectionMode="Multiple"
+                                        ItemTemplate="{StaticResource CheckBoxItemTemplate}">
+
+                        <i:Interaction.Behaviors>
+                            <nomencl:ListBoxMultiselectBehavior SelectedItems="{Binding SelectedVehicles}"/>
+                        </i:Interaction.Behaviors>
+                    </telerik:RadListBox>
+                    <!--<ListBox Background="AliceBlue" Height="185">
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                        <RadioButton Content="A1-Ciclomotor"/>
+                    </ListBox>-->
+                </StackPanel>
+
+            </Grid>
+        </StackPanel>
+        <StackPanel>
+            <Label Content="CONTACTOS" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <Grid Height="250">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="PRIVADOS:"/>
+                <StackPanel Grid.Row="1" Margin="{StaticResource MarginRight1}">
+                    <Label >Teléfono fijo:</Label>
+                    <TextBox Width="Auto" Text="{Binding UserVO.HomePhoneNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Margin="{StaticResource MarginRight1}">
+                    <Label>Teléfono móvil:</Label>
+                    <TextBox Width="Auto" Text="{Binding UserVO.MovilPhoneNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Margin="{StaticResource MarginRight1}">
+                    <Label>Correo electrónico:</Label>
+                    <TextBox Width="Auto" Text="{Binding UserVO.Email}"/>
+                </StackPanel>
+
+                <!--<Label Grid.Column="1" Content="OTROS:"/>
+                <StackPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label >Teléfono fijo:</Label>
+                    <TextBox Width="Auto"/>
+                </StackPanel>
+                <StackPanel Grid.Row="2" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label>Teléfono móvil:</Label>
+                    <TextBox Width="Auto"/>
+                </StackPanel>
+                <StackPanel Grid.Row="3" Grid.Column="1" Margin="{StaticResource MarginRight1}">
+                    <Label>Correo electrónico:</Label>
+                    <TextBox Width="Auto"/>
+                </StackPanel>-->
+
+                <StackPanel Grid.Column="2" HorizontalAlignment="Right" Grid.RowSpan="4">
+                    <Label Content="FOTO DE PERFIL:" HorizontalAlignment="Center"/>
+                    <Image Stretch="Fill" Height="190" Width="190" 
+                       Source="{Binding UserVO.ProfileImage, Converter={StaticResource imageConverter}}">
+                        <Image.Clip>
+                            <EllipseGeometry Center="95,95" RadiusX="95" RadiusY="95"/>
+                        </Image.Clip>
+                    </Image>
+                    <Button Style="{StaticResource EMUpdateClientImageButtonStyle}" 
+                            Command="{Binding DataContext.SelectImagePerfilCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" Margin="0,-25,0,0"/>
+
+
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Button  Margin="0,0,40,0" Content="CANCELAR"
+                     Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
+            <Button Content="GUARDAR"
+                    Command="{Binding DataContext.DisplayInsertClientWorker2View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+
+        </StackPanel>
+    </StackPanel>
+</UserControl>

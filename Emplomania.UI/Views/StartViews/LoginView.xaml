@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.StartViews.LoginView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
+             mc:Ignorable="d" 
+             d:DesignHeight="768" 
+             d:DesignWidth="1300">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Rectangle Fill="#ffffff"/>
+        <Rectangle Grid.Row="1" Fill="#9a2a8b"/>
+        <Image Stretch="None" Source="/Emplomania.UI;component/Images/logo grande.png" />
+        <Grid Grid.Row="1" Width="242" Height="275">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Vertical">
+                <Label Foreground="#ffffff">Tipo de usuario</Label>
+                <ComboBox ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserAdminRole}}}"
+                          SelectedValue="{Binding SelectedUserRole}"
+                          DisplayMemberPath="Description"
+                          SelectedValuePath="Value"/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Orientation="Vertical">
+                <Label Foreground="#ffffff">Nombre</Label>
+                <TextBox Text="{Binding UserName}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical">
+                <Label Foreground="#ffffff">Contraseña</Label>
+                <telerik:RadPasswordBox x:Name="PasswordBox"
+                    ShowPasswordButtonVisibility="Auto"
+                    WatermarkContent="Password">
+                    <telerik:RadPasswordBox.InputBindings>
+                        <KeyBinding Key="Enter" Command="{Binding SignInCommand}"
+                                    CommandParameter="{Binding ElementName=PasswordBox}"/>
+                    </telerik:RadPasswordBox.InputBindings>
+                </telerik:RadPasswordBox>
+                
+            </StackPanel>
+            <Button Grid.Row="3" Style="{StaticResource EMYellowStyleButton}"
+                    Content="ENTRAR" VerticalAlignment="Bottom"
+                    Command="{Binding SignInCommand}"
+                    CommandParameter="{Binding ElementName=PasswordBox}"/>
+            <!--Click="EnterButton_Click"/>-->
+        </Grid>
+    </Grid>
+</UserControl>

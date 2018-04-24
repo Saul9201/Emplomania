@@ -1,0 +1,39 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
+             mc:Ignorable="d" 
+             d:DesignHeight="520" d:DesignWidth="1300">
+    
+    <UserControl.Resources>
+        <converters:EnumBooleanConverter x:Key="enumBooleanConverter"/>
+    </UserControl.Resources>
+    <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                DataContext="{Binding InsertClientModel}">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}" Orientation="Vertical">
+            <Label>Tipo de usuario</Label>
+            <ComboBox ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserClientRole}}}"
+                      DisplayMemberPath="Description"
+                      SelectedValuePath="Value"
+                      SelectedValue="{Binding UserClientRole}"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}" Orientation="Vertical">
+            <RadioButton Margin="{StaticResource StackPanelItemMargin2}" 
+                         Content="Autenticación natural" 
+                         IsChecked="{Binding Path=AuthenticationTypes, Converter={StaticResource enumBooleanConverter}, ConverterParameter=NaturalAuthRB}"/>
+            <RadioButton Margin="{StaticResource StackPanelItemMargin2}" 
+                         Content="Autenticación por invitación" 
+                         IsChecked="{Binding Path=AuthenticationTypes, Converter={StaticResource enumBooleanConverter}, ConverterParameter=ForInvitationRB}"/>
+        </StackPanel>
+        <Button Content="AUTENTICAR"
+                Margin="{StaticResource StackPanelItemMargin}"
+                Command="{Binding DataContext.LogicDisplayPosiblAuthTypeInsertClientViews, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                CommandParameter="{Binding DataContext.InsertClientModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+    </StackPanel>
+</UserControl>

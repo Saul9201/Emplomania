@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{07AD95CC-128C-47EA-926E-7A39E568F373}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Emplomania.Data</RootNamespace>
+    <AssemblyName>Emplomania.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configurations\AdminUserConfigurations.cs" />
+    <Compile Include="Configurations\NomenclatorsConfigurations.cs" />
+    <Compile Include="Configurations\UserConfigurations.cs" />
+    <Compile Include="EmplomaniaAdminDBContext.cs" />
+    <Compile Include="MapConfiguration.cs" />
+    <Compile Include="Migrations\201804171404263_InitialCreate.cs" />
+    <Compile Include="Migrations\201804171404263_InitialCreate.Designer.cs">
+      <DependentUpon>201804171404263_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804180234079_AddingFieldToBusiness.cs" />
+    <Compile Include="Migrations\201804180234079_AddingFieldToBusiness.Designer.cs">
+      <DependentUpon>201804180234079_AddingFieldToBusiness.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804180329043_ChangingProfileImageFieldName.cs" />
+    <Compile Include="Migrations\201804180329043_ChangingProfileImageFieldName.Designer.cs">
+      <DependentUpon>201804180329043_ChangingProfileImageFieldName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804181408432_AddingBusinessWorkplaceRelation.cs" />
+    <Compile Include="Migrations\201804181408432_AddingBusinessWorkplaceRelation.Designer.cs">
+      <DependentUpon>201804181408432_AddingBusinessWorkplaceRelation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804231357060_AddingWorkerTable.cs" />
+    <Compile Include="Migrations\201804231357060_AddingWorkerTable.Designer.cs">
+      <DependentUpon>201804231357060_AddingWorkerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804231826591_RemovingSqueduleFromWorkerTable.cs" />
+    <Compile Include="Migrations\201804231826591_RemovingSqueduleFromWorkerTable.Designer.cs">
+      <DependentUpon>201804231826591_RemovingSqueduleFromWorkerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804231945497_AddingAspirations.cs" />
+    <Compile Include="Migrations\201804231945497_AddingAspirations.Designer.cs">
+      <DependentUpon>201804231945497_AddingAspirations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AdminUserService.cs" />
+    <Compile Include="Services\Base\CrudService.cs" />
+    <Compile Include="Services\Base\ICrudService.cs" />
+    <Compile Include="Services\Base\IServiceBase.cs" />
+    <Compile Include="Services\Base\ServiceBase.cs" />
+    <Compile Include="Services\NomenclatorServices.cs" />
+    <Compile Include="Services\UserService.cs" />
+    <Compile Include="VO\AdminUserVO.cs" />
+    <Compile Include="VO\Base\BindableBase.cs" />
+    <Compile Include="VO\Base\NomenclatorVO.cs" />
+    <Compile Include="VO\BusinessVO.cs" />
+    <Compile Include="VO\BusinessWorkplaceVO.cs" />
+    <Compile Include="VO\CategoryVO.cs" />
+    <Compile Include="VO\CivilStatusVO.cs" />
+    <Compile Include="VO\ComplexionVO.cs" />
+    <Compile Include="VO\CourseVO.cs" />
+    <Compile Include="VO\CurrencyVO.cs" />
+    <Compile Include="VO\DriverLicenseVO.cs" />
+    <Compile Include="VO\EmployerVO.cs" />
+    <Compile Include="VO\EyeColorVO.cs" />
+    <Compile Include="VO\GenderVO.cs" />
+    <Compile Include="VO\LanguageLevelVO.cs" />
+    <Compile Include="VO\LanguageVO.cs" />
+    <Compile Include="VO\MembershipVO.cs" />
+    <Compile Include="VO\MunicipalityVO.cs" />
+    <Compile Include="VO\PrizeVO.cs" />
+    <Compile Include="VO\ProvinceVO.cs" />
+    <Compile Include="VO\ScheduleVO.cs" />
+    <Compile Include="VO\SchoolGradeVO.cs" />
+    <Compile Include="VO\SkinColorVO.cs" />
+    <Compile Include="VO\SpecialtyVO.cs" />
+    <Compile Include="VO\UserVO.cs" />
+    <Compile Include="VO\VehicleVO.cs" />
+    <Compile Include="VO\WorkAspirationVO.cs" />
+    <Compile Include="VO\WorkerCourseVO.cs" />
+    <Compile Include="VO\WorkerDriverLicenseVO.cs" />
+    <Compile Include="VO\WorkerLanguageVO.cs" />
+    <Compile Include="VO\WorkerVehicleVO.cs" />
+    <Compile Include="VO\WorkerVO.cs" />
+    <Compile Include="VO\WorkplaceVO.cs" />
+    <Compile Include="VO\WorkReferenceVO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Emplomania.Infrastucture\Emplomania.Infrastucture.csproj">
+      <Project>{e448c0f2-5dda-44a3-be7b-1baa86a16a95}</Project>
+      <Name>Emplomania.Infrastucture</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emplomania.Model\Emplomania.Model.csproj">
+      <Project>{a9fe05e1-1708-42d8-96b3-92999bc3b1b3}</Project>
+      <Name>Emplomania.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201804171404263_InitialCreate.resx">
+      <DependentUpon>201804171404263_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180234079_AddingFieldToBusiness.resx">
+      <DependentUpon>201804180234079_AddingFieldToBusiness.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804180329043_ChangingProfileImageFieldName.resx">
+      <DependentUpon>201804180329043_ChangingProfileImageFieldName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804181408432_AddingBusinessWorkplaceRelation.resx">
+      <DependentUpon>201804181408432_AddingBusinessWorkplaceRelation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804231357060_AddingWorkerTable.resx">
+      <DependentUpon>201804231357060_AddingWorkerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804231826591_RemovingSqueduleFromWorkerTable.resx">
+      <DependentUpon>201804231826591_RemovingSqueduleFromWorkerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804231945497_AddingAspirations.resx">
+      <DependentUpon>201804231945497_AddingAspirations.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

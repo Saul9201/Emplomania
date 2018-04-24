@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.ServicesViews.QueryUserRecomendationLevelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="1300">
+
+    <StackPanel Width="970">
+        <DockPanel Width="702" Margin="{StaticResource StackPanelItemMargin}">
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Fecha de Inicio"/>
+                <DatePicker Style="{StaticResource EMDatePickerStyle}"
+                                Width="200"/>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <Label Content="Fecha Final"/>
+                <DatePicker Style="{StaticResource EMDatePickerStyle}"
+                                Width="200"/>
+            </StackPanel>
+            <Button Content="BUSCAR" VerticalAlignment="Bottom"/>
+        </DockPanel>
+        <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
+               Content="Resultados de la búsqueda"
+               Margin="{StaticResource StackPanelItemMargin}"/>
+        <!--<Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
+                Margin="{StaticResource StackPanelItemMargin}">
+
+        </Border>-->
+        <DockPanel HorizontalAlignment="Center">
+            <StackPanel Margin="0,0,40,0">
+                <Label Content="# para NR"
+                       TextElement.FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+                <Button Content="DETALLES"
+                        Command="{Binding DataContext.DisplayQueryUserToRecomendationLevelView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
+            </StackPanel>
+            <StackPanel >
+                <Label Content="# con NR"
+                       TextElement.FontWeight="Bold"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,20"/>
+                <Button Content="DETALLES"
+                        Command="{Binding DataContext.DisplayQueryUserWithRecomendationLevelView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
+            </StackPanel>
+        </DockPanel>
+    </StackPanel>
+
+
+</UserControl>

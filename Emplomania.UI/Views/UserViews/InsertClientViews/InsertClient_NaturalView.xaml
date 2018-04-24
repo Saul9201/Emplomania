@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="Emplomania.UI.Views.UserViews.InsertClientViews.InsertClient_NaturalView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="520" d:DesignWidth="1300">
+
+    <StackPanel Width="379" DataContext="{Binding InsertClientModel}">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label >Nombre (s) *</Label>
+            <TextBox Width="Auto" 
+                     Text="{Binding UserVO.Name}"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label>Primer Apellido*</Label>
+            <TextBox Width="Auto"
+                     Text="{Binding UserVO.LastName}"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label>Segundo Apellido</Label>
+            <TextBox Width="Auto"
+                     Text="{Binding UserVO.LastName2}"/>
+        </StackPanel>
+        <!--<StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label>Usuario (s) *</Label>
+            <TextBox Width="Auto"
+                     Text="{Binding ClientUserName}"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label >Contraseña *</Label>
+            <PasswordBox Width="Auto"/>
+        </StackPanel>
+        <StackPanel Margin="{StaticResource StackPanelItemMargin2}">
+            <Label>Repetir Contraseña *</Label>
+            <PasswordBox Width="Auto"/>
+        </StackPanel>-->
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+            <Label>Cómo conoció de Emplomania</Label>
+            <ComboBox Width="Auto"/>
+        </StackPanel>
+        <Button Content="REGISTRAR"
+                Command="{Binding DataContext.LogicDisplayPosiblUserClientTypeInsertClientViews, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                CommandParameter="{Binding DataContext.InsertClientModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+    </StackPanel>
+</UserControl>
