@@ -152,6 +152,17 @@ namespace Emplomania.UI.ViewModels
              DisplayBasicView.Execute(null);
          });
 
+        public ICommand CreateWorkerPofileFinichCommand => new RelayCommand(param =>
+        {
+            var insertWorkerModel = param as InsertWorkerModel;
+            insertWorkerModel.WorkerVO.WorkAspirations = insertWorkerModel.SelectedWorkAspirations.ToList();
+            if (!ServiceLocator.Get<IWorkerService>().AddOrUpdate(insertWorkerModel.WorkerVO))
+            {
+                MessageBox.Show("No se puede salvar el trabajador. Intente modificar los datos.");
+                return;
+            }
+            DisplayWorkerSheetView.Execute(insertWorkerModel);
+        });
         #endregion
 
         #region Navegation

@@ -188,7 +188,7 @@ namespace Emplomania.Data.Configurations
             ToTable("Schedules");
 
             HasMany<WorkAspiration>(s => s.WorkAspirations)
-                .WithRequired()
+                .WithOptional()
                 .HasForeignKey(wa => wa.ScheduleFK);
         }
     }
@@ -256,7 +256,7 @@ namespace Emplomania.Data.Configurations
                 .WithRequired()
                 .HasForeignKey(bw => bw.WorkplaceFK);
             HasMany<WorkAspiration>(wp => wp.WorkAspirations)
-                .WithRequired()
+                .WithOptional()
                 .HasForeignKey(wa => wa.WorkplaceFK);
         }
     }

@@ -294,46 +294,6 @@ namespace Emplomania.UI.Model
                 WorkReferences[4] = value;
             }
         }
-
-        public WorkAspirationVO[] WorkAspirations { get; set; } = new WorkAspirationVO[3];
-        public WorkAspirationVO Wa0
-        {
-            get
-            {
-                if (WorkAspirations[0] == null)
-                    WorkAspirations[0] = new WorkAspirationVO();
-                return WorkAspirations[0];
-            }
-            set
-            {
-                WorkAspirations[0] = value;
-            }
-        }
-        public WorkAspirationVO Wa1
-        {
-            get
-            {
-                if (WorkAspirations[1] == null)
-                    WorkAspirations[1] = new WorkAspirationVO();
-                return WorkAspirations[1];
-            }
-            set
-            {
-                WorkAspirations[1] = value;
-            }
-        }
-        public WorkAspirationVO Wa2
-        {
-            get
-            {
-                if (WorkAspirations[2] == null)
-                    WorkAspirations[2] = new WorkAspirationVO();
-                return WorkAspirations[2];
-            }
-            set
-            {
-                WorkAspirations[2] = value;
-            }
-        }
+        
     }
 }

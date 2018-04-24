@@ -22,13 +22,19 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="0" Text="{Binding Workplace.Name}" Width="Auto" Margin="3"/>
-                <TextBox Grid.Column="1" Width="Auto"/>
-                <TextBox Grid.Column="2" Width="Auto"/>
-                <TextBox Grid.Column="3" Width="Auto"/>
-                <TextBox Grid.Column="4" Width="Auto"/>
+                <TextBox Grid.Column="0" Text="{Binding Workplace.Name}" Width="165" Margin="2" IsReadOnly="True"/>
+                <ComboBox Grid.Column="1" Width="165" Margin="2"
+                          ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"
+                          SelectedValue="{Binding Experience}"/>
+                <TextBox Grid.Column="2" Width="165" Margin="2"
+                         Text="{Binding Abilities}"/>
+                <ComboBox Grid.Column="3" Width="165" Margin="2" 
+                          ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}"
+                          SelectedValue="{Binding Schedule}"
+                          DisplayMemberPath="Name"/>
+                <TextBox Grid.Column="4" Width="165" Margin="2"
+                         Text="{Binding Observations}"/>
             </Grid>
         </DataTemplate>
     </UserControl.Resources>
@@ -50,51 +56,26 @@
                         <infr:ListBoxMultiselectBehavior SelectedItems="{Binding InsertWorkerModel.SelectedWorkAspirations}"/>
                     </i:Interaction.Behaviors>
                 </telerik:RadListBox>
-                <!--<ScrollViewer Width="570" Height="400" Background="AliceBlue">
-                    <StackPanel Orientation="Horizontal" Margin="10">
-                        <StackPanel Orientation="Vertical">
-                            <RadioButton GroupName="WorksInterest" Content="Abogado/a" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Analista financiero" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Alfarero/a" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Artesano/a" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Administrador de red" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Administrador integral" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguridad" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Actriz/actor" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Actriz/actor" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Administrador integral" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguridad" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
-                            <RadioButton GroupName="WorksInterest" Content="Agente de seguro" Margin="15,10,0,0"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Margin="70,0,0,0">
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Abogado/a"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Analista financiero"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Alfarero/a"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Artesano/a"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador de red"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador integral"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguridad"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Actriz/actor"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguro"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Actriz/actor"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Administrador integral"/>
-                            <RadioButton GroupName="WorksInterest" Margin="15,10,0,0" Content="Agente de seguridad"/>
-                        </StackPanel>
-                    </StackPanel>
-                </ScrollViewer>-->
             </StackPanel>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}" DataContext="{Binding InsertWorkerModel}">
             <Label Content="DETALLES DE CADA PLAZA" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <Grid HorizontalAlignment="Center">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Width="165" Margin="2" Content="Plaza"/>
+                <Label Grid.Column="1" Width="165" Margin="2" Content="Experiencia"/>
+                <Label Grid.Column="2" Width="165" Margin="2" Content="Habilidad"/>
+                <Label Grid.Column="3" Width="165" Margin="2" Content="Horario"/>
+                <Label Grid.Column="4" Width="165" Margin="2" Content="Observaciones"/>
+            </Grid>
             <ItemsControl ItemsSource="{Binding SelectedWorkAspirations}"
                           ItemTemplate="{StaticResource WorkAspirationTemplate}"
-                          HorizontalContentAlignment="Center"
                           HorizontalAlignment="Center">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -102,72 +83,13 @@
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
-            <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
-                <!--<StackPanel Orientation="Vertical">
-                    <Label Content="Plaza"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa0.Workplace}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa1.Workplace}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa2.Workplace}"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Experiencia"/>
-                    <ComboBox Width="165" 
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
-                              SelectedValue="{Binding Wa0.Experience}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
-                              SelectedValue="{Binding Wa1.Experience}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=WorkedTimes}}"
-                              SelectedValue="{Binding Wa2.Experience}"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Habilidad"/>
-                    <TextBox Width="165"
-                             Text="{Binding Wa0.Abilities}"/>
-                    <TextBox Width="165"
-                             Text="{Binding Wa1.Abilities}"/>
-                    <TextBox Width="165"
-                             Text="{Binding Wa2.Abilities}"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Horario"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa0.Schedule}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa1.Schedule}"/>
-                    <ComboBox Width="165"
-                              ItemsSource="{Binding Source={Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Schedules}}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding Wa2.Schedule}"/>
-                </StackPanel>
-                <StackPanel Orientation="Vertical">
-                    <Label Content="Observaciones"/>
-                    <TextBox Width="165" Text="{Binding Wa0.Observations}"/>
-                    <TextBox Width="165" Text="{Binding Wa1.Observations}"/>
-                    <TextBox Width="165" Text="{Binding Wa2.Observations}"/>
-                </StackPanel>-->
-            </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Margin="0,0,40,0" Content="CANCELAR"
                     Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
             <Button Content="GUARDAR"
-                    Command="{Binding DataContext.DisplayWorkerSheetView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
-                    CommandParameter="{Binding DataContext.InsertClientModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                    Command="{Binding DataContext.CreateWorkerPofileFinichCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding DataContext.InsertWorkerModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         </StackPanel>
     </StackPanel>
 </UserControl>

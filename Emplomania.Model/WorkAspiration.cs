@@ -10,8 +10,8 @@ namespace Emplomania.Model
     {
         public int Id { get; set; }
         public Guid WorkerFK { get; set; }
-        public Guid WorkplaceFK { get; set; }
-        public Guid ScheduleFK { get; set; }
+        public Guid? WorkplaceFK { get; set; }
+        public Guid? ScheduleFK { get; set; }
         public string Experience { get; set; }
         public string Observations { get; set; }
         public string Abilities { get; set; }
