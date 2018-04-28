@@ -15,6 +15,18 @@ namespace Emplomania.UI.Model
     {
         public WorkerVO WorkerVO { get; set; }
 
+        //private DateTime? bornDate;
+
+        //public DateTime? BornDate
+        //{
+        //    get { return bornDate; }
+        //    set {
+        //        bornDate = value;
+        //        WorkerVO.BornDate = value;
+        //    }
+        //}
+
+
         private Gender gender;
         public Gender Gender
         {

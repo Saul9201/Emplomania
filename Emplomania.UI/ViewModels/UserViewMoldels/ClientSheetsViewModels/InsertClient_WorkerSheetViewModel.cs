@@ -17,6 +17,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         public InsertClient_WorkerSheetViewModel(EMMainViewModel centralEMMain, InsertWorkerModel insertWorkerModel) : base(centralEMMain)
         {
             CentralEMMain.Subitle = "ficha del trabajador";
+            CentralEMMain.ResetScrollContent();
             InsertWorkerModel = insertWorkerModel;
         }
     }

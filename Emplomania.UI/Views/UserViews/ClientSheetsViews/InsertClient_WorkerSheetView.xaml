@@ -9,10 +9,13 @@
              d:DesignHeight="1024" d:DesignWidth="1300">
 
     <UserControl.Resources>
+        <converters:ImageConverter x:Key="imageConverter"/>
         <converters:IntStringToLevelRecomendationConverter x:Key="intStringToLevelRecomendationConverter"/>
+        <converters:ListNomenclToStringConverter x:Key="listNomenclToStringConverter"/>
+        <converters:BornDateToAgeConverter x:Key="bornDateToAgeConverter"/>
     </UserControl.Resources>
 
-    <Grid Width="970" DataContext="{Binding InsertClientModel}">
+    <Grid Width="970" DataContext="{Binding InsertWorkerModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*"/>
             <ColumnDefinition Width="380*"/>
@@ -50,65 +53,67 @@
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Content="{Binding ClientName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
-                    <Label Margin="-5,0,0,0" Content="{Binding ClientLastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding UserVO.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding UserVO.LastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding UserVO.LastName2}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
                 <Label Content="Sexo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientSex}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Gender}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
                 <Label Content="Edad:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="28 años" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.BornDate, Converter={StaticResource bornDateToAgeConverter}}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Vertical">
                 <Label Content="Estatura:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding ClientStature}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Content="{Binding WorkerVO.Stature}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
                     <Label Content="m" Margin="-5,0,0,0" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Vertical">
                 <Label Content="Complexión:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientComplexion}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Complexion.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Color de la piel:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientSkinColor}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding SkinColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
                 <Label Content="Color de los ojos:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientEyesColor}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding EyeColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
                 <Label Content="Reside en la provincia:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="La Habana" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Province.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Content="En el municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="La Lisa" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Vertical">
                 <Label Content="Licencia de conducción:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="Auto ligero" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.DriverLicenses, Converter={StaticResource listNomenclToStringConverter}}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Posee vehículo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="Lada" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.Vehicles, Converter={StaticResource listNomenclToStringConverter}}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical">
                 <Label Content="Estado civil:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientCivilStatus}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding CivilStatus.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Vertical">
                 <Label Content="¿Tiene hijos?" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding ClientHaveSons}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Childrens}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Column="1">
             <Image Stretch="Fill" Height="168" Width="168" 
-                   Source="{Binding ClientImagePath}"
+                   Source="{Binding UserVO.ProfileImage, Converter={StaticResource imageConverter}}"
                    HorizontalAlignment="Left" Margin="40,0,0,0">
                 <Image.Clip>
                     <EllipseGeometry Center="84,84" RadiusX="84" RadiusY="84"/>
@@ -163,17 +168,18 @@
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel de escolaridad:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Universitario"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding SchoolGrade.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Graduado de:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Arquitectura"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Specialty.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical" Margin="0,25,0,0">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Otros cursos:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Diplomado Internacional de Luminarias Ecológicas"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.Courses, Converter={StaticResource listNomenclToStringConverter}}"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.OtherCourses}"/>
             </StackPanel>
 
             <Label Grid.Row="3" VerticalAlignment="Bottom"
@@ -181,26 +187,26 @@
                    Content="Conozco el idioma:"/>
 
             <StackPanel Grid.Row="4">
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Inglés"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl0.Language.Name}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
-                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Avanzado"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl0.LanguageLevel.Name}"/>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="4" Grid.Column="1">
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Portugués"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl1.Language.Name}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
-                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Avanzado"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl1.LanguageLevel.Name}"/>
                 </StackPanel>
             </StackPanel>
             
             <StackPanel Grid.Row="4" Grid.Column="2">
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Italiano"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl2.Language.Name}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
-                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Solo práctica"/>
+                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl2.LanguageLevel.Name}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -228,22 +234,22 @@
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
             <Label Grid.Row="1" Content="PRIVADOS" VerticalAlignment="Center"
                    Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-            <Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
-                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+            <!--<Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>-->
 
             <StackPanel Grid.Row="2">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="8769876"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding UserVO.HomePhoneNumber}"/>
             </StackPanel>
             <StackPanel Grid.Row="3">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="54897069"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding UserVO.MovilPhoneNumber}"/>
             </StackPanel>
             <StackPanel Grid.Row="4">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="slkdfj@djklzf.com"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding UserVO.Email}"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
+            <!--<StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="8768987"/>
             </StackPanel>
@@ -254,7 +260,7 @@
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="dlfkhlkxgb@dsflkg.cu"/>
-            </StackPanel>
+            </StackPanel>-->
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2">
@@ -280,43 +286,43 @@
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Lugar" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Place}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Place}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Place}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Place}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Place}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Ocupación" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Occupation}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Occupation}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Occupation}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Occupation}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Occupation}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Tiempo" Margin="0,0,0,5"/>
-                    <ComboBox Width="Auto" Margin="2"/>
-                    <ComboBox Width="Auto" Margin="2"/>
-                    <ComboBox Width="Auto" Margin="2"/>
-                    <ComboBox Width="Auto" Margin="2"/>
-                    <ComboBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.WorkedTime}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.WorkedTime}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.WorkedTime}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.WorkedTime}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.WorkedTime}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Persona de contacto" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.ContactPerson}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.ContactPerson}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.ContactPerson}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.ContactPerson}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.ContactPerson}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="4">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
-                    <TextBox Width="Auto" Margin="2"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Phone}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Phone}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Phone}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Phone}"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Phone}"/>
                 </StackPanel>
             </Grid>
         
@@ -333,7 +339,8 @@
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
                 
                 <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
-                        Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"/>
+                        Command="{Binding DataContext.VerifyClient, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"
+                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
                 <Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>
             </StackPanel>
         </StackPanel>

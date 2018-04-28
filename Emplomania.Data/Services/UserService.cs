@@ -168,7 +168,8 @@ namespace Emplomania.Data.Services
         IWorkerVehicleService wvs;
         IWorkerLanguageService wls;
         IWorkerCourseService wcs;
-        public WorkerService(EmplomaniaAdminDBContext db, IUserService us, IWorkReferenceService wrs, IWorkerDriverLicenseService wdls, IWorkerVehicleService wvs, IWorkerLanguageService wls, IWorkerCourseService wcs) : base(db)
+        IWorkAspirationService was;
+        public WorkerService(EmplomaniaAdminDBContext db, IUserService us, IWorkReferenceService wrs, IWorkerDriverLicenseService wdls, IWorkerVehicleService wvs, IWorkerLanguageService wls, IWorkerCourseService wcs, IWorkAspirationService was) : base(db)
         {
             this.us = us;
             this.wrs = wrs;
@@ -176,6 +177,7 @@ namespace Emplomania.Data.Services
             this.wvs = wvs;
             this.wls = wls;
             this.wcs = wcs;
+            this.was = was;
         }
         public bool AddOrUpdate(WorkerVO worker)
         {
@@ -194,6 +196,7 @@ namespace Emplomania.Data.Services
                     res &= wvs.AddToWorker(worker.Id, worker.Vehicles);
                     res&=wls.AddToWorker(worker.Id, worker.Languages);
                     res &= wcs.AddToWorker(worker.Id, worker.Courses);
+                    res &= was.AddToWorker(worker.Id, worker.WorkAspirations);
                     return res;
                 }
                 else
@@ -210,6 +213,8 @@ namespace Emplomania.Data.Services
                     res&=wls.AddToWorker(worker.Id, worker.Languages);
                     res&=wcs.ClearToWorker(worker.Id);
                     res &= wcs.AddToWorker(worker.Id, worker.Courses);
+                    res &= was.ClearToWorker(worker.Id);
+                    res &= was.AddToWorker(worker.Id, worker.WorkAspirations);
                     return res;
                 }
             }
@@ -488,6 +493,59 @@ namespace Emplomania.Data.Services
     public interface IWorkerCourseService : ICrudService<WorkerCourseVO, WorkerCourse>
     {
         bool AddToWorker(Guid id, IEnumerable<CourseVO> courses);
+        bool ClearToWorker(Guid id);
+    }
+
+    internal class WorkAspirationService : CrudService<WorkAspirationVO, WorkAspiration>, IWorkAspirationService
+    {
+        public WorkAspirationService(EmplomaniaAdminDBContext db) : base(db)
+        {
+        }
+
+        public bool AddToWorker(Guid id, IEnumerable<WorkAspirationVO> workAspirations)
+        {
+            try
+            {
+                if (workAspirations != null)
+                    foreach (var item in workAspirations)
+                    {
+                        if (item != null && base.Get(x => x.WorkerFK == id && x.WorkplaceFK == item.WorkplaceFK) == null)
+                        {
+                            var toAdd = item;
+                            toAdd.WorkerFK = id;
+                            base.Add(toAdd);
+                        }
+                    }
+                return true;
+            }
+            catch (Exception)
+            {
+                this.UndoChanges();
+                return false;
+            }
+        }
+        public bool ClearToWorker(Guid id)
+        {
+            try
+            {
+                var q = (from wa in db.WorkAspirations
+                         where wa.WorkerFK == id
+                         select wa).ToList();
+                foreach (var item in q)
+                    db.WorkAspirations.Remove(item);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                this.UndoChanges();
+                return false;
+            }
+        }
+    }
+    public interface IWorkAspirationService: ICrudService<WorkAspirationVO, WorkAspiration>
+    {
+        bool AddToWorker(Guid id, IEnumerable<WorkAspirationVO> workAspirations);
         bool ClearToWorker(Guid id);
     }
 }
