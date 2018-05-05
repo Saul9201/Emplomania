@@ -46,7 +46,7 @@ namespace Emplomania.Data.VO
                     }
             }
         }
-        public Guid MunicipalityFK { get; set; }
+        public Guid? MunicipalityFK { get; set; }
 
         #region Old
         //public Guid Id { get; set; }

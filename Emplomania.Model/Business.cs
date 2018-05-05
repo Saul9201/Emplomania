@@ -14,8 +14,8 @@ namespace Emplomania.Model
         public string WebSite { get; set; }
         public string Details { get; set; }
         public Guid EmployerFK { get; set; }
-        public Guid CategoryFK { get; set; }
-        public Guid MunicipalityFK { get; set; }
+        public Guid? CategoryFK { get; set; }
+        public Guid? MunicipalityFK { get; set; }
         public ICollection<BusinessWorkplace> Workplaces {get; set; }
 
     }

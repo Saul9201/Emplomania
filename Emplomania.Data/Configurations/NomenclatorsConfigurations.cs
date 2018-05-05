@@ -15,6 +15,11 @@ namespace Emplomania.Data.Configurations
         {
             HasKey(x => x.Id);
             ToTable("Categories");
+
+            HasMany<Business>(c => c.Business)
+                .WithOptional()
+                .HasForeignKey(b => b.CategoryFK);
+
         }
     }
 
@@ -155,6 +160,9 @@ namespace Emplomania.Data.Configurations
             HasMany<User>(m => m.Users)
                 .WithOptional()
                 .HasForeignKey(u => u.MunicipalityFK);
+            HasMany<Business>(m => m.Business)
+                .WithOptional()
+                .HasForeignKey(b => b.MunicipalityFK);
         }
     }
 

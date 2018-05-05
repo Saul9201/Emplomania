@@ -11,5 +11,6 @@ namespace Emplomania.Model
     {
         public Guid ProvinceFK { get; set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Business> Business { get; set; }
     }
 }

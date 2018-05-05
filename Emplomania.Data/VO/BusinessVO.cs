@@ -14,8 +14,8 @@ namespace Emplomania.Data.VO
         public string WebSite { get; set; }
         public string Details { get; set; }
         public Guid EmployerFK { get; set; }
-        public Guid CategoryFK { get; set; }
-        public Guid MunicipalityFK { get; set; }
+        public Guid? CategoryFK { get; set; }
+        public Guid? MunicipalityFK { get; set; }
         public WorkplaceVO[] WorkPlaces { get; set; } = new WorkplaceVO[7];
     }
 }

@@ -24,7 +24,7 @@ namespace Emplomania.Model
         public bool Verified { get; set; }
         public float Balance { get; set; }//saldo
         public byte[] ProfileImageRaw { get; set; }
-        public Guid MunicipalityFK { get; set; }
+        public Guid? MunicipalityFK { get; set; }
 
         //Relaciones
         public ICollection<Employer> Employers { get; set; }

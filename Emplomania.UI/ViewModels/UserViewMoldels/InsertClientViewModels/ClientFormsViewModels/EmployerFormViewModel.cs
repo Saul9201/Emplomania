@@ -89,8 +89,15 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels
         {
             CentralEMMain.Subitle = "crear perfil empleador";
             InsertEmployerModel = insertEmployerModel;
-            Province = InsertEmployerModel.Province;
-            ProvinceNeg = InsertEmployerModel.ProvinceNeg;
+            if (InsertEmployerModel.Province != null)
+                Province = InsertEmployerModel.Province;
+            if (InsertEmployerModel.Municipality != null)
+                InsertEmployerModel.Municipality = Municipalities.Where(x => x.Id == InsertEmployerModel.Municipality.Id).FirstOrDefault();
+
+            if (InsertEmployerModel.ProvinceNeg != null)
+                ProvinceNeg = InsertEmployerModel.ProvinceNeg;
+            if (InsertEmployerModel.MunicipalityNeg != null)
+                InsertEmployerModel.MunicipalityNeg = MunicipalitiesNeg.Where(x => x.Id == InsertEmployerModel.MunicipalityNeg.Id).FirstOrDefault();
         }
     }
 }

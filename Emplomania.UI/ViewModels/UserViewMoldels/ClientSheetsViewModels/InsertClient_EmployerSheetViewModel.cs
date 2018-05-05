@@ -33,6 +33,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         {
             CentralEMMain.Subitle = "ficha del empleador";
             InsertEmployerModel = insertEmployerModel;
+            CentralEMMain.ResetScrollContent();
         }
 
     }
