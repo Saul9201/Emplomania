@@ -169,10 +169,10 @@
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding BusinessVO.Email}"/>
             </StackPanel>
 
-            <StackPanel Grid.Row="4" Grid.Column="1">
+            <!--<StackPanel Grid.Row="4" Grid.Column="1">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Barriada:"/>
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}"/>
-            </StackPanel>
+            </StackPanel>-->
 
             <StackPanel Grid.Row="4" Grid.Column="2">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Sitio web:"/>

@@ -107,6 +107,18 @@
     <Compile Include="Migrations\201805051328119_SettingNullablesAndAddingRelations.Designer.cs">
       <DependentUpon>201805051328119_SettingNullablesAndAddingRelations.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805051442532_RemovingPrivateAddressFromUser.cs" />
+    <Compile Include="Migrations\201805051442532_RemovingPrivateAddressFromUser.Designer.cs">
+      <DependentUpon>201805051442532_RemovingPrivateAddressFromUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805052123210_AddingMembershipsToUser.cs" />
+    <Compile Include="Migrations\201805052123210_AddingMembershipsToUser.Designer.cs">
+      <DependentUpon>201805052123210_AddingMembershipsToUser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805052138361_AddingAditionalService.cs" />
+    <Compile Include="Migrations\201805052138361_AddingAditionalService.Designer.cs">
+      <DependentUpon>201805052138361_AddingAditionalService.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminUserService.cs" />
@@ -116,6 +128,7 @@
     <Compile Include="Services\Base\ServiceBase.cs" />
     <Compile Include="Services\NomenclatorServices.cs" />
     <Compile Include="Services\UserService.cs" />
+    <Compile Include="VO\AditionalServiceVO.cs" />
     <Compile Include="VO\AdminUserVO.cs" />
     <Compile Include="VO\Base\BindableBase.cs" />
     <Compile Include="VO\Base\NomenclatorVO.cs" />
@@ -192,6 +205,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805051328119_SettingNullablesAndAddingRelations.resx">
       <DependentUpon>201805051328119_SettingNullablesAndAddingRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805051442532_RemovingPrivateAddressFromUser.resx">
+      <DependentUpon>201805051442532_RemovingPrivateAddressFromUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805052123210_AddingMembershipsToUser.resx">
+      <DependentUpon>201805052123210_AddingMembershipsToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805052138361_AddingAditionalService.resx">
+      <DependentUpon>201805052138361_AddingAditionalService.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

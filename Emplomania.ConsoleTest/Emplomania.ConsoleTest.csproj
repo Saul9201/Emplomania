@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=6.2.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.6.2.2\lib\net45\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -44,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -68,9 +72,17 @@
       <Project>{07ad95cc-128c-47ea-926e-7a39e568f373}</Project>
       <Name>Emplomania.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Emplomania.Infrastucture\Emplomania.Infrastucture.csproj">
+      <Project>{E448C0F2-5DDA-44A3-BE7B-1BAA86A16A95}</Project>
+      <Name>Emplomania.Infrastucture</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Emplomania.Model\Emplomania.Model.csproj">
       <Project>{A9FE05E1-1708-42D8-96B3-92999BC3B1B3}</Project>
       <Name>Emplomania.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Emplomania.UI\Emplomania.UI.csproj">
+      <Project>{aa67123a-628c-4d47-98a4-dc73c1d37905}</Project>
+      <Name>Emplomania.UI</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

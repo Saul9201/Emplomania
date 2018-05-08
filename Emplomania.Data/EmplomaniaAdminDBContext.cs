@@ -45,6 +45,7 @@ namespace Emplomania.Data
         public DbSet<WorkerLanguage> WorkerLanguages { get; set; }
         public DbSet<WorkerCourse> WorkerCourses { get; set; }
         public DbSet<WorkAspiration> WorkAspirations { get; set; }
+        public DbSet<AditionalService> AditionalServices { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

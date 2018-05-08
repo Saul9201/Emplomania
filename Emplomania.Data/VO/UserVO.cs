@@ -22,7 +22,7 @@ namespace Emplomania.Data.VO
         public string Name { get; set; }
         public string LastName { get; set; }
         public string LastName2 { get; set; }
-        public string PrivateAddress { get; set; }
+        //public string PrivateAddress { get; set; }
         public bool Verified { get; set; }
         public float Balance { get; set; }//saldo
         public byte[] ProfileImageRaw { get; set; }
@@ -47,6 +47,7 @@ namespace Emplomania.Data.VO
             }
         }
         public Guid? MunicipalityFK { get; set; }
+        public Guid? MembershipFK { get; set; }
 
         #region Old
         //public Guid Id { get; set; }

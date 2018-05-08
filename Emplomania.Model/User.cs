@@ -20,11 +20,13 @@ namespace Emplomania.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string LastName2 { get; set; }
-        public string PrivateAddress { get; set; }
+        //public string PrivateAddress { get; set; }
         public bool Verified { get; set; }
         public float Balance { get; set; }//saldo
         public byte[] ProfileImageRaw { get; set; }
         public Guid? MunicipalityFK { get; set; }
+        public Guid? MembershipFK { get; set; }
+        public Guid? AditionalServiceFK { get; set; }
 
         //Relaciones
         public ICollection<Employer> Employers { get; set; }

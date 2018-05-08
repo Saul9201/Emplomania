@@ -106,9 +106,38 @@ namespace Emplomania.Data.Services
         public MembershipService(EmplomaniaAdminDBContext db) : base(db)
         {
         }
+        public IQueryable<MembershipVO> GetMembershipsByUserType(Infrastucture.Enums.UserClientRole userType)
+        {
+            var readDb = new EmplomaniaAdminDBContext();
+            var q = from m in readDb.Memberships
+                    where m.UserType == userType
+                    select m;
+            return q.ProjectTo<MembershipVO>();
+        }
     }
     public interface IMembershipService : ICrudService<MembershipVO, Membership>
     {
+        IQueryable<MembershipVO> GetMembershipsByUserType(Infrastucture.Enums.UserClientRole userType);
+    }
+
+    internal class AditionalServiceService : CrudService<AditionalServiceVO, AditionalService>, IAditionalServiceService
+    {
+        public AditionalServiceService(EmplomaniaAdminDBContext db) : base(db)
+        {
+        }
+
+        public IQueryable<AditionalServiceVO> GetAditionalServicesByUserType(Infrastucture.Enums.UserClientRole userType)
+        {
+            var readDb = new EmplomaniaAdminDBContext();
+            var q = from s in readDb.AditionalServices
+                    where s.UserType == userType
+                    select s;
+            return q.ProjectTo<AditionalServiceVO>();
+        }
+    }
+    public interface IAditionalServiceService : ICrudService<AditionalServiceVO, AditionalService>
+    {
+        IQueryable<AditionalServiceVO> GetAditionalServicesByUserType(Infrastucture.Enums.UserClientRole userType);
     }
 
     internal class MunicipalityService : CrudService<MunicipalityVO, Municipality>, IMunicipalityService

@@ -167,7 +167,7 @@
                     </ListBox>-->
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="2" Grid.RowSpan="4">
-                    <Label>Licencia de conducción</Label>
+                    <Label>Vehículos que poseo</Label>
                     <telerik:RadListBox Height="185"
                                         ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Vehicles}"
                                         SelectionMode="Multiple"

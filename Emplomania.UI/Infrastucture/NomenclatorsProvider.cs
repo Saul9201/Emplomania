@@ -88,8 +88,14 @@ namespace Emplomania.UI.Infrastucture
 
     public enum YesNotAnswer
     {
+        No,
         Yes,
-        No
+    }
+
+    public enum MoneyType
+    {
+        CUC,
+        CUP,
     }
     #endregion
 

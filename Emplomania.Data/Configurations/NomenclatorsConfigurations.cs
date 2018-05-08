@@ -136,6 +136,19 @@ namespace Emplomania.Data.Configurations
         }
     }
 
+    internal class AditionalServiceConfiguration : EntityTypeConfiguration<AditionalService>
+    {
+        public AditionalServiceConfiguration()
+        {
+            ToTable("AditionalServices");
+            HasKey(x => x.Id);
+
+            HasMany<User>(s => s.Users)
+                .WithOptional()
+                .HasForeignKey(u => u.AditionalServiceFK);
+        }
+    }
+
     internal class MembershipConfiguration : EntityTypeConfiguration<Membership>
     {
         public MembershipConfiguration()
@@ -143,9 +156,9 @@ namespace Emplomania.Data.Configurations
             HasKey(x => x.Id);
             ToTable("Memberships");
 
-            //HasMany<User>(x => x.Users)
-            //    .WithOptional()
-            //    .HasForeignKey(x => x.MembershipFK);
+            HasMany<User>(x => x.Users)
+                .WithOptional()
+                .HasForeignKey(x => x.MembershipFK);
         }
     }
 

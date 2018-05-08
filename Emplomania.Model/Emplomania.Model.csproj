@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AditionalService.cs" />
     <Compile Include="AdminUser.cs" />
     <Compile Include="Base\Nomenclator.cs" />
     <Compile Include="Business.cs" />

@@ -1,4 +1,5 @@
-﻿using Emplomania.Model.Base;
+﻿using Emplomania.Infrastucture.Enums;
+using Emplomania.Model.Base;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace Emplomania.Model
 {
     public class Membership : Nomenclator
     {
-        //public ICollection<User> Users { get; set; }
+        public UserClientRole UserType { get; set; }
+        public int Price { get; set; }
+        public ICollection<User> Users { get; set; }
 
     }
 }

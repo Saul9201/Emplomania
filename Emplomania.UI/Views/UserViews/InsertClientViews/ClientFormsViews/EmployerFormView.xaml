@@ -169,11 +169,11 @@
                               DisplayMemberPath="Name"
                               SelectedValue="{Binding InsertEmployerModel.MunicipalityNeg}"/>
                 </StackPanel>
-                <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
+                <!--<StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Barriada"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
                     <TextBox Width="170"/>
-                </StackPanel>
+                </StackPanel>-->
             </StackPanel>
             <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,30,0">
                 <Label Content="Teléfono fijo:"

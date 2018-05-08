@@ -228,7 +228,14 @@ namespace Emplomania.UI.ViewModels
                   //TODO: Castear paramEx a insertClient
                   this.Subitle = "Pasarela de pago";
                   ResetScrollContent();
-                  CurrentViewModel = new PaymentGatewayViewModel(this) { UserClientIdetityKnow = true };
+                  var vm = new PaymentGatewayViewModel(this) { UserClientIdetityKnow = true, CurrentUser = (paramEx as InsertClientModel).UserVO };
+                  if (paramEx is InsertWorkerModel)
+                      vm.SelectedClientType = UserClientRole.Trabajador;
+                  if (paramEx is InsertEmployerModel)
+                      vm.SelectedClientType = UserClientRole.Empleador;
+                  if (paramEx is InsertTeacherModel)
+                      vm.SelectedClientType = UserClientRole.Profesor;
+                  CurrentViewModel = vm;
               }
               else
                   DisplayEMView<PaymentGatewayViewModel>("Pasarela de pago");

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Emplomania.Data.VO
 {
-    public class MembershipVO : NomenclatorVO
+    public class AditionalServiceVO: NomenclatorVO
     {
         public UserClientRole UserType { get; set; }
         public int Price { get; set; }

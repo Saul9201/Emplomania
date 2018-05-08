@@ -10,14 +10,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
+using Emplomania.UI.Infrastucture;
+using Emplomania.Infrastucture.Enums;
+
 namespace Emplomania.ConsoleTest
 {
     class Program
     {
         static void Main(string[] args)
         {
-            Guid[] l = new Guid[7];
-            l[2] = Guid.NewGuid();
+            AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
+
+            var ass = ServiceLocator.Get<IAditionalServiceService>();
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Empleador });
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Trabajador });
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Profesor });
+
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ficha Destacada", Price = 0, UserType = UserClientRole.Trabajador });
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Asistencia Tecnica", Price = 0, UserType = UserClientRole.Empleador });
+            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Confeccion de Matricula", Price = 0, UserType = UserClientRole.Profesor });
+
+            //Guid[] l = new Guid[7];
+            //l[2] = Guid.NewGuid();
             //Util Para generar userNameyPasswords
             //var g=Guid.NewGuid();
             //Console.WriteLine(g.ToString("N"));
