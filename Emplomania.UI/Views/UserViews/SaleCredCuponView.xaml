@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1300">
     <StackPanel Width="970" 
@@ -12,7 +13,7 @@
             <StackPanel Orientation="Vertical" Margin="0,0,45,0">
                 <Label Content="Tipo de Usuario"/>
                 <ComboBox Width="200"
-                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type nomencl:UserClientRole}}}"
+                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserClientRole}}}"
                           SelectedValue="{Binding SelectedClientType}"
                           DisplayMemberPath="Description"
                           SelectedValuePath="Value"/>

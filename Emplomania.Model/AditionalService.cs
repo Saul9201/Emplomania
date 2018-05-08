@@ -13,5 +13,6 @@ namespace Emplomania.Model
         public UserClientRole UserType { get; set; }
         public int Price { get; set; }
         public ICollection<User> Users { get; set; }
+        public ICollection<Income> Income { get; set; }
     }
 }

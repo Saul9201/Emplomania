@@ -38,7 +38,7 @@
             </Border>
         </StackPanel>
 
-        <Grid Width="560" Height="330">
+        <Grid Width="770" Height="330">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -50,21 +50,37 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
+                <ColumnDefinition/>
                 <ColumnDefinition Width="0.2*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Label Content="Categoría de Cliente"/>
+                <ComboBox Width="230" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:ClientCategory}}}"
+                          DisplayMemberPath="Description"
+                          SelectedValuePath="Value"/>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
+                <Label Content="Tipo de Ingreso"/>
+                <ComboBox Width="230" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:IncomeType}}}"
+                          DisplayMemberPath="Description"
+                          SelectedValuePath="Value"/>
+            </StackPanel>
+            
+            <StackPanel Grid.Column="1" Orientation="Vertical">
                 <Label Content="Membresía"/>
                 <ComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding Memberships}"
                           DisplayMemberPath="Name"/>
             </StackPanel>
-            <StackPanel Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Label Content="Servicio Adicional"/>
                 <ComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding AditionalServices}"
                           DisplayMemberPath="Name"/>
             </StackPanel>
-            <StackPanel Grid.Row="1" Orientation="Vertical">
+            <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Cantidad de dinero"/>
                 <Grid Width="230" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
@@ -78,7 +94,7 @@
                               SelectedValuePath="Value"/>
                 </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Vertical">
+            <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
                 <Label Content="Cantidad de dinero"/>
                 <Grid Width="230" HorizontalAlignment="Left">
                     <Grid.ColumnDefinitions>
@@ -102,14 +118,14 @@
                 <Label Content="Tiempo"/>
                 <ComboBox Width="230" HorizontalAlignment="Left"/>
             </StackPanel>-->
-            <StackPanel Grid.Row="3" Orientation="Vertical" Grid.ColumnSpan="2">
+            <StackPanel Grid.Row="3" Orientation="Vertical" Grid.ColumnSpan="3">
                 <Label Content="Devoluciones" HorizontalAlignment="Center"/>
                 <TextBox Width="170" HorizontalAlignment="Center"/>
             </StackPanel>
-            <Button Grid.Column="2" Style="{StaticResource EMNoteIconButtonStyle}"/>
-            <Button Grid.Column="2" Grid.Row="1" Style="{StaticResource EMEmailIconButtonStyle}"/>
+            <Button Grid.Column="3" Style="{StaticResource EMNoteIconButtonStyle}"/>
+            <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource EMEmailIconButtonStyle}"/>
             <!--<Button Grid.Column="2" Grid.Row="2" Style="{StaticResource EMPrinterIconButtonStyle}" Margin="11,18,10,18"/>-->
-            <Button Grid.Row="5" Content="COBRAR" Grid.ColumnSpan="2"/>
+            <Button Grid.Row="5" Content="COBRAR" Grid.ColumnSpan="3"/>
 
         </Grid>
 

@@ -44,6 +44,8 @@
     <Compile Include="Enums\AuthenticationTypes.cs" />
     <Compile Include="Enums\ClientRoles.cs" />
     <Compile Include="Enums\Genders.cs" />
+    <Compile Include="Enums\IncomeType.cs" />
+    <Compile Include="Enums\ClientCategory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

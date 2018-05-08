@@ -55,6 +55,7 @@
     <Compile Include="Employer.cs" />
     <Compile Include="EyeColor.cs" />
     <Compile Include="Gender.cs" />
+    <Compile Include="Income.cs" />
     <Compile Include="Language.cs" />
     <Compile Include="LanguageLevel.cs" />
     <Compile Include="Membership.cs" />

@@ -146,6 +146,10 @@ namespace Emplomania.Data.Configurations
             HasMany<User>(s => s.Users)
                 .WithOptional()
                 .HasForeignKey(u => u.AditionalServiceFK);
+
+            HasMany<Income>(s => s.Income)
+                .WithOptional()
+                .HasForeignKey(i => i.AditionalServiceFK);
         }
     }
 
@@ -159,6 +163,11 @@ namespace Emplomania.Data.Configurations
             HasMany<User>(x => x.Users)
                 .WithOptional()
                 .HasForeignKey(x => x.MembershipFK);
+
+            HasMany<Income>(m => m.Income)
+            .WithOptional()
+            .HasForeignKey(i => i.MembershipFK);
+
         }
     }
 
