@@ -331,8 +331,9 @@
       <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Scheduling.Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Telerik.Windows.Themes.Windows8">
-      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Themes.Windows8.dll</HintPath>
+    <Reference Include="Telerik.Windows.Themes.Office2016">
+      <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Themes.Office2016.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Telerik.Windows.Zip, Version=2017.2.428.40, Culture=neutral, PublicKeyToken=5803cfa389c90ce7, processorArchitecture=MSIL">
       <HintPath>..\lib\RCWPF\2017.2.503.45.NoXaml\Telerik.Windows.Zip.dll</HintPath>
@@ -361,6 +362,7 @@
     <Compile Include="Converters\InverterBoolToVisibilityConverter2.cs" />
     <Compile Include="Converters\ListNomenclToStringConverter.cs" />
     <Compile Include="Converters\NegationConverter.cs" />
+    <Compile Include="Converters\NullableToVisibilityConverter.cs" />
     <Compile Include="Converters\ObjectToVisibilityConverter.cs" />
     <Compile Include="Converters\IntStringToLevelRecomendationConverter.cs" />
     <Compile Include="Converters\UserTypeToEnabilityConverter.cs" />

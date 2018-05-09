@@ -45,6 +45,7 @@ namespace Emplomania.UI.Infrastucture
 
             var result = (
               from object enumValue in enumValues
+              where GetDescription(enumValue)!="NotShow"
               select new EnumerationMember
               {
                   Value = enumValue,

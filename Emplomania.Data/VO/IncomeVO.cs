@@ -14,8 +14,10 @@ namespace Emplomania.Data.VO
         public ClientCategory ClientCategory { get; set; }
         public IncomeType IncomeType { get; set; }
         public DateTime? IncomeDate { get; set; }
-        public int MoneyCountCUC { get; set; }
-        public int Return { get; set; }
+        public float? MoneyCountMemberchipCUC { get; set; }
+        public float? MoneyCountAditionalServCUC { get; set; }
+        public float? Return { get; set; }
+        public Guid? User { get; set; }
 
         public Guid? MembershipFK { get; set; }
         public Guid? AditionalServiceFK { get; set; }

@@ -13,7 +13,7 @@ namespace Emplomania.Infrastucture.Enums
         CommercialOffice,
         [Description("Depósito Bancario")]
         BankDeposit,
-        [Description("Venta de Cupón")]
+        [Description("NotShow")]
         CouponSale,
     }
 }

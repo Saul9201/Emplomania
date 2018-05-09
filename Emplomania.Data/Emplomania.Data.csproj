@@ -124,6 +124,22 @@
     <Compile Include="Migrations\201805082017329_AddingIncome.Designer.cs">
       <DependentUpon>201805082017329_AddingIncome.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805091413503_AddingUserFieldToIncomeTable.cs" />
+    <Compile Include="Migrations\201805091413503_AddingUserFieldToIncomeTable.Designer.cs">
+      <DependentUpon>201805091413503_AddingUserFieldToIncomeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091545135_AddingFieldsToIncomeTable.cs" />
+    <Compile Include="Migrations\201805091545135_AddingFieldsToIncomeTable.Designer.cs">
+      <DependentUpon>201805091545135_AddingFieldsToIncomeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091659127_ModifingFieldsOnIncomeTable.cs" />
+    <Compile Include="Migrations\201805091659127_ModifingFieldsOnIncomeTable.Designer.cs">
+      <DependentUpon>201805091659127_ModifingFieldsOnIncomeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805091849304_ModifingFieldsFloatsOnIncomeTable.cs" />
+    <Compile Include="Migrations\201805091849304_ModifingFieldsFloatsOnIncomeTable.Designer.cs">
+      <DependentUpon>201805091849304_ModifingFieldsFloatsOnIncomeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminUserService.cs" />
@@ -224,6 +240,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805082017329_AddingIncome.resx">
       <DependentUpon>201805082017329_AddingIncome.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091413503_AddingUserFieldToIncomeTable.resx">
+      <DependentUpon>201805091413503_AddingUserFieldToIncomeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091545135_AddingFieldsToIncomeTable.resx">
+      <DependentUpon>201805091545135_AddingFieldsToIncomeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091659127_ModifingFieldsOnIncomeTable.resx">
+      <DependentUpon>201805091659127_ModifingFieldsOnIncomeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805091849304_ModifingFieldsFloatsOnIncomeTable.resx">
+      <DependentUpon>201805091849304_ModifingFieldsFloatsOnIncomeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

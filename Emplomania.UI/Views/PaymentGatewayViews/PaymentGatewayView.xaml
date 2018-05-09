@@ -6,6 +6,7 @@
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
              xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
              xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="1300">
     <UserControl.Resources>
@@ -14,20 +15,25 @@
     <StackPanel Width="970">
 
         <StackPanel Visibility="{Binding UserClientIdetityKnow, Converter={StaticResource boolVisibilityConverter}}">
-            <DockPanel Width="702" Margin="{StaticResource StackPanelItemMargin}">
-                <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+            <DockPanel Width="870" Margin="{StaticResource StackPanelItemMargin}">
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
                     <Label Content="Tipo de Usuario"/>
-                    <ComboBox Width="200"
+                    <telerik:RadComboBox Width="200"
                           ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserClientRole}}}"
                           SelectedValue="{Binding SelectedClientType}"
                           DisplayMemberPath="Description"
                           SelectedValuePath="Value"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Margin="0,0,45,0">
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
                     <Label Content="Usuario"/>
                     <TextBox Width="200" Text="{Binding UserName}"/>
                 </StackPanel>
-                <Button Content="BUSCAR" VerticalAlignment="Bottom"/>
+
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
+                    <Label Content="Nombre y Apellidos"/>
+                    <TextBox Width="200" Text="{Binding UserName}"/>
+                </StackPanel>
+                <Button Content="BUSCAR" Width="170" VerticalAlignment="Bottom"/>
             </DockPanel>
             <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
                Content="Resultados de la búsqueda"
@@ -38,7 +44,7 @@
             </Border>
         </StackPanel>
 
-        <Grid Width="770" Height="330">
+        <Grid Width="870" Height="330">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -46,7 +52,7 @@
                 <RowDefinition/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -55,30 +61,38 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Orientation="Vertical">
                 <Label Content="Categoría de Cliente"/>
-                <ComboBox Width="230" HorizontalAlignment="Left"
+                <telerik:RadComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:ClientCategory}}}"
                           DisplayMemberPath="Description"
-                          SelectedValuePath="Value"/>
+                          SelectedValuePath="Value"
+                          SelectedValue="{Binding IncomeVO.ClientCategory}"/>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Tipo de Ingreso"/>
-                <ComboBox Width="230" HorizontalAlignment="Left"
+                <telerik:RadComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:IncomeType}}}"
                           DisplayMemberPath="Description"
-                          SelectedValuePath="Value"/>
+                          SelectedValuePath="Value"
+                          SelectedValue="{Binding IncomeVO.IncomeType}"/>
             </StackPanel>
-            
+
             <StackPanel Grid.Column="1" Orientation="Vertical">
                 <Label Content="Membresía"/>
-                <ComboBox Width="230" HorizontalAlignment="Left"
+                <telerik:RadComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding Memberships}"
-                          DisplayMemberPath="Name"/>
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding SelectedMembership}"
+                          ClearSelectionButtonVisibility="Visible"
+                                     ClearSelectionButtonContent="Limpiar seleccion"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Orientation="Vertical">
                 <Label Content="Servicio Adicional"/>
-                <ComboBox Width="230" HorizontalAlignment="Left"
+                <telerik:RadComboBox Width="230" HorizontalAlignment="Left"
                           ItemsSource="{Binding AditionalServices}"
-                          DisplayMemberPath="Name"/>
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding SelectedAditServ}"
+                        ClearSelectionButtonVisibility="Visible"
+                                     ClearSelectionButtonContent="Limpiar seleccion"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Cantidad de dinero"/>
@@ -87,11 +101,20 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="115"/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Margin="0" Width="100" HorizontalAlignment="Left"/>
-                    <ComboBox Grid.Column="1" Margin="0" Width="100" HorizontalAlignment="Right"
+                    <telerik:RadMaskedCurrencyInput Margin="0" Width="100" HorizontalAlignment="Left" 
+                                                   Mask="#5.2"
+                                                   Culture="es-CU"
+                                                    InputBehavior="Insert"
+                                                    SpinMode="Position"
+                                                   AutoFillNumberGroupSeparators="False"
+                                                    IsClearButtonVisible="False"
+                                                    Value="{Binding MembershipMoney}"/>
+                    <!--Text="{Binding MembershipMoney}"-->
+                    <telerik:RadComboBox Grid.Column="1" Margin="0" Width="100" HorizontalAlignment="Right"
                               ItemsSource="{Binding Source={nomencl:Enumeration {x:Type nomencl:MoneyType}}}"
                               DisplayMemberPath="Description"
-                              SelectedValuePath="Value"/>
+                              SelectedValuePath="Value"
+                              SelectedValue="{Binding MembershipMoneyType}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="2" Orientation="Vertical">
@@ -101,11 +124,19 @@
                         <ColumnDefinition/>
                         <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <TextBox Margin="0" Width="100" HorizontalAlignment="Left"/>
-                    <ComboBox Grid.Column="1" Margin="0" Width="100" HorizontalAlignment="Right"
+                    <telerik:RadMaskedCurrencyInput Margin="0" Width="100" HorizontalAlignment="Left" 
+                                                    Mask="#5.2"
+                                                    Culture="es-CU"
+                                                    InputBehavior="Insert"
+                                                    SpinMode="Position"
+                                                    IsClearButtonVisible="False"
+                                                    AutoFillNumberGroupSeparators="False"
+                                                    Value="{Binding AditionSerMoney}"/>
+                    <telerik:RadComboBox Grid.Column="1" Margin="0" Width="100" HorizontalAlignment="Right"
                               ItemsSource="{Binding Source={nomencl:Enumeration {x:Type nomencl:MoneyType}}}"
                               DisplayMemberPath="Description"
-                              SelectedValuePath="Value"/>
+                              SelectedValuePath="Value"
+                              SelectedValue="{Binding AditionSerMoneyType}"/>
                 </Grid>
             </StackPanel>
 
@@ -120,12 +151,20 @@
             </StackPanel>-->
             <StackPanel Grid.Row="3" Orientation="Vertical" Grid.ColumnSpan="3">
                 <Label Content="Devoluciones" HorizontalAlignment="Center"/>
-                <TextBox Width="170" HorizontalAlignment="Center"/>
+                <telerik:RadMaskedCurrencyInput Margin="276,0" Width="170" HorizontalAlignment="Center" Value="{Binding ReturnMoney}"
+                                                Mask="#5.2"
+                                                Culture="es-CU"
+                                                InputBehavior="Insert"
+                                                IsClearButtonVisible="False"
+                                                SpinMode="Position"
+                                                AutoFillNumberGroupSeparators="False"
+                                                   />
             </StackPanel>
             <Button Grid.Column="3" Style="{StaticResource EMNoteIconButtonStyle}"/>
             <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource EMEmailIconButtonStyle}"/>
             <!--<Button Grid.Column="2" Grid.Row="2" Style="{StaticResource EMPrinterIconButtonStyle}" Margin="11,18,10,18"/>-->
-            <Button Grid.Row="5" Content="COBRAR" Grid.ColumnSpan="3"/>
+            <Button Grid.Row="5" Content="COBRAR" Grid.ColumnSpan="3"
+                    Command="{Binding CobrarButtonCommand}"/>
 
         </Grid>
 

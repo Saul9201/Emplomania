@@ -282,6 +282,10 @@
         <Setter Property="Width" Value="231"/>
     </Style>
 
+    <Style TargetType="telerik:RadMaskedCurrencyInput" BasedOn="{StaticResource RadMaskedCurrencyInputStyle}">
+        <Setter Property="Height" Value="26"/>
+        <Setter Property="Width" Value="231"/>
+    </Style>
     <!--TextBoxs-->
     <Style x:Key="{x:Type TextBox}" TargetType="{x:Type TextBox}">
         <Setter Property="Background" Value="{StaticResource EMTextBoxBackgroundColor}"/>
