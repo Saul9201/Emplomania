@@ -5,6 +5,7 @@ using Emplomania.UI.Infrastucture;
 using Emplomania.UI.ViewModels.Base;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -17,6 +18,8 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
 {
     public class PaymentGatewayViewModel : EMViewModelBase
     {
+        public string UserNameToSearch { get; set; }
+        public string FullNameToSearch { get; set; }
         public bool UserClientIdetityKnow { get; set; } = false;
         //private UserVO currentUser;
         //public UserVO CurrentUser
@@ -30,7 +33,12 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
         //        SetProperty(ref currentUser, value);
         //    }
         //}
-        public UserVO CurrentUser { get; set; }
+        private UserVO currentUser;
+        public UserVO CurrentUser
+        {
+            get { return currentUser; }
+            set { SetProperty(ref currentUser, value); }
+        }
         public IncomeVO IncomeVO { get; set; }
         public PaymentGatewayViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
@@ -72,7 +80,7 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
             }
         }
 
-        
+
         public float? MembershipMoney { get; set; }
         public MoneyType MembershipMoneyType { get; set; }
 
@@ -101,6 +109,13 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
             }
         }
 
+        private ObservableCollection<UserVO> usersSearchResult;
+        public ObservableCollection<UserVO> UsersSearchResult
+        {
+            get { return usersSearchResult; }
+            set { SetProperty(ref usersSearchResult, value); }
+        }
+
         public ICommand CobrarButtonCommand => new RelayCommand(param =>
         {
             IncomeVO.ClientType = SelectedClientType;
@@ -109,7 +124,7 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
             if (ValidM)
             {
                 if ((MembershipMoneyType == MoneyType.CUC && MembershipMoney >= SelectedMembership.Price)
-                || (MembershipMoneyType == MoneyType.CUP && MembershipMoney / 25 > SelectedMembership.Price))
+                || (MembershipMoneyType == MoneyType.CUP && MembershipMoney / 25 >= SelectedMembership.Price))
                 {
                     IncomeVO.MembershipFK = SelectedMembership.Id;
                     IncomeVO.MoneyCountMemberchipCUC = MembershipMoneyType == MoneyType.CUC ? MembershipMoney : MembershipMoney / 25;
@@ -123,7 +138,7 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
             if (ValidAS)
             {
                 if ((AditionSerMoneyType == MoneyType.CUC && AditionSerMoney >= SelectedAditServ.Price)
-                || (AditionSerMoneyType == MoneyType.CUP && AditionSerMoney / 25 > SelectedAditServ.Price))
+                || (AditionSerMoneyType == MoneyType.CUP && AditionSerMoney / 25 >= SelectedAditServ.Price))
                 {
                     IncomeVO.AditionalServiceFK = SelectedAditServ.Id;
                     IncomeVO.MoneyCountAditionalServCUC = AditionSerMoneyType == MoneyType.CUC ? AditionSerMoney : AditionSerMoney / 25;
@@ -135,15 +150,28 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
                 }
             }
             if (ServiceLocator.Get<IIncomeService>().Add(IncomeVO) != null)
-                RadWindow.Alert(new DialogParameters
-                {
-                    Content = "El cobro fue efectuado correctamente.\nRecuerde sincronizar cuando se conecte a internet.",
-                    Owner = Application.Current.MainWindow,
-                });
-                //MessageBox.Show("El cobro fue efectuado correctamente. Recuerde sincronizar cuando se conecte a internet.");
+            {
+                MessageBox.Show("El cobro fue efectuado correctamente.\nRecuerde sincronizar cuando se conecte a internet.");
+                //RadWindow.Alert(new DialogParameters
+                //{
+                //    Content = "El cobro fue efectuado correctamente.\nRecuerde sincronizar cuando se conecte a internet.",
+                //    Owner = Application.Current.MainWindow,
+                //});
+                if (UserClientIdetityKnow)
+                    //TODO: Pensar si no es mejor aqui virar para donde estaba
+                    CentralEMMain.DisplayBasicView.Execute(null);
+            }
+            else
+            {
+                MessageBox.Show("Error interno al insertar a la db local.");
+            }
+
         },
             param => CanExecuteCobrarButton());
-
+        public ICommand SearchButtonCommand => new RelayCommand(param =>
+        {
+            UsersSearchResult = new ObservableCollection<UserVO>(DataAdministrator.GetUserByUserNameOrFullName(SelectedClientType, UserNameToSearch, FullNameToSearch));
+        });
 
         public bool ValidM
         {

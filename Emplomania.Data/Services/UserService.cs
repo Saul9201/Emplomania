@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Emplomania.Infrastucture.Enums;
 
 namespace Emplomania.Data.Services
 {
@@ -17,10 +18,42 @@ namespace Emplomania.Data.Services
         {
         }
 
+        public List<UserVO> FilterByUserNameAndFullName(UserClientRole clientType, string userNameToSearch, string fullNameToSearch)
+        {
+            IQueryable<UserVO> q = null;
+            switch (clientType)
+            {
+                case UserClientRole.Trabajador:
+                    q = (from s in db.Users
+                        join w in db.Workers on s.Id equals w.UserFK
+                        select s).ProjectTo<UserVO>();
+                    break;
+                case UserClientRole.Empleador:
+                    q = (from s in db.Users
+                         join e in db.Employers on s.Id equals e.UserFK
+                         select s).ProjectTo<UserVO>();
+                    break;
+                case UserClientRole.Profesor:
+                    //TODO: Falta hacer lo mismo para el profesor
+                    break;
+                default:
+                    break;
+            }
+            if (q == null)
+                return null;
+            if (!string.IsNullOrEmpty(userNameToSearch))
+                q = q.Where(x => x.UserName == userNameToSearch);
+            if (!string.IsNullOrEmpty(fullNameToSearch))
+                q = q.Where(x => (x.Name + " " + x.LastName + " " + x.LastName2).Contains(fullNameToSearch));
+            //q = q.Where(x => x.Name.Contains(fullNameToSearch)||x.LastName.Contains(fullNameToSearch)||x.LastName2.Contains(fullNameToSearch));
+            return q.ToList();
+
+        }
     }
 
     public interface IUserService : ICrudService<UserVO, User>
     {
+        List<UserVO> FilterByUserNameAndFullName(UserClientRole selectedClientType, string userNameToSearch, string fullNameToSearch);
     }
 
 

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using Emplomania.Infrastucture.Enums;
 
 namespace Emplomania.UI.Infrastucture
 {
@@ -73,6 +74,15 @@ namespace Emplomania.UI.Infrastucture
 
             //TODO: Hacer otras cosas como sincronizar usuarios.
             return res;
+        }
+
+        internal static List<UserVO> GetUserByUserNameOrFullName(UserClientRole clientType, string userNameToSearch, string fullNameToSearch)
+        {
+            return ServiceLocator.Get<IUserService>().FilterByUserNameAndFullName(clientType, userNameToSearch, fullNameToSearch);
+            //TODO: Buscar por la web y agregar el resultado a la lista.
+            //Notificar aqui en caso de que se este buscando solamente por la db local.
+            //UsersSearchResult = UserNameToSearch.Concat(ServiceLocator.Get<IUserWebService>(FilterByUserNameAndFullName(SelectedClientType, UserNameToSearch, FullNameToSearch)));
+
         }
     }
 }
