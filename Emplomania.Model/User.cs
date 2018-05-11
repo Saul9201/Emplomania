@@ -10,7 +10,6 @@ namespace Emplomania.Model
 {
     public class User
     {
-        //Propiedades(Columnas)
         public Guid Id { get; set; }
         public string UserName { get; set; }
         public string PasswordHash { get; set; }
@@ -20,23 +19,18 @@ namespace Emplomania.Model
         public string Name { get; set; }
         public string LastName { get; set; }
         public string LastName2 { get; set; }
-        //public string PrivateAddress { get; set; }
         public bool Verified { get; set; }
-        public float Balance { get; set; }//saldo
+        public float Balance { get; set; }
         public byte[] ProfileImageRaw { get; set; }
-        public Guid? MunicipalityFK { get; set; }
-        public Guid? MembershipFK { get; set; }
-        public Guid? AditionalServiceFK { get; set; }
         public AuthenticationTypes AuthenticationType { get; set; }
         public string HowKnowEmplomania { get; set; }
         public string InvitationConfirmCode { get; set; }
-        //Relaciones
+
+        public Guid? MunicipalityFK { get; set; }
+        public Guid? MembershipFK { get; set; }
+        public Guid? AditionalServiceFK { get; set; }
+        
         public ICollection<Employer> Employers { get; set; }
         public ICollection<Worker> Workers { get; set; }
-
-
-        //public bool ProfileCreated { get; set; }
-        //public int Ticket { get; set; }
-        //public bool Actived { get; set; }
     }
 }

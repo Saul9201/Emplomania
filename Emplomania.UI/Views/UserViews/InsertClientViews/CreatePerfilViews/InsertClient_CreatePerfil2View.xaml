@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:vw="clr-namespace:Emplomania.UI.Views"
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="735.038" d:DesignWidth="1300">
 
-    <StackPanel Width="970" DataContext="{Binding InsertWorkerModel}">
+    <StackPanel Width="970">
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="CURRÍCULUM" 
                    Style="{StaticResource EMGroupHeaderLabelStyle}"/>
@@ -20,14 +20,14 @@
                     <ComboBox Width="570"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=SchoolGrades}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding SchoolGrade}"/>
+                              SelectedValue="{Binding InsertWorkerModel.WorkerVO.SchoolGrade}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                     <Label>Graduado de *</Label>
                     <ComboBox Width="570"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Specialities}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding Specialty}"/>
+                              SelectedValue="{Binding InsertWorkerModel.WorkerVO.Specialty}"/>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                     <Label>Otros cursos</Label>
@@ -42,7 +42,7 @@
                              TextSearch.TextPath="Name" 
                              IsEditable="false">
                         <i:Interaction.Behaviors>
-                            <nomencl:MultiselectBehavior SelectedItems="{Binding SelectedCourses}"/>
+                            <nomencl:MultiselectBehavior SelectedItems="{Binding InsertWorkerModel.WorkerVO.SelectedCourses}"/>
                         </i:Interaction.Behaviors>
                     </telerik:RadComboBox>
                 </StackPanel>
@@ -50,61 +50,110 @@
                     <Label>Otros</Label>
                     <TextBox Width="570"
                              Text="{Binding WorkerVO.OtherCourses}"/>
-                    
+
                 </StackPanel>
-                <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                    <StackPanel Orientation="Vertical">
-                        <Label>Conozco el idioma</Label>
-                        <ComboBox Width="240" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl0.Language}"/>
-                        <ComboBox Width="240" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl1.Language}"/>
-                        <ComboBox Width="240" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl2.Language}"/>
-                        <ComboBox Width="240" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl3.Language}"/>
-                        <ComboBox Width="240" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Languages}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl4.Language}"/>
-                    </StackPanel>
-                    <StackPanel Orientation="Vertical">
-                        <Label>Nivel de idioma</Label>
-                        <ComboBox Width="327" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl0.LanguageLevel}"/>
-                        <ComboBox Width="327" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl1.LanguageLevel}"/>
-                        <ComboBox Width="327" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl2.LanguageLevel}"/>
-                        <ComboBox Width="327" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl3.LanguageLevel}"/>
-                        <ComboBox Width="327" 
-                                  ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
-                                  DisplayMemberPath="Name"
-                                  SelectedValue="{Binding Wl4.LanguageLevel}"/>
-                    </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,10,0,0">
+                    <Label>Conozco el idioma</Label>
+                    <telerik:RadComboBox Width="570" EmptyText="Selecciona los idiomas" FontFamily="Segoe UI"
+                             AllowMultipleSelection="True"
+                             ClearSelectionButtonContent="Deseleccionar todo"
+					         ClearSelectionButtonVisibility="Visible"
+                             ItemsSource="{Binding WorkerLanguagesSource}"
+                             DisplayMemberPath="Language.Name"
+                             MultipleSelectionSeparator=","
+                             TextSearch.TextPath="Language.Name" 
+                             IsEditable="false">
+                        <i:Interaction.Behaviors>
+                            <nomencl:MultiselectBehavior SelectedItems="{Binding InsertWorkerModel.SelectedWorkerLanguages}"/>
+                        </i:Interaction.Behaviors>
+                    </telerik:RadComboBox>
                 </StackPanel>
+                <Grid HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Idioma"
+                           Grid.Column="0"
+                           Width="240" 
+                           Margin="2"/>
+                    <Label Content="Nivel"
+                           Grid.Column="1"
+                           Width="327" 
+                           Margin="2" />
+                </Grid>
+                <ItemsControl ItemsSource="{Binding InsertWorkerModel.SelectedWorkerLanguages}"
+                          HorizontalAlignment="Center">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="0" 
+                                         Text="{Binding Language.Name}" 
+                                         Width="240" Margin="2" IsReadOnly="True"/>
+                                <ComboBox Grid.Column="1"
+                                          Width="327" 
+                                          Margin="2" 
+                                          ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=LanguageLevels}"
+                                          DisplayMemberPath="Name"
+                                          SelectedValue="{Binding LanguageLevel}"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                </ItemsControl>
             </StackPanel>
         </StackPanel>
-        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}"
+                    MinHeight="200">
             <Label Content="TRAYECTORIA LABORAL Y REFERENCIAS" Style="{StaticResource EMGroupHeaderLabelStyle}"/>
+            <Button Content="AGREGAR REFERENCIA LABORAL" 
+                    Margin="0,10,0,0"
+                    Command="{Binding AddWorkReferenceComand}"
+                    Width="310"/>
             <StackPanel Margin="0,10,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                <Label Width="165" Content="Lugar"/>
+                <Label Width="165" Content="Ocupación"/>
+                <Label Width="165" Content="Tiempo"/>
+                <Label Width="165" Content="Persona de contacto"/>
+                <Label Width="165" Content="Teléfono"/>
+            </StackPanel>
+            <ItemsControl ItemsSource="{Binding InsertWorkerModel.SelectedWorkReferences}"
+                          HorizontalAlignment="Center">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="0,10,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
+                            <TextBox Width="165" 
+                                     Text="{Binding Place}"
+                                     IsReadOnly="True"/>
+                            <TextBox Width="165" 
+                                     Text="{Binding Occupation}"/>
+                            <ComboBox Width="165" ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkedTimes}"  
+                                      SelectedValue="{Binding WorkedTime}"/>
+                            <TextBox Width="165"  
+                                     Text="{Binding ContactPerson}"/>
+                            <TextBox Width="165" 
+                                     Text="{Binding Phone}"/>
+                            <Button Style="{StaticResource EMRemoveIconButtonStyle}"
+                                    Command="{Binding DataContext.DeleteWorkReferenceReferenceCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                    CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <!--<StackPanel Margin="0,10,0,0" HorizontalAlignment="Center" Orientation="Horizontal">
                 <StackPanel Orientation="Vertical">
                     <Label Content="Lugar"/>
                     <TextBox Width="165" Text="{Binding Wr0.Place}"/>
@@ -146,7 +195,7 @@
                     <TextBox Width="165" Text="{Binding Wr4.Phone}"/>
                 </StackPanel>
 
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Margin="0,0,40,0" Content="CANCELAR"

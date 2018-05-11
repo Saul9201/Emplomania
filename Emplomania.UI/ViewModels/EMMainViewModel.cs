@@ -360,25 +360,8 @@ namespace Emplomania.UI.ViewModels
                     {
                         var context = actionParam as InsertClient_CreatePerfil2ViewModel;
                         context.InsertWorkerModel.WorkerVO.User = context.InsertWorkerModel.UserVO;
-                        context.InsertWorkerModel.WorkerVO.Languages = new List<WorkerLanguageVO>();
-                        foreach (var item in context.InsertWorkerModel.Languages)
-                        {
-                            if (item != null && item.Language != null && item.LanguageLevel != null)
-                            {
-                                item.WorkerFK = context.InsertWorkerModel.WorkerVO.Id;
-                                context.InsertWorkerModel.WorkerVO.Languages.Add(item);
-                            }
-                        }
-                        context.InsertWorkerModel.WorkerVO.WorkReferences = new List<WorkReferenceVO>();
-                        foreach (var item in context.InsertWorkerModel.WorkReferences)
-                        {
-                            if (item != null && !string.IsNullOrEmpty(item.Place) && !string.IsNullOrEmpty(item.Occupation)
-                            && !string.IsNullOrEmpty(item.ContactPerson) && !string.IsNullOrEmpty(item.Phone))
-                            {
-                                item.WorkerFK = context.InsertWorkerModel.WorkerVO.Id;
-                                context.InsertWorkerModel.WorkerVO.WorkReferences.Add(item);
-                            }
-                        }
+                        context.InsertWorkerModel.WorkerVO.WorkReferences = context.InsertWorkerModel.SelectedWorkReferences.ToList();
+                        context.InsertWorkerModel.WorkerVO.Languages = context.InsertWorkerModel.SelectedWorkerLanguages.ToList();
                         context.InsertWorkerModel.WorkerVO.Courses = context.InsertWorkerModel.SelectedCourses.ToList();
                         if (!ServiceLocator.Get<IWorkerService>().AddOrUpdate(context.InsertWorkerModel.WorkerVO))
                         {
@@ -717,10 +700,9 @@ namespace Emplomania.UI.ViewModels
                                 UserClientRole = InsertClientModel.UserClientRole,
                                 UserVO = InsertClientModel.UserVO,
                             };
-                            p2.WorkerVO = new WorkerVO() { Id=Guid.NewGuid(), UserFK = p2.UserVO.Id };
-
-                            p2.WorkerVO.GenderFK = ServiceLocator.Get<IGenderService>().Get(x => x.Name == p2.Gender.ToString()).Id;
-                            p2.WorkerVO.Childrens = p2.Childrens == YesNotAnswer.Yes;
+                            p2.WorkerVO = new WorkerVO() { Id=Guid.NewGuid(), User = p2.UserVO };
+                            p2.WorkerVO.Childrens = true;
+                            p2.WorkerVO.Gender = WebNomenclatorsCache.Instance.Genders.Where(x => x.Name == Gender.Masculino.ToString()).FirstOrDefault();
                             DisplayInsertClientWorkerView.Execute(p2);
                             break;
                         default:

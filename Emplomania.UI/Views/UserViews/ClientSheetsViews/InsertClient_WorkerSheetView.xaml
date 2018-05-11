@@ -75,15 +75,15 @@
             </StackPanel>
             <StackPanel Grid.Row="5" Orientation="Vertical">
                 <Label Content="Complexión:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding Complexion.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.Complexion.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Color de la piel:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding SkinColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.SkinColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
                 <Label Content="Color de los ojos:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding EyeColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.EyeColor.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
                 <Label Content="Reside en la provincia:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
@@ -91,7 +91,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Content="En el municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Vertical">
                 <Label Content="Licencia de conducción:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
@@ -103,11 +103,11 @@
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical">
                 <Label Content="Estado civil:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding CivilStatus.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.CivilStatus.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Vertical">
                 <Label Content="¿Tiene hijos?" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding Childrens}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding WorkerVO.Childrens}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
         </Grid>
 

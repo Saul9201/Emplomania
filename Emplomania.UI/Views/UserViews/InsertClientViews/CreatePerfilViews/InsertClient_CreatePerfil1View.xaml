@@ -75,8 +75,8 @@
                 <StackPanel Grid.Row="3" Orientation="Vertical">
                     <Label>Sexo *</Label>
                     <StackPanel Orientation="Horizontal" >
-                        <RadioButton Content="F" IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Femenino}"/>
-                        <RadioButton Margin="20,0,0,0" Content="M" IsChecked="{Binding Path=Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Masculino}"/>
+                        <RadioButton Content="F" IsChecked="{Binding Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Femenino}"/>
+                        <RadioButton Margin="20,0,0,0" Content="M" IsChecked="{Binding Gender, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Masculino}"/>
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Margin="{StaticResource MarginRight2}">
@@ -89,7 +89,7 @@
                     <Label>Complexión</Label>
                     <ComboBox Width="Auto"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Complexions}"
-                              SelectedValue="{Binding Complexion}"
+                              SelectedValue="{Binding WorkerVO.Complexion}"
                               DisplayMemberPath="Name"/>
                     
                 </StackPanel>
@@ -97,7 +97,7 @@
                     <Label>Color de la Piel</Label>
                     <ComboBox Width="Auto" 
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=SkinColors}"
-                              SelectedValue="{Binding SkinColor}"
+                              SelectedValue="{Binding WorkerVO.SkinColor}"
                               DisplayMemberPath="Name"/>
                 </StackPanel>
 
@@ -105,21 +105,21 @@
                     <Label>Color de los ojos</Label>
                     <ComboBox Width="Auto"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=EyeColors}"
-                              SelectedValue="{Binding EyeColor}"
+                              SelectedValue="{Binding WorkerVO.EyeColor}"
                               DisplayMemberPath="Name"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource MarginRight2}">
                     <Label >Estado civil</Label>
                     <ComboBox Width="Auto"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=CivilStatuses}"
-                              SelectedValue="{Binding CivilStatus}"
+                              SelectedValue="{Binding WorkerVO.CivilStatus}"
                               DisplayMemberPath="Name"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Vertical">
                     <Label>¿Tienes hijos?</Label>
                     <StackPanel Orientation="Horizontal" >
-                        <RadioButton Content="Si" IsChecked="{Binding Path=Childrens, Converter={StaticResource enumBooleanConverter}, ConverterParameter=Yes}"/>
-                        <RadioButton Margin="20,0,0,0" Content="No" IsChecked="{Binding Path=Childrens, Converter={StaticResource enumBooleanConverter}, ConverterParameter=No}"/>
+                        <RadioButton Content="Si" IsChecked="{Binding WorkerVO.Childrens}"/>
+                        <RadioButton Margin="20,0,0,0" Content="No" />
                     </StackPanel>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="1" Margin="{StaticResource MarginRight1}">
@@ -133,7 +133,7 @@
                     <Label>Municipio *</Label>
                     <ComboBox Width="Auto" 
                               ItemsSource="{Binding DataContext.Municipalities, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
-                              SelectedValue="{Binding Municipality}"
+                              SelectedValue="{Binding UserVO.Municipality}"
                               DisplayMemberPath="Name"/>
                 </StackPanel>
                 <StackPanel Grid.Row="5" Grid.Column="1" Margin="{StaticResource MarginRight1}">
@@ -147,24 +147,11 @@
                                         ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=DriverLicenses}"
                                         SelectionMode="Multiple"
                                         ItemTemplate="{StaticResource CheckBoxItemTemplate}">
-                        
+
                         <i:Interaction.Behaviors>
                             <nomencl:ListBoxMultiselectBehavior SelectedItems="{Binding SelectedLicenses}"/>
                         </i:Interaction.Behaviors>
                     </telerik:RadListBox>
-                    <!--<ListBox Background="AliceBlue" Height="185">
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                    </ListBox>-->
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="2" Grid.RowSpan="4">
                     <Label>Vehículos que poseo</Label>
@@ -177,30 +164,6 @@
                             <nomencl:ListBoxMultiselectBehavior SelectedItems="{Binding SelectedVehicles}"/>
                         </i:Interaction.Behaviors>
                     </telerik:RadListBox>
-                    <!--<ListBox Background="AliceBlue" Height="185">
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                        <RadioButton Content="A1-Ciclomotor"/>
-                    </ListBox>-->
                 </StackPanel>
 
             </Grid>

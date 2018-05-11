@@ -136,6 +136,7 @@ namespace Emplomania.UI.Infrastucture
             Instance.Vehicles = ServiceLocator.Get<IVehicleService>().GetAll().ToList();
             Instance.Workplaces = ServiceLocator.Get<IWorkplaceService>().GetAll().ToList();
             Instance.Courses = ServiceLocator.Get<ICourseService>().GetAll().ToList();
+            Instance.Genders = ServiceLocator.Get<IGenderService>().GetAll().ToList();
             Instance.Municipalities = ServiceLocator.Get<IMunicipalityService>().GetAll().ToList();
         }
 
@@ -392,6 +393,8 @@ namespace Emplomania.UI.Infrastucture
             get { return municipalities; }
             set { SetProperty(ref municipalities, value); }
         }
+        public List<GenderVO> Genders { get; private set; }
+
     }
 
     //public enum Membresy

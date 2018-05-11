@@ -258,10 +258,65 @@ namespace Emplomania.Data.Services
             }
         }
 
+        public override IQueryable<WorkerVO> GetAll()
+        {
+            var q = from w in db.Workers
+                    join us in db.Users on w.UserFK equals us.Id
+                    join ec in db.EyeColors on w.EyeColorFK equals ec.Id
+                    join sc in db.SkinColors on w.SkinColorFK equals sc.Id
+                    join comp in db.Complexios on w.ComplexionFK equals comp.Id
+                    join g in db.Genders on w.GenderFK equals g.Id
+                    join cs in db.CivilStatuses on w.CivilStatusFK equals cs.Id
+                    join sg in db.SchoolGrades on w.SchoolGradeFK equals sg.Id
+                    join sp in db.Specialties on w.SpecialtyFK equals sp.Id
+                    select new WorkerVO
+                    {
+                        Id = w.Id,
+                        BornDate = w.BornDate,
+                        Stature = w.Stature,
+                        Childrens = w.Childrens,
+                        Barriada = w.Barriada,
+                        Abilities = w.Abilities,
+                        Salary = w.Salary,
+                        Experience = w.Experience,
+                        OtherCourses = w.OtherCourses,
+
+                        User = Mapper.Map<UserVO>(us),
+                        EyeColor = Mapper.Map<EyeColorVO>(ec),
+                        SkinColor = Mapper.Map<SkinColorVO>(sc),
+                        Complexion = Mapper.Map<ComplexionVO>(comp),
+                        Gender = Mapper.Map<GenderVO>(g),
+                        CivilStatus = Mapper.Map<CivilStatusVO>(cs),
+                        SchoolGrade = Mapper.Map<SchoolGradeVO>(sg),
+                        Specialty = Mapper.Map<SpecialtyVO>(sp),
+                    };
+            return q;
+        }
+
+        public WorkerVO LoadEnumerablesProperties(WorkerVO worker)
+        {
+            worker.WorkReferences = wrs.GetAll().Where(x => x.WorkerFK == worker.Id).ToList();
+            worker.DriverLicenses = (from wdl in db.WorkerDriverLicenses
+                                     join dl in db.DriverLicenses on wdl.DriverLicenseFK equals dl.Id
+                                     where wdl.WorkerFK == worker.Id
+                                     select dl).ProjectTo<DriverLicenseVO>().ToList();
+            worker.Vehicles = (from wv in db.WorkerVehicles
+                               join v in db.Vehicles on wv.VehicleFK equals v.Id
+                               where wv.WorkerFK == worker.Id
+                               select v).ProjectTo<VehicleVO>().ToList();
+            worker.Languages = wls.GetAll().Where(x => x.WorkerFK == worker.Id).ToList();
+            worker.Courses = (from wc in db.WorkerCourses
+                              join c in db.Courses on wc.CourseFK equals c.Id
+                              where wc.WorkerFK == worker.Id
+                              select c).ProjectTo<CourseVO>().ToList();
+            worker.WorkAspirations = was.GetAll().Where(x => x.WorkerFK == worker.Id).ToList();
+            return worker;
+        }
     }
     public interface IWorkerService : ICrudService<WorkerVO, Worker>
     {
         bool AddOrUpdate(WorkerVO worker);
+        WorkerVO LoadEnumerablesProperties(WorkerVO worker);
     }
 
     internal class WorkReferenceService : CrudService<WorkReferenceVO, WorkReference>, IWorkReferenceService
@@ -470,6 +525,21 @@ namespace Emplomania.Data.Services
                 return false;
             }
         }
+
+        public override IQueryable<WorkerLanguageVO> GetAll()
+        {
+            var q = from wl in db.WorkerLanguages
+                    join l in db.Languages on wl.LanguageFK equals l.Id
+                    join ll in db.LanguageLevels on wl.LanguageLevelFK equals ll.Id
+                    select new WorkerLanguageVO
+                    {
+                        Id = wl.Id,
+                        WorkerFK = wl.WorkerFK,
+                        Language = Mapper.Map<LanguageVO>(l),
+                        LanguageLevel = Mapper.Map<LanguageLevelVO>(ll),
+                    };
+            return q;
+        }
     }
     public interface IWorkerLanguageService : ICrudService<WorkerLanguageVO, WorkerLanguage>
     {
@@ -574,6 +644,22 @@ namespace Emplomania.Data.Services
                 this.UndoChanges();
                 return false;
             }
+        }
+
+        public override IQueryable<WorkAspirationVO> GetAll()
+        {
+            return from wa in db.WorkAspirations
+                   join sc in db.Schedules on wa.ScheduleFK equals sc.Id
+                   join wp in db.Workplaces on wa.WorkplaceFK equals wp.Id
+                   select new WorkAspirationVO
+                   {
+                       Id = wa.Id,
+                       Abilities = wa.Abilities,
+                       Experience = wa.Experience,
+                       Observations = wa.Observations,
+                       Schedule = Mapper.Map<ScheduleVO>(sc),
+                       Workplace = Mapper.Map<WorkplaceVO>(wp),
+                   };
         }
     }
     public interface IWorkAspirationService: ICrudService<WorkAspirationVO, WorkAspiration>

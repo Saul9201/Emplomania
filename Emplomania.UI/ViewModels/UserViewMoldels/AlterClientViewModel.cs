@@ -68,7 +68,6 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
                         UserVO=CurrentUser,
                         WorkerVO=worker,
                         AuthenticationTypes=CurrentUser.AuthenticationType,
-                        Childrens = worker.Childrens?YesNotAnswer.Yes:YesNotAnswer.No,
 
                         //TODO++: Antes de hacer esto arreglar lo de los modelos de insercion
                         //TODO: Agregar AuthenticationTypes a UserVO y User para guardarlo en base de datos y aqui hacer: AuthenticationTypes=CurrentUser.AuthenticationType
