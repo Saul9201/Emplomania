@@ -226,6 +226,15 @@ namespace Emplomania.UI.Infrastucture
                     "10 años",
                     "mas de 10 años",
                 },
+                HowKnowEM = new List<string>()
+                {
+                    "Por un anuncio de clasificados",
+                    "Porque me lo recomendaron",
+                    "Por publicidad impresa",
+                    "Recibí promoción por email",
+                    "Por el paquete semanal",
+                    "Por las redes sociales",
+                }
             };
             Load();
 
@@ -236,6 +245,8 @@ namespace Emplomania.UI.Infrastucture
         public List<string> WorkedTimes { get; set; }
 
         public List<int> WorkPlaceCount { get; set; }
+
+        public List<string> HowKnowEM { get; set; }
 
         private List<CategoryVO> categories;
         public List<CategoryVO> Categories

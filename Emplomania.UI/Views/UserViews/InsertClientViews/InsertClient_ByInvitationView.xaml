@@ -39,7 +39,7 @@
         </StackPanel>>-->
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label>Codigo de invitación *</Label>
-            <TextBox Width="Auto" Text="{Binding InvitationCode}" Tag="Introducir Código de Invitacion"/>
+            <TextBox Width="Auto" Text="{Binding UserVO.InvitationConfirmCode}" Tag="Introducir Código de Invitacion"/>
             
         </StackPanel>
         <Button Content="REGISTRAR" 

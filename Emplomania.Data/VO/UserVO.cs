@@ -48,7 +48,9 @@ namespace Emplomania.Data.VO
         }
         public Guid? MunicipalityFK { get; set; }
         public Guid? MembershipFK { get; set; }
-
+        public AuthenticationTypes AuthenticationType { get; set; }
+        public string HowKnowEmplomania { get; set; }
+        public string InvitationConfirmCode { get; set; }
         #region Old
         //public Guid Id { get; set; }
         //public string UserName { get; set; }

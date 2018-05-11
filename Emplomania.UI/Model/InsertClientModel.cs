@@ -19,9 +19,10 @@ namespace Emplomania.UI.Model
             set
             {
                 SetProperty(ref authenticationTypes, value);
+                if(UserVO!=null)
+                    UserVO.AuthenticationType = value;
             }
         }
-        public string InvitationCode { get; set; }
         public UserClientRole UserClientRole { get; set; }
         
         public UserVO UserVO { get; set; }

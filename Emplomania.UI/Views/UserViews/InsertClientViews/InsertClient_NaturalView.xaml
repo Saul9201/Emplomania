@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
              mc:Ignorable="d" 
              d:DesignHeight="520" d:DesignWidth="1300">
 
@@ -38,7 +39,10 @@
         </StackPanel>-->
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label>Cómo conoció de Emplomania</Label>
-            <ComboBox Width="Auto"/>
+            <ComboBox Width="Auto" 
+                      ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=HowKnowEM}"
+                      SelectedValue="{Binding UserVO.HowKnowEmplomania}"/>
+            
         </StackPanel>
         <Button Content="REGISTRAR"
                 Command="{Binding DataContext.LogicDisplayPosiblUserClientTypeInsertClientViews, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"

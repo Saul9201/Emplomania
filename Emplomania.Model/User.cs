@@ -27,7 +27,9 @@ namespace Emplomania.Model
         public Guid? MunicipalityFK { get; set; }
         public Guid? MembershipFK { get; set; }
         public Guid? AditionalServiceFK { get; set; }
-
+        public AuthenticationTypes AuthenticationType { get; set; }
+        public string HowKnowEmplomania { get; set; }
+        public string InvitationConfirmCode { get; set; }
         //Relaciones
         public ICollection<Employer> Employers { get; set; }
         public ICollection<Worker> Workers { get; set; }

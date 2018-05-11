@@ -140,6 +140,10 @@
     <Compile Include="Migrations\201805091849304_ModifingFieldsFloatsOnIncomeTable.Designer.cs">
       <DependentUpon>201805091849304_ModifingFieldsFloatsOnIncomeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805110349308_AddingAuthTypeFieldsToUser.cs" />
+    <Compile Include="Migrations\201805110349308_AddingAuthTypeFieldsToUser.Designer.cs">
+      <DependentUpon>201805110349308_AddingAuthTypeFieldsToUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminUserService.cs" />
@@ -252,6 +256,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805091849304_ModifingFieldsFloatsOnIncomeTable.resx">
       <DependentUpon>201805091849304_ModifingFieldsFloatsOnIncomeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805110349308_AddingAuthTypeFieldsToUser.resx">
+      <DependentUpon>201805110349308_AddingAuthTypeFieldsToUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
