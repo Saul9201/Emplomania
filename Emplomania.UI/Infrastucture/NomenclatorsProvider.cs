@@ -138,6 +138,8 @@ namespace Emplomania.UI.Infrastucture
             Instance.Courses = ServiceLocator.Get<ICourseService>().GetAll().ToList();
             Instance.Genders = ServiceLocator.Get<IGenderService>().GetAll().ToList();
             Instance.Municipalities = ServiceLocator.Get<IMunicipalityService>().GetAll().ToList();
+
+            
         }
 
         static WebNomenclatorsCache()
@@ -393,6 +395,8 @@ namespace Emplomania.UI.Infrastucture
             get { return municipalities; }
             set { SetProperty(ref municipalities, value); }
         }
+
+        //public List<WorkerLanguageVO> WorkerLanguages { get; private set; }
         public List<GenderVO> Genders { get; private set; }
 
     }

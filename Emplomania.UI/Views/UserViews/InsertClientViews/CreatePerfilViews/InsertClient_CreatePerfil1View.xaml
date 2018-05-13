@@ -127,12 +127,12 @@
                     <ComboBox Width="Auto"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Provinces}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding DataContext.Province, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                              SelectedValue="{Binding Province}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="4" Grid.Column="1" Margin="{StaticResource MarginRight1}">
                     <Label>Municipio *</Label>
                     <ComboBox Width="Auto" 
-                              ItemsSource="{Binding DataContext.Municipalities, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                              ItemsSource="{Binding Municipalities}"
                               SelectedValue="{Binding UserVO.Municipality}"
                               DisplayMemberPath="Name"/>
                 </StackPanel>

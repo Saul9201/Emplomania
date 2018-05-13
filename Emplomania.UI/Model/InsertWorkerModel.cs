@@ -13,24 +13,103 @@ namespace Emplomania.UI.Model
 {
     public class InsertWorkerModel : InsertClientModel
     {
-        //TODO
-        //public static InsertWorkerModel Build(UserVO worker)
-        //{ 
-        
-        //    var res = new InsertWorkerModel()
-        //    {
-        //        WorkerVO = worker,
-        //        UserVO = worker.User,
-        //        AuthenticationTypes = worker.User.AuthenticationType,
-        //        Childrens = worker.Childrens ? YesNotAnswer.Yes : YesNotAnswer.No,
-        //    };
+        public InsertWorkerModel(UserVO user)
+        {
 
-        //}
+            AuthenticationTypes = user.AuthenticationType;
+            UserClientRole = UserClientRole.Trabajador;
+            UserVO = user;
+            WorkerVO = new WorkerVO()
+            {
+                Id = Guid.NewGuid(),
+                UserFK = user.Id,
+                User = user,
+                Childrens = true,
+                Gender = WebNomenclatorsCache.Instance.Genders.Where(x => x.Name == Gender.Masculino.ToString()).FirstOrDefault(),
+            };
+
+
+            SelectedCourses = new ObservableCollection<CourseVO>();
+            SelectedLicenses = new ObservableCollection<DriverLicenseVO>();
+            SelectedVehicles = new ObservableCollection<VehicleVO>();
+            SelectedWorkAspirations = new ObservableCollection<WorkAspirationVO>();
+            SelectedWorkerLanguages = new ObservableCollection<WorkerLanguageVO>();
+            SelectedWorkReferences = new ObservableCollection<WorkReferenceVO>();
+
+            WorkerLanguagesSource = (from l in WebNomenclatorsCache.Instance.Languages
+                                     select new WorkerLanguageVO
+                                     {
+                                         Language = new LanguageVO
+                                         {
+                                             Id = l.Id,
+                                             Name = l.Name,
+                                         },
+                                     }).ToList();
+            var ll = WebNomenclatorsCache.Instance.LanguageLevels.Where(x => x.Name == "Básico").FirstOrDefault();
+            if (ll == null)
+                throw new Exception("Error interno");
+            foreach (var item in WorkerLanguagesSource)
+            {
+                item.LanguageLevel = ll;
+                item.WorkerFK = WorkerVO.Id;
+            }
+
+            WorkAspirationsSource = new List<WorkAspirationVO>();
+            foreach (var item in WebNomenclatorsCache.Instance.Workplaces)
+            {
+                WorkAspirationsSource.Add(new WorkAspirationVO()
+                {
+                    WorkerFK = WorkerVO.Id,
+                    Workplace = item,
+                });
+            }
+        }
+
+        public InsertWorkerModel(InsertWorkerModel toCopy)
+        {
+            this.UserVO = toCopy.UserVO;
+            this.WorkerVO = toCopy.WorkerVO;
+            this.UserClientRole = toCopy.UserClientRole;
+            this.AuthenticationTypes = toCopy.AuthenticationTypes;
+            this.Province = toCopy.Province;
+            this.Municipalities = toCopy.Municipalities;
+            this.SelectedCourses = toCopy.SelectedCourses;
+            this.SelectedLicenses = toCopy.SelectedLicenses;
+            this.SelectedVehicles = toCopy.SelectedVehicles;
+            this.SelectedWorkAspirations = new ObservableCollection<WorkAspirationVO>(toCopy.SelectedWorkAspirations);
+            this.SelectedWorkReferences = new ObservableCollection<WorkReferenceVO>(toCopy.SelectedWorkReferences);
+            this.SelectedWorkerLanguages= new ObservableCollection<WorkerLanguageVO>(toCopy.SelectedWorkerLanguages);
+
+            this.WorkerLanguagesSource = toCopy.WorkerLanguagesSource;
+            this.WorkAspirationsSource = toCopy.WorkAspirationsSource;
+        }
+
+        public InsertWorkerModel(Guid userId)
+        {
+            var workServ = ServiceLocator.Get<IWorkerService>();
+            WorkerVO w = workServ.Get(x => x.UserFK == userId);
+            w = workServ.LoadEnumerablesProperties(w);
+            WorkerVO = w;
+            UserVO = w.User;
+            Province = ServiceLocator.Get<IProvinceService>().Get(x => x.Id == w.User.Municipality.ProvinciaId);
+            if (UserVO.Municipality != null)
+                UserVO.Municipality = Municipalities.Where(x => x.Id == UserVO.Municipality.Id).FirstOrDefault();
+            UserClientRole = UserClientRole.Trabajador;
+            AuthenticationTypes = UserVO.AuthenticationType;
+            SelectedCourses = new ObservableCollection<CourseVO>(w.Courses);
+            SelectedLicenses = new ObservableCollection<DriverLicenseVO>(w.DriverLicenses);
+            SelectedVehicles = new ObservableCollection<VehicleVO>(w.Vehicles);
+            SelectedWorkAspirations = new ObservableCollection<WorkAspirationVO>(w.WorkAspirations);
+            SelectedWorkerLanguages = new ObservableCollection<WorkerLanguageVO>(w.Languages);
+            SelectedWorkReferences = new ObservableCollection<WorkReferenceVO>(w.WorkReferences);
+            
+            
+        }
+
         public WorkerVO WorkerVO { get; set; }
+        public List<WorkerLanguageVO> WorkerLanguagesSource { get; set; }
+        public List<WorkAspirationVO> WorkAspirationsSource { get; set; }
 
-
-
-       
         public Gender Gender
         {
             get { return WorkerVO.Gender.Name == "Masculino" ? Gender.Masculino : Gender.Femenino; }
@@ -40,18 +119,8 @@ namespace Emplomania.UI.Model
                 OnPropertyChanged();
             }
         }
-        public ProvinceVO Province { get; set; }
-
-
-        public InsertWorkerModel()
-        {
-            SelectedCourses = new ObservableCollection<CourseVO>();
-            SelectedLicenses = new ObservableCollection<DriverLicenseVO>();
-            SelectedVehicles = new ObservableCollection<VehicleVO>();
-            SelectedWorkAspirations = new ObservableCollection<WorkAspirationVO>();
-            SelectedWorkerLanguages = new ObservableCollection<WorkerLanguageVO>();
-            SelectedWorkReferences = new ObservableCollection<WorkReferenceVO>();
-        }
+               
+        //public ProvinceVO Province { get; set; }
 
         private ObservableCollection<CourseVO> selectedCourses;
         public ObservableCollection<CourseVO> SelectedCourses
@@ -96,8 +165,14 @@ namespace Emplomania.UI.Model
         private ObservableCollection<WorkerLanguageVO> selectedWorkerLanguages;
         public ObservableCollection<WorkerLanguageVO> SelectedWorkerLanguages
         {
-            get { return selectedWorkerLanguages; }
-            set { SetProperty(ref selectedWorkerLanguages, value); }
+            get
+            {
+                return selectedWorkerLanguages;
+            }
+            set
+            {
+                SetProperty(ref selectedWorkerLanguages, value);
+            }
         }
 
         private ObservableCollection<WorkReferenceVO> selectedWorkReferences;
@@ -107,173 +182,28 @@ namespace Emplomania.UI.Model
             set { SetProperty(ref selectedWorkReferences, value); }
         }
 
+        private ProvinceVO province;
+        public ProvinceVO Province
+        {
+            get { return province; }
+            set
+            {
+                province = value;
+                if (value != null)
+                    Municipalities = WebNomenclatorsCache.Instance.Municipalities.Where(x => x.ProvinciaId == value.Id).ToList();
+                else
+                    Municipalities = new List<MunicipalityVO>();
+            }
+        }
 
-
-        //public YesNotAnswer Childrens
-        //{
-        //    get { return WorkerVO.Childrens?YesNotAnswer.Yes:YesNotAnswer.No; }
-        //    set
-        //    {
-        //        OnPropertyChanged();
-        //        WorkerVO.Childrens = value == YesNotAnswer.Yes;
-        //    }
-        //}
-        //private MunicipalityVO municipality;
-        //public MunicipalityVO Municipality
-        //{
-        //    get { return municipality; }
-        //    set
-        //    {
-        //        SetProperty(ref municipality, value);
-        //        if (municipality != null)
-        //            UserVO.MunicipalityFK = municipality.Id;
-        //    }
-        //}
-
-
-        //private EyeColorVO eyeColor;
-        //private SkinColorVO skinColor;
-        //private ComplexionVO complexion;
-        //private CivilStatusVO civilStatus;
-        //private SchoolGradeVO schoolGrade;
-        //private SpecialtyVO specialty;
-        //public EyeColorVO EyeColor
-        //{
-        //    get { return eyeColor; }
-        //    set
-        //    {
-        //        SetProperty(ref eyeColor, value);
-        //        WorkerVO.EyeColorFK = value?.Id;
-        //    }
-        //}
-        //public SkinColorVO SkinColor
-        //{
-        //    get
-        //    {
-        //        return skinColor;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref skinColor, value);
-        //        WorkerVO.SkinColorFK = skinColor?.Id;
-        //    }
-        //}
-        //public ComplexionVO Complexion
-        //{
-        //    get
-        //    {
-        //        return complexion;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref complexion, value);
-        //        WorkerVO.ComplexionFK = complexion?.Id;
-        //    }
-        //}
-        //public CivilStatusVO CivilStatus
-        //{
-        //    get
-        //    {
-        //        return civilStatus;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref civilStatus, value);
-        //        WorkerVO.CivilStatusFK = value?.Id;
-        //    }
-        //}
-        //public SchoolGradeVO SchoolGrade
-        //{
-        //    get
-        //    {
-        //        return schoolGrade;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref schoolGrade, value);
-        //        WorkerVO.SchoolGradeFK = schoolGrade?.Id;
-        //    }
-        //}
-        //public SpecialtyVO Specialty
-        //{
-        //    get
-        //    {
-        //        return specialty;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref specialty, value);
-        //        WorkerVO.SpecialtyFK = specialty?.Id;
-        //    }
-        //}
-
-
-        //public WorkReferenceVO[] WorkReferences { get; set; } = new WorkReferenceVO[5];
-        //public WorkReferenceVO Wr0
-        //{
-        //    get
-        //    {
-        //        if (WorkReferences[0] == null)
-        //            WorkReferences[0] = new WorkReferenceVO();
-        //        return WorkReferences[0];
-        //    }
-        //    set
-        //    {
-        //        WorkReferences[0] = value;
-        //    }
-        //}
-        //public WorkReferenceVO Wr1
-        //{
-        //    get
-        //    {
-        //        if (WorkReferences[1] == null)
-        //            WorkReferences[1] = new WorkReferenceVO();
-        //        return WorkReferences[1];
-        //    }
-        //    set
-        //    {
-        //        WorkReferences[1] = value;
-        //    }
-        //}
-        //public WorkReferenceVO Wr2
-        //{
-        //    get
-        //    {
-        //        if (WorkReferences[2] == null)
-        //            WorkReferences[2] = new WorkReferenceVO();
-        //        return WorkReferences[2];
-        //    }
-        //    set
-        //    {
-        //        WorkReferences[2] = value;
-        //    }
-        //}
-        //public WorkReferenceVO Wr3
-        //{
-        //    get
-        //    {
-        //        if (WorkReferences[3] == null)
-        //            WorkReferences[3] = new WorkReferenceVO();
-        //        return WorkReferences[3];
-        //    }
-        //    set
-        //    {
-        //        WorkReferences[3] = value;
-        //    }
-        //}
-        //public WorkReferenceVO Wr4
-        //{
-        //    get
-        //    {
-        //        if (WorkReferences[4] == null)
-        //            WorkReferences[4] = new WorkReferenceVO();
-        //        return WorkReferences[4];
-        //    }
-        //    set
-        //    {
-        //        WorkReferences[4] = value;
-        //    }
-        //}
-
+        private List<MunicipalityVO> municipalities;
+        public List<MunicipalityVO> Municipalities
+        {
+            get { return municipalities; }
+            set
+            {
+                SetProperty(ref municipalities, value);
+            }
+        }
     }
 }

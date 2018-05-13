@@ -19,9 +19,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
     {
         public InsertWorkerModel InsertWorkerModel { get; set; }
         public bool FromWorkerSheet { get; set; }
-
-        public List<WorkerLanguageVO> WorkerLanguagesSource { get; set; }
-
+        
         public ICommand AddWorkReferenceComand => new RelayCommand(param =>
         {
             if (InsertWorkerModel?.SelectedWorkReferences == null)
@@ -65,23 +63,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
             CentralEMMain.Subitle = "crear perfil trabajador (paso 2)";
             InsertWorkerModel = insertWorkerModel;
             CentralEMMain.ResetScrollContent();
-            WorkerLanguagesSource = (from l in ServiceLocator.Get<ILanguageService>().GetAll()
-                                     select new WorkerLanguageVO
-                                     {
-                                         Language = new LanguageVO
-                                         {
-                                             Id =l.Id,
-                                             Name=l.Name,
-                                         },
-                                     }).ToList();
-            var ll = WebNomenclatorsCache.Instance.LanguageLevels.Where(x=>x.Name== "Básico").FirstOrDefault();
-            if (ll == null)
-                throw new Exception("Error interno");
-            foreach (var item in WorkerLanguagesSource)
-            {
-                item.LanguageLevel = ll;
-                item.WorkerFK = InsertWorkerModel.WorkerVO.Id;
-            }
+            
         }
         
         

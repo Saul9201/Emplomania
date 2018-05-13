@@ -42,14 +42,14 @@
                              TextSearch.TextPath="Name" 
                              IsEditable="false">
                         <i:Interaction.Behaviors>
-                            <nomencl:MultiselectBehavior SelectedItems="{Binding InsertWorkerModel.WorkerVO.SelectedCourses}"/>
+                            <nomencl:MultiselectBehavior SelectedItems="{Binding InsertWorkerModel.SelectedCourses}"/>
                         </i:Interaction.Behaviors>
                     </telerik:RadComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
                     <Label>Otros</Label>
                     <TextBox Width="570"
-                             Text="{Binding WorkerVO.OtherCourses}"/>
+                             Text="{Binding InsertWorkerModel.WorkerVO.OtherCourses}"/>
 
                 </StackPanel>
                 <StackPanel Orientation="Vertical" Margin="0,10,0,0">
@@ -58,7 +58,7 @@
                              AllowMultipleSelection="True"
                              ClearSelectionButtonContent="Deseleccionar todo"
 					         ClearSelectionButtonVisibility="Visible"
-                             ItemsSource="{Binding WorkerLanguagesSource}"
+                             ItemsSource="{Binding InsertWorkerModel.WorkerLanguagesSource}"
                              DisplayMemberPath="Language.Name"
                              MultipleSelectionSeparator=","
                              TextSearch.TextPath="Language.Name" 
@@ -203,6 +203,7 @@
             <Button Content="GUARDAR"
                     Command="{Binding DataContext.DisplayInsertClientWorker3View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+
         </StackPanel>
     </StackPanel>
 </UserControl>

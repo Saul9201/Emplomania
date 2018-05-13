@@ -19,6 +19,7 @@ using Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels;
 using Emplomania.UI.Views.UtilsTemplatesViews;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -161,7 +162,8 @@ namespace Emplomania.UI.ViewModels
                 MessageBox.Show("No se puede salvar el trabajador. Intente modificar los datos.");
                 return;
             }
-            DisplayWorkerSheetView.Execute(insertWorkerModel);
+
+            DisplayWorkerSheetView.Execute(new InsertWorkerModel(insertWorkerModel));
         });
         #endregion
 
@@ -363,23 +365,28 @@ namespace Emplomania.UI.ViewModels
                         context.InsertWorkerModel.WorkerVO.WorkReferences = context.InsertWorkerModel.SelectedWorkReferences.ToList();
                         context.InsertWorkerModel.WorkerVO.Languages = context.InsertWorkerModel.SelectedWorkerLanguages.ToList();
                         context.InsertWorkerModel.WorkerVO.Courses = context.InsertWorkerModel.SelectedCourses.ToList();
+
                         if (!ServiceLocator.Get<IWorkerService>().AddOrUpdate(context.InsertWorkerModel.WorkerVO))
                         {
                             MessageBox.Show("No se puede salvar el trabajador. Intente modificar los datos.");
                             return;
                         }
+
+                        //var param = new InsertWorkerModel(context.InsertWorkerModel);
                         if (context.FromWorkerSheet)
                         {
-                            DisplayWorkerSheetView.Execute(context.InsertWorkerModel);
+                            DisplayWorkerSheetView.Execute(new InsertWorkerModel(context.InsertWorkerModel));
                         }
                         else
                         {
-                            CurrentViewModel = new InsertClient_CreatePerfil3ViewModel(this, context.InsertWorkerModel);
+                            CurrentViewModel = new InsertClient_CreatePerfil3ViewModel(this, new InsertWorkerModel(context.InsertWorkerModel));
                         }
                     }
                     else if (contextType.Name == "InsertClient_WorkerSheetViewModel")
                     {
                         var context = actionParam as InsertClient_WorkerSheetViewModel;
+                        var iwm = context.InsertWorkerModel;
+
                         CurrentViewModel = new InsertClient_CreatePerfil3ViewModel(this, context.InsertWorkerModel);
                     }
                     else
@@ -694,15 +701,8 @@ namespace Emplomania.UI.ViewModels
                             DisplayInsertClientTeacherView.Execute(p1);
                             break;
                         case UserClientRole.Trabajador:
-                            var p2 = new InsertWorkerModel()
-                            {
-                                AuthenticationTypes = InsertClientModel.AuthenticationTypes,
-                                UserClientRole = InsertClientModel.UserClientRole,
-                                UserVO = InsertClientModel.UserVO,
-                            };
-                            p2.WorkerVO = new WorkerVO() { Id=Guid.NewGuid(), User = p2.UserVO };
-                            p2.WorkerVO.Childrens = true;
-                            p2.WorkerVO.Gender = WebNomenclatorsCache.Instance.Genders.Where(x => x.Name == Gender.Masculino.ToString()).FirstOrDefault();
+                            InsertClientModel.UserVO.AuthenticationType = InsertClientModel.AuthenticationTypes;
+                            var p2 = new InsertWorkerModel(InsertClientModel.UserVO);
                             DisplayInsertClientWorkerView.Execute(p2);
                             break;
                         default:

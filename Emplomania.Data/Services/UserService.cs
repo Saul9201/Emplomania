@@ -25,8 +25,8 @@ namespace Emplomania.Data.Services
             {
                 case UserClientRole.Trabajador:
                     q = (from s in db.Users
-                        join w in db.Workers on s.Id equals w.UserFK
-                        select s).ProjectTo<UserVO>();
+                         join w in db.Workers on s.Id equals w.UserFK
+                         select s).ProjectTo<UserVO>();
                     break;
                 case UserClientRole.Empleador:
                     q = (from s in db.Users
@@ -224,10 +224,10 @@ namespace Emplomania.Data.Services
                     us.Add(worker.User);
                     worker.UserFK = worker.User.Id;
                     base.Add(worker);
-                    bool res=wrs.AddToWorker(worker.Id, worker.WorkReferences);
-                    res&=wdls.AddToWorker(worker.Id, worker.DriverLicenses);
+                    bool res = wrs.AddToWorker(worker.Id, worker.WorkReferences);
+                    res &= wdls.AddToWorker(worker.Id, worker.DriverLicenses);
                     res &= wvs.AddToWorker(worker.Id, worker.Vehicles);
-                    res&=wls.AddToWorker(worker.Id, worker.Languages);
+                    res &= wls.AddToWorker(worker.Id, worker.Languages);
                     res &= wcs.AddToWorker(worker.Id, worker.Courses);
                     res &= was.AddToWorker(worker.Id, worker.WorkAspirations);
                     return res;
@@ -236,15 +236,15 @@ namespace Emplomania.Data.Services
                 {
                     us.Update(worker.User);
                     base.Update(worker);
-                    bool res=wrs.ClearToWorker(worker.Id);
-                    res&=wrs.AddToWorker(worker.Id, worker.WorkReferences);
-                    res&=wdls.ClearToWorker(worker.Id);
-                    res&=wdls.AddToWorker(worker.Id, worker.DriverLicenses);
-                    res&=wvs.ClearToWorker(worker.Id);
-                    res&=wvs.AddToWorker(worker.Id, worker.Vehicles);
-                    res&=wls.ClearToWorker(worker.Id);
-                    res&=wls.AddToWorker(worker.Id, worker.Languages);
-                    res&=wcs.ClearToWorker(worker.Id);
+                    bool res = wrs.ClearToWorker(worker.Id);
+                    res &= wrs.AddToWorker(worker.Id, worker.WorkReferences);
+                    res &= wdls.ClearToWorker(worker.Id);
+                    res &= wdls.AddToWorker(worker.Id, worker.DriverLicenses);
+                    res &= wvs.ClearToWorker(worker.Id);
+                    res &= wvs.AddToWorker(worker.Id, worker.Vehicles);
+                    res &= wls.ClearToWorker(worker.Id);
+                    res &= wls.AddToWorker(worker.Id, worker.Languages);
+                    res &= wcs.ClearToWorker(worker.Id);
                     res &= wcs.AddToWorker(worker.Id, worker.Courses);
                     res &= was.ClearToWorker(worker.Id);
                     res &= was.AddToWorker(worker.Id, worker.WorkAspirations);
@@ -261,7 +261,10 @@ namespace Emplomania.Data.Services
         public override IQueryable<WorkerVO> GetAll()
         {
             var q = from w in db.Workers
-                    join us in db.Users on w.UserFK equals us.Id
+                    join s in db.Users on w.UserFK equals s.Id
+                    join ads in db.AditionalServices on s.AditionalServiceFK equals ads.Id
+                    join mem in db.Memberships on s.MembershipFK equals mem.Id
+                    join mun in db.Municipalities on s.MunicipalityFK equals mun.Id
                     join ec in db.EyeColors on w.EyeColorFK equals ec.Id
                     join sc in db.SkinColors on w.SkinColorFK equals sc.Id
                     join comp in db.Complexios on w.ComplexionFK equals comp.Id
@@ -280,15 +283,90 @@ namespace Emplomania.Data.Services
                         Salary = w.Salary,
                         Experience = w.Experience,
                         OtherCourses = w.OtherCourses,
-
-                        User = Mapper.Map<UserVO>(us),
-                        EyeColor = Mapper.Map<EyeColorVO>(ec),
-                        SkinColor = Mapper.Map<SkinColorVO>(sc),
-                        Complexion = Mapper.Map<ComplexionVO>(comp),
-                        Gender = Mapper.Map<GenderVO>(g),
-                        CivilStatus = Mapper.Map<CivilStatusVO>(cs),
-                        SchoolGrade = Mapper.Map<SchoolGradeVO>(sg),
-                        Specialty = Mapper.Map<SpecialtyVO>(sp),
+                        CivilStatusFK=w.CivilStatusFK,
+                        ComplexionFK=w.ComplexionFK,
+                        EyeColorFK=w.EyeColorFK,
+                        GenderFK=w.GenderFK,
+                        SchoolGradeFK=w.SchoolGradeFK,
+                        SkinColorFK=w.SkinColorFK,
+                        SpecialtyFK=w.SpecialtyFK,
+                        UserFK=w.UserFK,
+                        User = new UserVO
+                        {
+                            AditionalServiceFK=s.AditionalServiceFK,
+                            MembershipFK=s.MembershipFK,
+                            MunicipalityFK=s.MunicipalityFK,
+                            Id = s.Id,
+                            AditionalService = new AditionalServiceVO
+                            {
+                                Id = ads.Id,
+                                Name = ads.Name,
+                                Price = ads.Price,
+                                UserType = ads.UserType,
+                            },
+                            AuthenticationType = s.AuthenticationType,
+                            Name = s.Name,
+                            Balance = s.Balance,
+                            Email = s.Email,
+                            HomePhoneNumber = s.HomePhoneNumber,
+                            HowKnowEmplomania = s.HowKnowEmplomania,
+                            InvitationConfirmCode = s.InvitationConfirmCode,
+                            LastName = s.LastName,
+                            LastName2 = s.LastName2,
+                            Membership = new MembershipVO
+                            {
+                                Id = mem.Id,
+                                Name = mem.Name,
+                                Price = mem.Price,
+                                UserType = mem.UserType,
+                            },
+                            MovilPhoneNumber = s.MovilPhoneNumber,
+                            Municipality = new MunicipalityVO
+                            {
+                                Id = mun.Id,
+                                Name = mun.Name,
+                                ProvinciaId = mun.ProvinceFK,
+                            },
+                            PasswordHash = s.PasswordHash,
+                            ProfileImageRaw = s.ProfileImageRaw,
+                            UserName = s.UserName,
+                            Verified = s.Verified,
+                        },
+                        EyeColor = new EyeColorVO
+                        {
+                            Id = ec.Id,
+                            Name = ec.Name,
+                        },
+                        SkinColor = new SkinColorVO
+                        {
+                            Id = sc.Id,
+                            Name = sc.Name,
+                        },
+                        Complexion = new ComplexionVO
+                        {
+                            Id = comp.Id,
+                            Name = comp.Name,
+                        },
+                        Gender = new GenderVO
+                        {
+                            Id = g.Id,
+                            Name = g.Name,
+                        },
+                        CivilStatus = new CivilStatusVO
+                        {
+                            Id = cs.Id,
+                            Name = cs.Name,
+                        },
+                        SchoolGrade = new SchoolGradeVO
+                        {
+                            Id = sg.Id,
+                            Name = sg.Name,
+                        },
+                        Specialty = new SpecialtyVO
+                        {
+                            Id = sp.Id,
+                            Name = sp.Name,
+                        },
                     };
             return q;
         }
@@ -329,12 +407,12 @@ namespace Emplomania.Data.Services
         {
             try
             {
-                if(workReferences!=null)
+                if (workReferences != null)
                     foreach (var item in workReferences)
                     {
-                        if(item != null && base.Get(x=>x.WorkerFK==id && x.Place==item.Place)==null)
+                        if (item != null && base.Get(x => x.WorkerFK == id && x.Place == item.Place) == null)
                         {
-                            var toAdd=item;
+                            var toAdd = item;
                             toAdd.WorkerFK = id;
                             base.Add(toAdd);
                         }
@@ -535,8 +613,18 @@ namespace Emplomania.Data.Services
                     {
                         Id = wl.Id,
                         WorkerFK = wl.WorkerFK,
-                        Language = Mapper.Map<LanguageVO>(l),
-                        LanguageLevel = Mapper.Map<LanguageLevelVO>(ll),
+                        LanguageFK=wl.LanguageFK,
+                        Language = new LanguageVO
+                        {
+                            Id = l.Id,
+                            Name = l.Name,
+                        },
+                        LanguageLevelFK=wl.LanguageLevelFK,
+                        LanguageLevel = new LanguageLevelVO
+                        {
+                            Id = ll.Id,
+                            Name = ll.Name,
+                        },
                     };
             return q;
         }
@@ -657,12 +745,23 @@ namespace Emplomania.Data.Services
                        Abilities = wa.Abilities,
                        Experience = wa.Experience,
                        Observations = wa.Observations,
-                       Schedule = Mapper.Map<ScheduleVO>(sc),
-                       Workplace = Mapper.Map<WorkplaceVO>(wp),
+                       ScheduleFK=wa.ScheduleFK,
+                       WorkerFK=wa.WorkerFK,
+                       WorkplaceFK=wa.WorkplaceFK,
+                       Schedule = new ScheduleVO
+                       {
+                           Id = sc.Id,
+                           Name = sc.Name,
+                       },
+                       Workplace = new WorkplaceVO
+                       {
+                           Id = wp.Id,
+                           Name = wp.Name,
+                       },
                    };
         }
     }
-    public interface IWorkAspirationService: ICrudService<WorkAspirationVO, WorkAspiration>
+    public interface IWorkAspirationService : ICrudService<WorkAspirationVO, WorkAspiration>
     {
         bool AddToWorker(Guid id, IEnumerable<WorkAspirationVO> workAspirations);
         bool ClearToWorker(Guid id);

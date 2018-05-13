@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:Emplomania.UI.Converters"
              xmlns:vw="clr-namespace:Emplomania.UI.Views"
+             xmlns:vos="clr-namespace:Emplomania.Data.VO;assembly=Emplomania.Data"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1300">
 
@@ -91,7 +92,7 @@
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Content="En el municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding WorkerVO.Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Vertical">
                 <Label Content="Licencia de conducción:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
@@ -168,12 +169,12 @@
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
             <StackPanel Grid.Row="1" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel de escolaridad:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding SchoolGrade.Name}"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.SchoolGrade.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Graduado de:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Specialty.Name}"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.Specialty.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Grid.RowSpan="2" Orientation="Vertical" Margin="0,25,0,0">
@@ -186,15 +187,30 @@
                    Style="{StaticResource EMClientFieldTitleLabelStyle}"
                    Content="Conozco el idioma:"/>
 
-            <StackPanel Grid.Row="4">
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl0.Language.Name}"/>
-                <StackPanel Orientation="Horizontal">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
-                    <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl0.LanguageLevel.Name}"/>
-                </StackPanel>
-            </StackPanel>
-
-            <StackPanel Grid.Row="4" Grid.Column="1">
+            <ItemsControl Grid.Row="4" Grid.ColumnSpan="3"
+                          ItemsSource="{Binding SelectedWorkerLanguages}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vos:WorkerLanguageVO}">
+                        <StackPanel Width="190">
+                            <Label Style="{StaticResource EMClientFieldContentLabelStyle}" 
+                                   Content="{Binding Language.Name}"/>
+                            <StackPanel Orientation="Horizontal">
+                                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
+                                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" 
+                                       Content="{Binding LanguageLevel.Name}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Orientation="Horizontal"
+                                   Width="590"
+                                   Height="100"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
+            <!--<StackPanel Grid.Row="4" Grid.Column="1">
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl1.Language.Name}"/>
                 <StackPanel Orientation="Horizontal">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
@@ -208,7 +224,7 @@
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel:"/>
                     <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding Wl2.LanguageLevel.Name}"/>
                 </StackPanel>
-            </StackPanel>
+            </StackPanel>-->
 
         </Grid>
 

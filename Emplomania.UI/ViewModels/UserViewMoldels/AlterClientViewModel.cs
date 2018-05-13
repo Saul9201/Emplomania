@@ -57,22 +57,8 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
             switch (SelectedClientType)
             {
                 case UserClientRole.Trabajador:
-                    WorkerVO worker = ServiceLocator.Get<IWorkerService>().Get(x => x.UserFK == CurrentUser.Id);
-                    if (worker == null)
-                    {
-                        MessageBox.Show("Error interno.");
-                        return;
-                    }
-                    var iwm = new InsertWorkerModel()
-                    {
-                        UserVO=CurrentUser,
-                        WorkerVO=worker,
-                        AuthenticationTypes=CurrentUser.AuthenticationType,
-
-                        //TODO++: Antes de hacer esto arreglar lo de los modelos de insercion
-                        //TODO: Agregar AuthenticationTypes a UserVO y User para guardarlo en base de datos y aqui hacer: AuthenticationTypes=CurrentUser.AuthenticationType
-                        
-                    };
+                    var model = new InsertWorkerModel(CurrentUser.Id);
+                    CentralEMMain.DisplayInsertClientWorkerView.Execute(model);
                     break;
                 case UserClientRole.Empleador:
                     break;

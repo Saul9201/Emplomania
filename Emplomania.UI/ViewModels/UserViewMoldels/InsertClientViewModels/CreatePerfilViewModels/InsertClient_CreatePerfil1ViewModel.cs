@@ -20,30 +20,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         public InsertWorkerModel InsertWorkerModel { get; set; }
         public bool FromWorkerSheet { get; set; }
 
-        private ProvinceVO province;
-        public ProvinceVO Province
-        {
-            get { return province; }
-            set
-            {
-                province = value;
-                InsertWorkerModel.Province = province;
-                if (province != null)
-                    Municipalities = ServiceLocator.Get<IMunicipalityService>().GetMunicByProvince(province.Id).ToList();
-                else
-                    Municipalities = new List<MunicipalityVO>();
-            }
-        }
-
-        private List<MunicipalityVO> municipalities;
-        public List<MunicipalityVO> Municipalities
-        {
-            get { return municipalities; }
-            set
-            {
-                SetProperty(ref municipalities, value);
-            }
-        }
+        
 
         public ICommand SelectImagePerfilCommand => new RelayCommand(param =>
         {
@@ -67,8 +44,8 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
 
             //if (InsertWorkerModel.Province != null)
             //    Province = InsertWorkerModel.Province;
-            //if (InsertWorkerModel.Municipality != null)
-            //    InsertWorkerModel.Municipality = Municipalities.Where(x => x.Id == InsertWorkerModel.Municipality.Id).FirstOrDefault();
+            //if (InsertWorkerModel.UserVO.Municipality != null)
+            //    InsertWorkerModel.UserVO.Municipality = Municipalities.Where(x => x.Id == InsertWorkerModel.UserVO.Municipality.Id).FirstOrDefault();
 
         }
 
