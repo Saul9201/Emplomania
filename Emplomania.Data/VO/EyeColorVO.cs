@@ -9,5 +9,6 @@ namespace Emplomania.Data.VO
 {
     public class EyeColorVO : NomenclatorVO
     {
+
     }
 }

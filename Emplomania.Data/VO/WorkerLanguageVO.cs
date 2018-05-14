@@ -37,5 +37,22 @@ namespace Emplomania.Data.VO
             }
         }
 
+        public override bool Equals(object obj)
+        {
+            var o = obj as WorkerLanguageVO;
+            if (o == null)
+                return false;
+
+            return this.WorkerFK.Equals(o.WorkerFK) && this.LanguageFK.Equals(o.LanguageFK);
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + this.WorkerFK.GetHashCode();
+            hash = (hash * 7) + this.LanguageFK.GetHashCode();
+            return hash;
+        }
+
     }
 }

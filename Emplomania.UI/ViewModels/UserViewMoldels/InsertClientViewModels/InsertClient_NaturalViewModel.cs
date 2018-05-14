@@ -1,4 +1,5 @@
 ﻿using Emplomania.Data.VO;
+using Emplomania.UI.Infrastucture;
 using Emplomania.UI.Model;
 using Emplomania.UI.ViewModels.Base;
 using Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels;
@@ -18,6 +19,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         {
             CentralEMMain.Subitle = "Insertar cliente natural";
             InsertClientModel = insertClientModel;
+            InsertClientModel.UserVO.HowKnowEmplomania = WebNomenclatorsCache.Instance.HowKnowEM.FirstOrDefault();
         }
         
     }

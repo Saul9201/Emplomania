@@ -262,16 +262,26 @@ namespace Emplomania.Data.Services
         {
             var q = from w in db.Workers
                     join s in db.Users on w.UserFK equals s.Id
-                    join ads in db.AditionalServices on s.AditionalServiceFK equals ads.Id
-                    join mem in db.Memberships on s.MembershipFK equals mem.Id
-                    join mun in db.Municipalities on s.MunicipalityFK equals mun.Id
-                    join ec in db.EyeColors on w.EyeColorFK equals ec.Id
-                    join sc in db.SkinColors on w.SkinColorFK equals sc.Id
-                    join comp in db.Complexios on w.ComplexionFK equals comp.Id
-                    join g in db.Genders on w.GenderFK equals g.Id
-                    join cs in db.CivilStatuses on w.CivilStatusFK equals cs.Id
-                    join sg in db.SchoolGrades on w.SchoolGradeFK equals sg.Id
-                    join sp in db.Specialties on w.SpecialtyFK equals sp.Id
+                    join ads in db.AditionalServices on s.AditionalServiceFK equals ads.Id into sads
+                    from ads in sads.DefaultIfEmpty()
+                    join mem in db.Memberships on s.MembershipFK equals mem.Id into smem
+                    from mem in smem.DefaultIfEmpty()
+                    join mun in db.Municipalities on s.MunicipalityFK equals mun.Id into smun
+                    from mun in smun.DefaultIfEmpty()
+                    join ec in db.EyeColors on w.EyeColorFK equals ec.Id into wec
+                    from ec in wec.DefaultIfEmpty()
+                    join sc in db.SkinColors on w.SkinColorFK equals sc.Id into wsc
+                    from sc in wsc.DefaultIfEmpty()
+                    join comp in db.Complexios on w.ComplexionFK equals comp.Id into wcomp
+                    from comp in wcomp.DefaultIfEmpty()
+                    join g in db.Genders on w.GenderFK equals g.Id into wg
+                    from g in wg.DefaultIfEmpty()
+                    join cs in db.CivilStatuses on w.CivilStatusFK equals cs.Id into wcs
+                    from cs in wcs.DefaultIfEmpty()
+                    join sg in db.SchoolGrades on w.SchoolGradeFK equals sg.Id into wsg
+                    from sg in wsg.DefaultIfEmpty()
+                    join sp in db.Specialties on w.SpecialtyFK equals sp.Id into wsp
+                    from sp in wsp.DefaultIfEmpty()
                     select new WorkerVO
                     {
                         Id = w.Id,
@@ -283,21 +293,56 @@ namespace Emplomania.Data.Services
                         Salary = w.Salary,
                         Experience = w.Experience,
                         OtherCourses = w.OtherCourses,
-                        CivilStatusFK=w.CivilStatusFK,
-                        ComplexionFK=w.ComplexionFK,
-                        EyeColorFK=w.EyeColorFK,
-                        GenderFK=w.GenderFK,
-                        SchoolGradeFK=w.SchoolGradeFK,
-                        SkinColorFK=w.SkinColorFK,
-                        SpecialtyFK=w.SpecialtyFK,
-                        UserFK=w.UserFK,
+                        CivilStatusFK = w.CivilStatusFK,
+                        ComplexionFK = w.ComplexionFK,
+                        EyeColorFK = w.EyeColorFK,
+                        GenderFK = w.GenderFK,
+                        SchoolGradeFK = w.SchoolGradeFK,
+                        SkinColorFK = w.SkinColorFK,
+                        SpecialtyFK = w.SpecialtyFK,
+                        UserFK = w.UserFK,
+                        EyeColor = ec == null ? null : new EyeColorVO
+                        {
+                            Id = ec.Id,
+                            Name = ec.Name,
+                        },
+                        SkinColor = sc == null ? null : new SkinColorVO
+                        {
+                            Id = sc.Id,
+                            Name = sc.Name,
+                        },
+                        Complexion = comp == null ? null : new ComplexionVO
+                        {
+                            Id = comp.Id,
+                            Name = comp.Name,
+                        },
+                        Gender = g == null ? null : new GenderVO
+                        {
+                            Id = g.Id,
+                            Name = g.Name,
+                        },
+                        CivilStatus = cs == null ? null : new CivilStatusVO
+                        {
+                            Id = cs.Id,
+                            Name = cs.Name,
+                        },
+                        SchoolGrade = sg == null ? null : new SchoolGradeVO
+                        {
+                            Id = sg.Id,
+                            Name = sg.Name,
+                        },
+                        Specialty = sp == null ? null : new SpecialtyVO
+                        {
+                            Id = sp.Id,
+                            Name = sp.Name,
+                        },
                         User = new UserVO
                         {
-                            AditionalServiceFK=s.AditionalServiceFK,
-                            MembershipFK=s.MembershipFK,
-                            MunicipalityFK=s.MunicipalityFK,
+                            AditionalServiceFK = s.AditionalServiceFK,
+                            MembershipFK = s.MembershipFK,
+                            MunicipalityFK = s.MunicipalityFK,
                             Id = s.Id,
-                            AditionalService = new AditionalServiceVO
+                            AditionalService = ads == null ? null : new AditionalServiceVO
                             {
                                 Id = ads.Id,
                                 Name = ads.Name,
@@ -313,7 +358,7 @@ namespace Emplomania.Data.Services
                             InvitationConfirmCode = s.InvitationConfirmCode,
                             LastName = s.LastName,
                             LastName2 = s.LastName2,
-                            Membership = new MembershipVO
+                            Membership = mem == null ? null : new MembershipVO
                             {
                                 Id = mem.Id,
                                 Name = mem.Name,
@@ -321,7 +366,7 @@ namespace Emplomania.Data.Services
                                 UserType = mem.UserType,
                             },
                             MovilPhoneNumber = s.MovilPhoneNumber,
-                            Municipality = new MunicipalityVO
+                            Municipality = mun == null ? null : new MunicipalityVO
                             {
                                 Id = mun.Id,
                                 Name = mun.Name,
@@ -332,42 +377,8 @@ namespace Emplomania.Data.Services
                             UserName = s.UserName,
                             Verified = s.Verified,
                         },
-                        EyeColor = new EyeColorVO
-                        {
-                            Id = ec.Id,
-                            Name = ec.Name,
-                        },
-                        SkinColor = new SkinColorVO
-                        {
-                            Id = sc.Id,
-                            Name = sc.Name,
-                        },
-                        Complexion = new ComplexionVO
-                        {
-                            Id = comp.Id,
-                            Name = comp.Name,
-                        },
-                        Gender = new GenderVO
-                        {
-                            Id = g.Id,
-                            Name = g.Name,
-                        },
-                        CivilStatus = new CivilStatusVO
-                        {
-                            Id = cs.Id,
-                            Name = cs.Name,
-                        },
-                        SchoolGrade = new SchoolGradeVO
-                        {
-                            Id = sg.Id,
-                            Name = sg.Name,
-                        },
-                        Specialty = new SpecialtyVO
-                        {
-                            Id = sp.Id,
-                            Name = sp.Name,
-                        },
                     };
+
             return q;
         }
 
@@ -607,20 +618,22 @@ namespace Emplomania.Data.Services
         public override IQueryable<WorkerLanguageVO> GetAll()
         {
             var q = from wl in db.WorkerLanguages
-                    join l in db.Languages on wl.LanguageFK equals l.Id
-                    join ll in db.LanguageLevels on wl.LanguageLevelFK equals ll.Id
+                    join l in db.Languages on wl.LanguageFK equals l.Id into wll
+                    from l in wll.DefaultIfEmpty()
+                    join ll in db.LanguageLevels on wl.LanguageLevelFK equals ll.Id into wlll
+                    from ll in wlll.DefaultIfEmpty()
                     select new WorkerLanguageVO
                     {
                         Id = wl.Id,
                         WorkerFK = wl.WorkerFK,
-                        LanguageFK=wl.LanguageFK,
-                        Language = new LanguageVO
+                        LanguageFK = wl.LanguageFK,
+                        Language = l == null ? null : new LanguageVO
                         {
                             Id = l.Id,
                             Name = l.Name,
                         },
-                        LanguageLevelFK=wl.LanguageLevelFK,
-                        LanguageLevel = new LanguageLevelVO
+                        LanguageLevelFK = wl.LanguageLevelFK,
+                        LanguageLevel = ll == null ? null : new LanguageLevelVO
                         {
                             Id = ll.Id,
                             Name = ll.Name,
@@ -737,23 +750,25 @@ namespace Emplomania.Data.Services
         public override IQueryable<WorkAspirationVO> GetAll()
         {
             return from wa in db.WorkAspirations
-                   join sc in db.Schedules on wa.ScheduleFK equals sc.Id
-                   join wp in db.Workplaces on wa.WorkplaceFK equals wp.Id
+                   join sc in db.Schedules on wa.ScheduleFK equals sc.Id into wasc
+                   from sc in wasc.DefaultIfEmpty()
+                   join wp in db.Workplaces on wa.WorkplaceFK equals wp.Id into wawp
+                   from wp in wawp.DefaultIfEmpty()
                    select new WorkAspirationVO
                    {
                        Id = wa.Id,
                        Abilities = wa.Abilities,
                        Experience = wa.Experience,
                        Observations = wa.Observations,
-                       ScheduleFK=wa.ScheduleFK,
-                       WorkerFK=wa.WorkerFK,
-                       WorkplaceFK=wa.WorkplaceFK,
-                       Schedule = new ScheduleVO
+                       ScheduleFK = wa.ScheduleFK,
+                       WorkerFK = wa.WorkerFK,
+                       WorkplaceFK = wa.WorkplaceFK,
+                       Schedule = sc == null ? null : new ScheduleVO
                        {
                            Id = sc.Id,
                            Name = sc.Name,
                        },
-                       Workplace = new WorkplaceVO
+                       Workplace = wp == null ? null : new WorkplaceVO
                        {
                            Id = wp.Id,
                            Name = wp.Name,

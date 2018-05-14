@@ -70,7 +70,7 @@
                         <ComboBox Grid.Column="2" Width="Auto"/>
                     </Grid>-->
                     <DatePicker Width="Auto" Height="28" Style="{DynamicResource EMDatePickerStyle}"
-                                SelectedDate="{Binding WorkerVO.BornDate}"/>
+                        SelectedDate="{Binding WorkerVO.BornDate}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Orientation="Vertical">
                     <Label>Sexo *</Label>

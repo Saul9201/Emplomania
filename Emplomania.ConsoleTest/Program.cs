@@ -19,16 +19,18 @@ namespace Emplomania.ConsoleTest
     {
         static void Main(string[] args)
         {
-            AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
+            //AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
 
-            var ass = ServiceLocator.Get<IAditionalServiceService>();
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Empleador });
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Trabajador });
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Profesor });
+            //var l=ServiceLocator.Get<IWorkerService>().GetAll().ToList();
 
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ficha Destacada", Price = 0, UserType = UserClientRole.Trabajador });
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Asistencia Tecnica", Price = 0, UserType = UserClientRole.Empleador });
-            ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Confeccion de Matricula", Price = 0, UserType = UserClientRole.Profesor });
+            //var ass = ServiceLocator.Get<IAditionalServiceService>();
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Empleador });
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Trabajador });
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ofrezco/Necesito", Price = 0, UserType = UserClientRole.Profesor });
+
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Ficha Destacada", Price = 0, UserType = UserClientRole.Trabajador });
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Asistencia Tecnica", Price = 0, UserType = UserClientRole.Empleador });
+            //ass.Add(new AditionalServiceVO() { Id = Guid.NewGuid(), Name = "Confeccion de Matricula", Price = 0, UserType = UserClientRole.Profesor });
 
             //Guid[] l = new Guid[7];
             //l[2] = Guid.NewGuid();

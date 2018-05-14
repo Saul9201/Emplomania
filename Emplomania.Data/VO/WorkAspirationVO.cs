@@ -40,5 +40,22 @@ namespace Emplomania.Data.VO
             }
         }
 
+
+        public override bool Equals(object obj)
+        {
+            var o = obj as WorkAspirationVO;
+            if (o == null)
+                return false;
+
+            return this.WorkerFK.Equals(o.WorkerFK) && this.WorkplaceFK.Equals(o.WorkplaceFK);
+        }
+
+        public override int GetHashCode()
+        {
+            int hash = 13;
+            hash = (hash * 7) + this.WorkerFK.GetHashCode();
+            hash = (hash * 7) + this.WorkplaceFK.GetHashCode();
+            return hash;
+        }
     }
 }

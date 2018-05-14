@@ -157,7 +157,7 @@
                 <RowDefinition Height="67"/>
                 <RowDefinition Height="67"/>
                 <RowDefinition Height="67"/>
-                <RowDefinition Height="67"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
@@ -191,7 +191,7 @@
                           ItemsSource="{Binding SelectedWorkerLanguages}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate DataType="{x:Type vos:WorkerLanguageVO}">
-                        <StackPanel Width="190">
+                        <StackPanel Width="190" Height="100">
                             <Label Style="{StaticResource EMClientFieldContentLabelStyle}" 
                                    Content="{Binding Language.Name}"/>
                             <StackPanel Orientation="Horizontal">
@@ -205,8 +205,7 @@
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <WrapPanel Orientation="Horizontal"
-                                   Width="590"
-                                   Height="100"/>
+                                   Width="590"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
             </ItemsControl>
@@ -294,51 +293,49 @@
             
             <Grid Grid.Row="1" Margin="40,10">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="180"/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="0">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Lugar" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Place}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Place}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Place}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Place}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Place}"/>
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                           Content="Lugar" 
+                           Margin="0,0,0,5"
+                           Width="180"/>
+                    <TextBox Width="180" 
+                             Margin="2"
+                             IsReadOnly="True"/>
                 </StackPanel>
                 <StackPanel Grid.Column="1">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Ocupación" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Occupation}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Occupation}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Occupation}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Occupation}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Occupation}"/>
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Ocupación" Margin="0,0,0,5"
+                           Width="180"/>
+                    <TextBox Width="180" Margin="2" 
+                             IsReadOnly="True" 
+                             Text="{Binding Wr0.Occupation}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Tiempo" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.WorkedTime}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.WorkedTime}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.WorkedTime}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.WorkedTime}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.WorkedTime}"/>
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Tiempo"
+                           Margin="0,0,0,5"
+                           Width="180"/>
+                    <TextBox Width="180" Margin="2" 
+                             IsReadOnly="True"
+                             Text="{Binding Wr0.WorkedTime}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="3">
                     <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Persona de contacto" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.ContactPerson}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.ContactPerson}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.ContactPerson}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.ContactPerson}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.ContactPerson}"/>
+                    <TextBox Width="180" Margin="2" 
+                             IsReadOnly="True" 
+                             Text="{Binding Wr0.ContactPerson}"/>
                 </StackPanel>
                 <StackPanel Grid.Column="4">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr0.Phone}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr1.Phone}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr2.Phone}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr3.Phone}"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True" Text="{Binding Wr4.Phone}"/>
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Teléfono" Margin="0,0,0,5"/>
+                    <TextBox Width="Auto" Margin="2" IsReadOnly="True"
+                             Text="{Binding Wr0.Phone}"/>
                 </StackPanel>
             </Grid>
         

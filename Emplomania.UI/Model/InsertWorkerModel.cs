@@ -15,7 +15,6 @@ namespace Emplomania.UI.Model
     {
         public InsertWorkerModel(UserVO user)
         {
-
             AuthenticationTypes = user.AuthenticationType;
             UserClientRole = UserClientRole.Trabajador;
             UserVO = user;
@@ -91,9 +90,11 @@ namespace Emplomania.UI.Model
             w = workServ.LoadEnumerablesProperties(w);
             WorkerVO = w;
             UserVO = w.User;
-            Province = ServiceLocator.Get<IProvinceService>().Get(x => x.Id == w.User.Municipality.ProvinciaId);
-            if (UserVO.Municipality != null)
+            if (UserVO.Municipality!=null)
+            {
+                Province = WebNomenclatorsCache.Instance.Provinces.Where(x => x.Id == w.User.Municipality.ProvinciaId).FirstOrDefault();
                 UserVO.Municipality = Municipalities.Where(x => x.Id == UserVO.Municipality.Id).FirstOrDefault();
+            }
             UserClientRole = UserClientRole.Trabajador;
             AuthenticationTypes = UserVO.AuthenticationType;
             SelectedCourses = new ObservableCollection<CourseVO>(w.Courses);
@@ -102,8 +103,34 @@ namespace Emplomania.UI.Model
             SelectedWorkAspirations = new ObservableCollection<WorkAspirationVO>(w.WorkAspirations);
             SelectedWorkerLanguages = new ObservableCollection<WorkerLanguageVO>(w.Languages);
             SelectedWorkReferences = new ObservableCollection<WorkReferenceVO>(w.WorkReferences);
-            
-            
+
+            WorkerLanguagesSource = (from l in WebNomenclatorsCache.Instance.Languages
+                                     select new WorkerLanguageVO
+                                     {
+                                         Language = new LanguageVO
+                                         {
+                                             Id = l.Id,
+                                             Name = l.Name,
+                                         },
+                                     }).ToList();
+            var ll = WebNomenclatorsCache.Instance.LanguageLevels.Where(x => x.Name == "Básico").FirstOrDefault();
+            if (ll == null)
+                throw new Exception("Error interno");
+            foreach (var item in WorkerLanguagesSource)
+            {
+                item.LanguageLevel = ll;
+                item.WorkerFK = WorkerVO.Id;
+            }
+
+            WorkAspirationsSource = new List<WorkAspirationVO>();
+            foreach (var item in WebNomenclatorsCache.Instance.Workplaces)
+            {
+                WorkAspirationsSource.Add(new WorkAspirationVO()
+                {
+                    WorkerFK = WorkerVO.Id,
+                    Workplace = item,
+                });
+            }
         }
 
         public WorkerVO WorkerVO { get; set; }
