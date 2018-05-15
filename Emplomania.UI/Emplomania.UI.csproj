@@ -417,7 +417,6 @@
     <Compile Include="ViewModels\UserViewMoldels\AlterClientViewModel.cs" />
     <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\ClientFormsViewModels\EmployerFormViewModel.cs" />
     <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\ClientFormsViewModels\TeacherFormViewModel.cs" />
-    <Compile Include="ViewModels\UserViewMoldels\InsertBankDepositViewModel.cs" />
     <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModel.cs" />
     <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\InsertClient_ByInvitationViewModel.cs" />
     <Compile Include="ViewModels\UserViewMoldels\InsertClientViewModels\CreatePerfilViewModels\InsertClient_CreatePerfil1ViewModel.cs" />
@@ -532,9 +531,6 @@
     </Compile>
     <Compile Include="Views\UserViews\InsertClientViews\ClientFormsViews\TeacherFormView.xaml.cs">
       <DependentUpon>TeacherFormView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\UserViews\InsertBankDepositView.xaml.cs">
-      <DependentUpon>InsertBankDepositView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\UserViews\InsertClientView.xaml.cs">
       <DependentUpon>InsertClientView.xaml</DependentUpon>
@@ -750,10 +746,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\UserViews\InsertClientViews\ClientFormsViews\TeacherFormView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\UserViews\InsertBankDepositView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

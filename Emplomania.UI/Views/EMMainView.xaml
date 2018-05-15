@@ -61,8 +61,6 @@
                           Command="{Binding DisplayAlterClientView}"/>
                 <MenuItem Header="Vender cupón de crédito"
                           Command="{Binding DisplaySaleCredCuponView}"/>
-                <!--<MenuItem Header="Insertar deposito bancario"
-                          Command="{Binding DisplayInsertBankDepositView}"/>-->
             </MenuItem>
 
             <MenuItem Grid.Column="2" Header="SERVICIOS">
