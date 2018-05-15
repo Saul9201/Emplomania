@@ -354,6 +354,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BoolToVisibilityConverter2.cs" />
+    <Compile Include="Converters\BoolToYesNotConverter.cs" />
     <Compile Include="Converters\BoolVisibilityConverter.cs" />
     <Compile Include="Converters\BornDateToAgeConverter.cs" />
     <Compile Include="Converters\EnumBooleanConverter.cs" />
