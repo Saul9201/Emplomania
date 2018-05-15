@@ -225,14 +225,7 @@ namespace Emplomania.UI.ViewModels
               else
                   DisplayEMView<PaymentGatewayViewModel>("Pasarela de pago");
           });
-
-        public ICommand DisplayInsertBankDepositView
-        {
-            get
-            {
-                return new RelayCommand(action => CurrentViewModel = new InsertBankDepositViewModel(this));
-            }
-        }
+        
 
         public ICommand DisplayInsertClientNaturalView
         {
