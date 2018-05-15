@@ -26,6 +26,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
         <Grid Margin="0,0,30,0">
@@ -239,7 +240,7 @@
                 <RowDefinition Height="67"/>
                 <RowDefinition Height="67"/>
             </Grid.RowDefinitions>
-            
+
             <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
                    Content="CONTACTOS" Grid.ColumnSpan="3"
                    VerticalAlignment="Bottom"/>
@@ -283,81 +284,139 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            
+
             <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
                    Content="TRAYECTORIA LABORAL Y REFERENCIAS"
                    VerticalAlignment="Bottom"/>
             <Button Style="{StaticResource EMPencilIconButtonStyle}"
                     Command="{Binding DataContext.DisplayInsertClientWorker2View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
-            
-            <Grid Grid.Row="1" Margin="40,10">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="180"/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <StackPanel Grid.Column="0">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
-                           Content="Lugar" 
-                           Margin="0,0,0,5"
-                           Width="180"/>
-                    <TextBox Width="180" 
-                             Margin="2"
-                             IsReadOnly="True"/>
-                </StackPanel>
-                <StackPanel Grid.Column="1">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
-                           Content="Ocupación" Margin="0,0,0,5"
-                           Width="180"/>
-                    <TextBox Width="180" Margin="2" 
-                             IsReadOnly="True" 
-                             Text="{Binding Wr0.Occupation}"/>
-                </StackPanel>
-                <StackPanel Grid.Column="2">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
-                           Content="Tiempo"
-                           Margin="0,0,0,5"
-                           Width="180"/>
-                    <TextBox Width="180" Margin="2" 
-                             IsReadOnly="True"
-                             Text="{Binding Wr0.WorkedTime}"/>
-                </StackPanel>
-                <StackPanel Grid.Column="3">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Persona de contacto" Margin="0,0,0,5"/>
-                    <TextBox Width="180" Margin="2" 
-                             IsReadOnly="True" 
-                             Text="{Binding Wr0.ContactPerson}"/>
-                </StackPanel>
-                <StackPanel Grid.Column="4">
-                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
-                           Content="Teléfono" Margin="0,0,0,5"/>
-                    <TextBox Width="Auto" Margin="2" IsReadOnly="True"
-                             Text="{Binding Wr0.Phone}"/>
-                </StackPanel>
-            </Grid>
-        
-        </Grid>
 
-        <StackPanel Grid.Row="3" Grid.ColumnSpan="3" >
-            <Separator Style="{StaticResource EMSearchHeaderSeparatorStyle}" Margin="0,10"/>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="PASO 3" Width="150"
+            <StackPanel Grid.Row="1" Margin="40,10">
+                <StackPanel Orientation="Horizontal">
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                           Content="Lugar" 
+                           Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Ocupación" Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Tiempo"
+                           Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                           Content="Persona de contacto" Margin="2"
+                           Width="180"/>
+                        <Label Width="180"
+                           Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Teléfono" Margin="2"/>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding SelectedWorkReferences}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vos:WorkReferenceVO}">
+                            <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="180" 
+                                             Margin="2"
+                                             IsReadOnly="True"
+                                             Text="{Binding Place}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True" 
+                                             Text="{Binding Occupation}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True"
+                                             Text="{Binding WorkedTime}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True" 
+                                             Text="{Binding ContactPerson}"/>
+                                    <TextBox Width="180" Margin="2" IsReadOnly="True"
+                                            Text="{Binding Phone}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+        </Grid>
+        <StackPanel Grid.Row="3" Grid.ColumnSpan="2">
+            <Grid>
+                <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
+                   Content="ASPIRACIONES"
+                   VerticalAlignment="Bottom"/>
+                <Button Style="{StaticResource EMPencilIconButtonStyle}"
                         Command="{Binding DataContext.DisplayInsertClientWorker3View, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+            </Grid>
+            <StackPanel Grid.Row="1" Margin="40,10">
+                <StackPanel Orientation="Horizontal">
+
+                    <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                           Content="Plaza" 
+                           Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Experiencia" Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Habilidad"
+                           Margin="2"
+                           Width="180"/>
+                        <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                           Content="Horario" Margin="2"
+                           Width="180"/>
+                        <Label Width="180"
+                           Style="{StaticResource EMClientFieldTitleLabelStyle}"
+                           Content="Observaciones" Margin="2"/>
+                </StackPanel>
+                <ItemsControl ItemsSource="{Binding SelectedWorkAspirations}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Vertical"/>
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type vos:WorkAspirationVO}">
+                            <StackPanel Orientation="Horizontal">
+                                    <TextBox Width="180" 
+                                             Margin="2"
+                                             IsReadOnly="True"
+                                             Text="{Binding Workplace.Name}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True" 
+                                             Text="{Binding Experience}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True"
+                                             Text="{Binding Abilities}"/>
+                                    <TextBox Width="180" Margin="2" 
+                                             IsReadOnly="True" 
+                                             Text="{Binding Schedule.Name}"/>
+                                    <TextBox Width="180" Margin="2" IsReadOnly="True"
+                                            Text="{Binding Observations}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2" >
+            <Separator Style="{StaticResource EMSearchHeaderSeparatorStyle}" Margin="0,10"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource EMMoneyIconButtonStyle}" Margin="40,0,0,0"
                         Command="{Binding DataContext.DisplayPaymentGatewayView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
-                
+
                 <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
                         Command="{Binding DataContext.VerifyClient, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
-                <Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>
+                <!--<Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>-->
             </StackPanel>
         </StackPanel>
-        
+
     </Grid>
 
 </UserControl>

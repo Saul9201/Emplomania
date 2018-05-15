@@ -58,7 +58,7 @@
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
                 <Label Content="En el municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="{Binding Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Teléfono fijo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
@@ -146,7 +146,7 @@
 
             <StackPanel Grid.Row="2">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Categoría:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding CategoryNeg.Name}"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding BusinessVO.Category.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Grid.Column="1">
@@ -161,7 +161,7 @@
 
             <StackPanel Grid.Row="3" Grid.Column="1">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Municipio:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding MunicipalityNeg.Name}"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding BusinessVO.Municipality.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="3" Grid.Column="2">
@@ -214,7 +214,7 @@
                 <!--<Label Grid.Row="2" Content="TOTAL" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>-->
                 <!--<Label Grid.Column="1" Grid.Row="2" Content="29" Style="{StaticResource EMClientFieldTitleLabelStyle}" Margin="30,0,0,0"/>-->
                 <ListView Grid.Row="1" Grid.ColumnSpan="2" BorderBrush="Transparent" Height="200"
-                          ItemsSource="{Binding DataContext.Workplaces, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
+                          ItemsSource="{Binding SelectedWorkplaces}">
                     <ListView.Resources>
                         <DataTemplate DataType="{x:Type vo:WorkplaceVO}">
                             <Label Content="{Binding Name}" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
@@ -234,7 +234,7 @@
                 <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
                         Command="{Binding DataContext.VerifyClient, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
-                <Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>
+                <!--<Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>-->
             </StackPanel>
         </StackPanel>
 

@@ -7,6 +7,7 @@
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
              xmlns:convert="clr-namespace:Emplomania.UI.Converters"
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1300">
 
@@ -85,11 +86,11 @@
                     <telerik:RadComboBox Width="170" Margin="0,0,30,0" EmptyText="Provincia"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Provinces}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding Province}"/>
+                              SelectedValue="{Binding InsertEmployerModel.Province}"/>
                     <telerik:RadComboBox Width="170" EmptyText="Municipio"
-                              ItemsSource="{Binding Municipalities}"
+                              ItemsSource="{Binding InsertEmployerModel.Municipalities}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding InsertEmployerModel.Municipality}"/>
+                              SelectedValue="{Binding InsertEmployerModel.UserVO.Municipality}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -150,7 +151,7 @@
                 <ComboBox Width="Auto"
                           ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Categories}"
                           DisplayMemberPath="Name"
-                          SelectedValue="{Binding InsertEmployerModel.CategoryNeg}"/>
+                          SelectedValue="{Binding InsertEmployerModel.BusinessVO.Category}"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Orientation="Horizontal">
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
@@ -159,15 +160,15 @@
                     <ComboBox Width="170" 
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Provinces}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding ProvinceNeg}"/>
+                              SelectedValue="{Binding InsertEmployerModel.ProvinceNeg}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Municipio"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
                     <ComboBox Width="170"
-                              ItemsSource="{Binding MunicipalitiesNeg}"
+                              ItemsSource="{Binding InsertEmployerModel.MunicipalitiesNeg}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding InsertEmployerModel.MunicipalityNeg}"/>
+                              SelectedValue="{Binding InsertEmployerModel.BusinessVO.Municipality}"/>
                 </StackPanel>
                 <!--<StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
                     <Label Content="Barriada"
@@ -207,23 +208,27 @@
 
         </Grid>
 
-        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
+        <StackPanel Margin="{StaticResource StackPanelItemMargin}"
+                    HorizontalAlignment="Left">
             <Label Style="{StaticResource EMGroupHeaderLabelStyle}" 
                    Content="GENERALES DE LA PLANTILLA" Grid.ColumnSpan="3"
                    VerticalAlignment="Bottom"/>
-
-            <Grid Width="470" HorizontalAlignment="Left" >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
                 <StackPanel>
                     <Label Content="Plaza"/>
-                    <ComboBox Width="Auto" Margin="1"
-                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Workplaces}"
-                              DisplayMemberPath="Name"
-                              SelectedValue="{Binding InsertEmployerModel.Place0}"/>
-                    <ComboBox Width="Auto" Margin="1"
+                    <telerik:RadComboBox Width="620" EmptyText="Selecciona las plazas" FontFamily="Segoe UI"
+                             AllowMultipleSelection="True"
+                             ClearSelectionButtonContent="Deseleccionar todo"
+					         ClearSelectionButtonVisibility="Visible"
+                             ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Workplaces}"
+                             DisplayMemberPath="Name"
+                             MultipleSelectionSeparator=","
+                             TextSearch.TextPath="Name" 
+                             IsEditable="false">
+                        <i:Interaction.Behaviors>
+                            <nomencl:MultiselectBehavior SelectedItems="{Binding InsertEmployerModel.SelectedWorkplaces}"/>
+                        </i:Interaction.Behaviors>
+                    </telerik:RadComboBox>
+                    <!--<ComboBox Width="Auto" Margin="1"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Workplaces}"
                               DisplayMemberPath="Name"
                               SelectedValue="{Binding InsertEmployerModel.Place1}"/>
@@ -246,7 +251,7 @@
                     <ComboBox Width="Auto" Margin="1"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Workplaces}"
                               DisplayMemberPath="Name"
-                              SelectedValue="{Binding InsertEmployerModel.Place6}"/>
+                              SelectedValue="{Binding InsertEmployerModel.Place6}"/>-->
                 </StackPanel>
                 <!--<StackPanel Grid.Column="1">
                     <Label Content="Cantidad"/>
@@ -265,14 +270,13 @@
                     <ComboBox Width="Auto" Margin="1"
                               ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=WorkPlaceCount}"/>
                 </StackPanel>-->
-            </Grid>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button  Margin="0,0,40,0" Content="CANCELAR"
                     Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
             <Button Content="GUARDAR" 
-                    Command="{Binding DataContext.InsertUserClientCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    Command="{Binding DataContext.InsertEmployerCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                     CommandParameter="{Binding DataContext.InsertEmployerModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
         </StackPanel>
     </StackPanel>

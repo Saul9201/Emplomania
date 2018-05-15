@@ -23,16 +23,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
 
         public InsertClientViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
-            InsertClientModel = new InsertClientModel()
-            {
-                UserVO = new UserVO()
-                {
-                    Id = Guid.NewGuid(),
-                    UserName = Guid.NewGuid().ToString("N"),
-                    PasswordHash = Guid.NewGuid().ToString("N"),
-                    ProfileImage = Resources.sin_imagen
-                },
-            };
+            InsertClientModel = new InsertClientModel();
         }
     
 

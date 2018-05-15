@@ -20,18 +20,65 @@ namespace Emplomania.Data.Services
 
         public List<UserVO> FilterByUserNameAndFullName(UserClientRole clientType, string userNameToSearch, string fullNameToSearch)
         {
-            IQueryable<UserVO> q = null;
+            IQueryable<UserVO> q = from s in db.Users
+                                   join ads in db.AditionalServices on s.AditionalServiceFK equals ads.Id into sads
+                                   from ads in sads.DefaultIfEmpty()
+                                   join mem in db.Memberships on s.MembershipFK equals mem.Id into smem
+                                   from mem in smem.DefaultIfEmpty()
+                                   join mun in db.Municipalities on s.MunicipalityFK equals mun.Id into smun
+                                   from mun in smun.DefaultIfEmpty()
+                                   select new UserVO
+                                   {
+                                       AditionalServiceFK = s.AditionalServiceFK,
+                                       MembershipFK = s.MembershipFK,
+                                       MunicipalityFK = s.MunicipalityFK,
+                                       Id = s.Id,
+                                       AditionalService = ads == null ? null : new AditionalServiceVO
+                                       {
+                                           Id = ads.Id,
+                                           Name = ads.Name,
+                                           Price = ads.Price,
+                                           UserType = ads.UserType,
+                                       },
+                                       AuthenticationType = s.AuthenticationType,
+                                       Name = s.Name,
+                                       Balance = s.Balance,
+                                       Email = s.Email,
+                                       HomePhoneNumber = s.HomePhoneNumber,
+                                       HowKnowEmplomania = s.HowKnowEmplomania,
+                                       InvitationConfirmCode = s.InvitationConfirmCode,
+                                       LastName = s.LastName,
+                                       LastName2 = s.LastName2,
+                                       Membership = mem == null ? null : new MembershipVO
+                                       {
+                                           Id = mem.Id,
+                                           Name = mem.Name,
+                                           Price = mem.Price,
+                                           UserType = mem.UserType,
+                                       },
+                                       MovilPhoneNumber = s.MovilPhoneNumber,
+                                       Municipality = mun == null ? null : new MunicipalityVO
+                                       {
+                                           Id = mun.Id,
+                                           Name = mun.Name,
+                                           ProvinciaId = mun.ProvinceFK,
+                                       },
+                                       PasswordHash = s.PasswordHash,
+                                       ProfileImageRaw = s.ProfileImageRaw,
+                                       UserName = s.UserName,
+                                       Verified = s.Verified,
+                                   };
             switch (clientType)
             {
                 case UserClientRole.Trabajador:
-                    q = (from s in db.Users
-                         join w in db.Workers on s.Id equals w.UserFK
-                         select s).ProjectTo<UserVO>();
+                    q = from w in db.Workers
+                        join us in q on w.UserFK equals us.Id
+                        select us;
                     break;
                 case UserClientRole.Empleador:
-                    q = (from s in db.Users
-                         join e in db.Employers on s.Id equals e.UserFK
-                         select s).ProjectTo<UserVO>();
+                    q = from e in db.Employers
+                        join us in q on e.UserFK equals us.Id
+                        select us;
                     break;
                 case UserClientRole.Profesor:
                     //TODO: Falta hacer lo mismo para el profesor
@@ -39,6 +86,7 @@ namespace Emplomania.Data.Services
                 default:
                     break;
             }
+
             if (q == null)
                 return null;
             if (!string.IsNullOrEmpty(userNameToSearch))
@@ -47,7 +95,6 @@ namespace Emplomania.Data.Services
                 q = q.Where(x => (x.Name + " " + x.LastName + " " + x.LastName2).Contains(fullNameToSearch));
             //q = q.Where(x => x.Name.Contains(fullNameToSearch)||x.LastName.Contains(fullNameToSearch)||x.LastName2.Contains(fullNameToSearch));
             return q.ToList();
-
         }
     }
 
@@ -69,7 +116,7 @@ namespace Emplomania.Data.Services
             this.us = us;
         }
 
-        public Guid? AddOrUpdate(UserVO userVO, EmployerVO employerVO, BusinessVO businessVO)
+        public bool AddOrUpdate(UserVO userVO, EmployerVO employerVO, BusinessVO businessVO)
         {
             var q = (from us in db.Users
                      where us.Id == userVO.Id
@@ -89,19 +136,19 @@ namespace Emplomania.Data.Services
                     base.Update(employerVO);
                     bs.Update(businessVO);
                 }
-                return employerVO.Id;
+                return true;
             }
             catch (Exception)
             {
                 this.UndoChanges();
-                return null;
+                return false;
             }
         }
     }
 
     public interface IEmployerService : ICrudService<EmployerVO, Employer>
     {
-        Guid? AddOrUpdate(UserVO userVO, EmployerVO employerVO, BusinessVO businessVO);
+        bool AddOrUpdate(UserVO userVO, EmployerVO employerVO, BusinessVO businessVO);
     }
 
     internal class BusinessService : CrudService<BusinessVO, Business>, IBusinessService
@@ -115,7 +162,7 @@ namespace Emplomania.Data.Services
         public override BusinessVO Add(BusinessVO vo, bool saveChanges = true)
         {
             var res = base.Add(vo, saveChanges);
-            bws.AddToBusiness(vo.Id, vo.WorkPlaces);
+            bws.AddToBusiness(vo.Id, vo.Workplaces);
             return res;
         }
 
@@ -123,20 +170,58 @@ namespace Emplomania.Data.Services
         {
             base.Update(vo);
             bws.ClearToBusiness(vo.Id);
-            bws.AddToBusiness(vo.Id, vo.WorkPlaces);
+            bws.AddToBusiness(vo.Id, vo.Workplaces);
         }
-        public IEnumerable<WorkplaceVO> GetWorkPlaces(Guid businessId)
+
+        public override IQueryable<BusinessVO> GetAll()
         {
-            return (from bw in db.BusinessWorkplaces
-                    join wp in db.Workplaces on bw.WorkplaceFK equals wp.Id
-                    where bw.BusinessFK == businessId
-                    select wp).ProjectTo<WorkplaceVO>().ToList();
+            var q = from b in db.Business
+                    join c in db.Categories on b.CategoryFK equals c.Id into bc
+                    from c in bc.DefaultIfEmpty()
+                    join m in db.Municipalities on b.MunicipalityFK equals m.Id into bm
+                    from m in bm.DefaultIfEmpty()
+                    select new BusinessVO
+                    {
+                        Id = b.Id,
+                        Address = b.Address,
+                        CategoryFK = b.CategoryFK,
+                        Details = b.Details,
+                        Email = b.Email,
+                        EmployerFK = b.EmployerFK,
+                        HomePhoneNumber = b.HomePhoneNumber,
+                        MovilPhoneNumber = b.MovilPhoneNumber,
+                        MunicipalityFK = b.MunicipalityFK,
+                        Name = b.Name,
+                        WebSite = b.WebSite,
+                        Category = c == null ? null : new CategoryVO
+                        {
+                            Id = c.Id,
+                            Name = c.Name,
+                        },
+                        Municipality = m == null ? null : new MunicipalityVO
+                        {
+                            Id = m.Id,
+                            Name = m.Name,
+                            ProvinciaId = m.ProvinceFK,
+                        },
+                    };
+
+            return q;
         }
+
+        public BusinessVO LoadEnumerablesProperties(BusinessVO business)
+        {
+            if (business == null)
+                return null;
+            business.Workplaces = bws.GetWorkplacesForBusiness(business.Id).ToList();
+            return business;
+        }
+
     }
 
     public interface IBusinessService : ICrudService<BusinessVO, Business>
     {
-        IEnumerable<WorkplaceVO> GetWorkPlaces(Guid businessId);
+        BusinessVO LoadEnumerablesProperties(BusinessVO business);
     }
 
     internal class BusinessWorkplaceService : CrudService<BusinessWorkplaceVO, BusinessWorkplace>, IBusinessWorkplaceService
@@ -183,12 +268,21 @@ namespace Emplomania.Data.Services
                 return false;
             }
         }
+
+        public IQueryable<WorkplaceVO> GetWorkplacesForBusiness(Guid businessId)
+        {
+            return (from bwp in db.BusinessWorkplaces
+                    join wp in db.Workplaces on bwp.WorkplaceFK equals wp.Id
+                    where bwp.BusinessFK == businessId
+                    select wp).ProjectTo<WorkplaceVO>();
+        }
     }
 
     public interface IBusinessWorkplaceService : ICrudService<BusinessWorkplaceVO, BusinessWorkplace>
     {
         bool AddToBusiness(Guid businessId, IEnumerable<WorkplaceVO> workPlaces);
         bool ClearToBusiness(Guid businessId);
+        IQueryable<WorkplaceVO> GetWorkplacesForBusiness(Guid businessId);
     }
 
 

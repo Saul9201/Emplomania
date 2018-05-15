@@ -158,7 +158,7 @@
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
                 <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
                         Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"/>
-                <Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>
+                <!--<Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>-->
             </StackPanel>
         </StackPanel>
 

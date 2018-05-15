@@ -17,7 +17,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels
         {
             CentralEMMain.Subitle = "crear perfil profesor";
             InsertTeacherModel = insertTeacherModel;
-
+            CentralEMMain.ResetScrollContent();
         }
     }
 }

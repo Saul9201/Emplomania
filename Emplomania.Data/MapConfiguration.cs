@@ -38,7 +38,7 @@ namespace Emplomania.Data
                 if (entityType.Name == "Business")
                 {
                     cfg.CreateMap<Business, BusinessVO>()
-                        .ForMember(vo => vo.WorkPlaces, opt => opt.Ignore());
+                        .ForMember(vo => vo.Workplaces, opt => opt.Ignore());
                     cfg.CreateMap<BusinessVO, Business>()
                         .ForMember(v => v.Workplaces, opt => opt.Ignore());
                     continue;

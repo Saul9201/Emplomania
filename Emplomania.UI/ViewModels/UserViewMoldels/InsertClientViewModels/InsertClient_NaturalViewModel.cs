@@ -19,7 +19,6 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         {
             CentralEMMain.Subitle = "Insertar cliente natural";
             InsertClientModel = insertClientModel;
-            InsertClientModel.UserVO.HowKnowEmplomania = WebNomenclatorsCache.Instance.HowKnowEM.FirstOrDefault();
         }
         
     }

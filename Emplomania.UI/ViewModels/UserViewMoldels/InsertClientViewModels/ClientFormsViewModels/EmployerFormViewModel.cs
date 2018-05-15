@@ -19,57 +19,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels
     public class EmployerFormViewModel : EMViewModelBase
     {
         public InsertEmployerModel InsertEmployerModel { get; set; }
-
-        private ProvinceVO province;
-        public ProvinceVO Province
-        {
-            get { return province; }
-            set
-            {
-                province = value;
-                InsertEmployerModel.Province = province;
-                if (province != null)
-                    Municipalities = ServiceLocator.Get<IMunicipalityService>().GetMunicByProvince(province.Id).ToList();
-                else
-                    Municipalities = new List<MunicipalityVO>();
-            }
-        }
-
-        private List<MunicipalityVO> municipalities;
-        public List<MunicipalityVO> Municipalities
-        {
-            get { return municipalities; }
-            set
-            {
-                SetProperty(ref municipalities, value);
-            }
-        }
-
-        private ProvinceVO provinceNeg;
-        public ProvinceVO ProvinceNeg
-        {
-            get { return provinceNeg; }
-            set
-            {
-                provinceNeg = value;
-                InsertEmployerModel.ProvinceNeg = provinceNeg;
-                if (provinceNeg != null)
-                    MunicipalitiesNeg = ServiceLocator.Get<IMunicipalityService>().GetMunicByProvince(provinceNeg.Id).ToList();
-                else
-                    MunicipalitiesNeg = new List<MunicipalityVO>();
-            }
-        }
-
-        private List<MunicipalityVO> municipalitiesNeg;
-        public List<MunicipalityVO> MunicipalitiesNeg
-        {
-            get { return municipalitiesNeg; }
-            set
-            {
-                SetProperty(ref municipalitiesNeg, value);
-            }
-        }
-
+        
         public ICommand SelectImagePerfilCommand => new RelayCommand(param =>
         {
             OpenFileDialog fd = new OpenFileDialog()
@@ -89,15 +39,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels
         {
             CentralEMMain.Subitle = "crear perfil empleador";
             InsertEmployerModel = insertEmployerModel;
-            if (InsertEmployerModel.Province != null)
-                Province = InsertEmployerModel.Province;
-            if (InsertEmployerModel.Municipality != null)
-                InsertEmployerModel.Municipality = Municipalities.Where(x => x.Id == InsertEmployerModel.Municipality.Id).FirstOrDefault();
-
-            if (InsertEmployerModel.ProvinceNeg != null)
-                ProvinceNeg = InsertEmployerModel.ProvinceNeg;
-            if (InsertEmployerModel.MunicipalityNeg != null)
-                InsertEmployerModel.MunicipalityNeg = MunicipalitiesNeg.Where(x => x.Id == InsertEmployerModel.MunicipalityNeg.Id).FirstOrDefault();
+            CentralEMMain.ResetScrollContent();
         }
     }
 }

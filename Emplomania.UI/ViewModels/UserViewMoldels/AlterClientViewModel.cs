@@ -21,6 +21,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
         public AlterClientViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
             CentralEMMain.Subitle = "MODIFICAR CLIENTE";
+            CentralEMMain.ResetScrollContent();
         }
 
         #region Campos
@@ -57,10 +58,12 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
             switch (SelectedClientType)
             {
                 case UserClientRole.Trabajador:
-                    var model = new InsertWorkerModel(CurrentUser.Id);
-                    CentralEMMain.DisplayInsertClientWorkerView.Execute(model);
+                    var workModel = new InsertWorkerModel(CurrentUser.Id);
+                    CentralEMMain.DisplayInsertClientWorkerView.Execute(workModel);
                     break;
                 case UserClientRole.Empleador:
+                    var emplModel = new InsertEmployerModel(currentUser);
+                    CentralEMMain.DisplayInsertClientEmployerView.Execute(emplModel);
                     break;
                 case UserClientRole.Profesor:
                     break;

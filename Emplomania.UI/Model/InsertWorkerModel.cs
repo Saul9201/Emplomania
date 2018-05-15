@@ -15,18 +15,17 @@ namespace Emplomania.UI.Model
     {
         public InsertWorkerModel(UserVO user)
         {
-            AuthenticationTypes = user.AuthenticationType;
+            //AuthenticationTypes = user.AuthenticationType;
             UserClientRole = UserClientRole.Trabajador;
             UserVO = user;
             WorkerVO = new WorkerVO()
             {
                 Id = Guid.NewGuid(),
                 UserFK = user.Id,
-                User = user,
+                User = UserVO,
                 Childrens = true,
                 Gender = WebNomenclatorsCache.Instance.Genders.Where(x => x.Name == Gender.Masculino.ToString()).FirstOrDefault(),
             };
-
 
             SelectedCourses = new ObservableCollection<CourseVO>();
             SelectedLicenses = new ObservableCollection<DriverLicenseVO>();
@@ -63,13 +62,12 @@ namespace Emplomania.UI.Model
                 });
             }
         }
-
         public InsertWorkerModel(InsertWorkerModel toCopy)
         {
             this.UserVO = toCopy.UserVO;
             this.WorkerVO = toCopy.WorkerVO;
             this.UserClientRole = toCopy.UserClientRole;
-            this.AuthenticationTypes = toCopy.AuthenticationTypes;
+            //this.AuthenticationTypes = toCopy.AuthenticationTypes;
             this.Province = toCopy.Province;
             this.Municipalities = toCopy.Municipalities;
             this.SelectedCourses = toCopy.SelectedCourses;
@@ -82,7 +80,6 @@ namespace Emplomania.UI.Model
             this.WorkerLanguagesSource = toCopy.WorkerLanguagesSource;
             this.WorkAspirationsSource = toCopy.WorkAspirationsSource;
         }
-
         public InsertWorkerModel(Guid userId)
         {
             var workServ = ServiceLocator.Get<IWorkerService>();
@@ -96,7 +93,7 @@ namespace Emplomania.UI.Model
                 UserVO.Municipality = Municipalities.Where(x => x.Id == UserVO.Municipality.Id).FirstOrDefault();
             }
             UserClientRole = UserClientRole.Trabajador;
-            AuthenticationTypes = UserVO.AuthenticationType;
+            //AuthenticationTypes = UserVO.AuthenticationType;
             SelectedCourses = new ObservableCollection<CourseVO>(w.Courses);
             SelectedLicenses = new ObservableCollection<DriverLicenseVO>(w.DriverLicenses);
             SelectedVehicles = new ObservableCollection<VehicleVO>(w.Vehicles);
@@ -133,10 +130,14 @@ namespace Emplomania.UI.Model
             }
         }
 
-        public WorkerVO WorkerVO { get; set; }
-        public List<WorkerLanguageVO> WorkerLanguagesSource { get; set; }
-        public List<WorkAspirationVO> WorkAspirationsSource { get; set; }
+        private ObservableCollection<CourseVO> selectedCourses;
+        private ObservableCollection<DriverLicenseVO> selectedLicenses;
+        private ObservableCollection<VehicleVO> selectedVehicles;
+        private ObservableCollection<WorkAspirationVO> selectedWorkAspirations;
+        private ObservableCollection<WorkerLanguageVO> selectedWorkerLanguages;
+        private ObservableCollection<WorkReferenceVO> selectedWorkReferences;
 
+        public WorkerVO WorkerVO { get; set; }
         public Gender Gender
         {
             get { return WorkerVO.Gender.Name == "Masculino" ? Gender.Masculino : Gender.Femenino; }
@@ -146,10 +147,8 @@ namespace Emplomania.UI.Model
                 OnPropertyChanged();
             }
         }
-               
-        //public ProvinceVO Province { get; set; }
-
-        private ObservableCollection<CourseVO> selectedCourses;
+        public List<WorkerLanguageVO> WorkerLanguagesSource { get; set; }
+        public List<WorkAspirationVO> WorkAspirationsSource { get; set; }
         public ObservableCollection<CourseVO> SelectedCourses
         {
             get
@@ -161,22 +160,16 @@ namespace Emplomania.UI.Model
                 SetProperty(ref selectedCourses, value);
             }
         }
-
-        private ObservableCollection<DriverLicenseVO> selectedLicenses;
         public ObservableCollection<DriverLicenseVO> SelectedLicenses
         {
             get { return selectedLicenses; }
             set { SetProperty(ref selectedLicenses, value); }
         }
-
-        private ObservableCollection<VehicleVO> selectedVehicles;
         public ObservableCollection<VehicleVO> SelectedVehicles
         {
             get { return selectedVehicles; }
             set { SetProperty(ref selectedVehicles, value); }
         }
-
-        private ObservableCollection<WorkAspirationVO> selectedWorkAspirations;
         public ObservableCollection<WorkAspirationVO> SelectedWorkAspirations
         {
             get
@@ -188,8 +181,6 @@ namespace Emplomania.UI.Model
                 SetProperty(ref selectedWorkAspirations, value);
             }
         }
-
-        private ObservableCollection<WorkerLanguageVO> selectedWorkerLanguages;
         public ObservableCollection<WorkerLanguageVO> SelectedWorkerLanguages
         {
             get
@@ -201,36 +192,11 @@ namespace Emplomania.UI.Model
                 SetProperty(ref selectedWorkerLanguages, value);
             }
         }
-
-        private ObservableCollection<WorkReferenceVO> selectedWorkReferences;
         public ObservableCollection<WorkReferenceVO> SelectedWorkReferences
         {
             get { return selectedWorkReferences; }
             set { SetProperty(ref selectedWorkReferences, value); }
         }
 
-        private ProvinceVO province;
-        public ProvinceVO Province
-        {
-            get { return province; }
-            set
-            {
-                province = value;
-                if (value != null)
-                    Municipalities = WebNomenclatorsCache.Instance.Municipalities.Where(x => x.ProvinciaId == value.Id).ToList();
-                else
-                    Municipalities = new List<MunicipalityVO>();
-            }
-        }
-
-        private List<MunicipalityVO> municipalities;
-        public List<MunicipalityVO> Municipalities
-        {
-            get { return municipalities; }
-            set
-            {
-                SetProperty(ref municipalities, value);
-            }
-        }
     }
 }

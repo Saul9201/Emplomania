@@ -379,11 +379,6 @@
     <Compile Include="Model\InsertTeacherModel.cs" />
     <Compile Include="Model\InsertWorkerModel.cs" />
     <Compile Include="Model\UserClientModel.cs" />
-    <Compile Include="Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\AccountingReportViewModels\AccountingReportViewModel.cs" />
     <Compile Include="ViewModels\Base\EMViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
@@ -596,10 +591,6 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

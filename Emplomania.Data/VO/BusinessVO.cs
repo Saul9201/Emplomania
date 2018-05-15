@@ -16,6 +16,30 @@ namespace Emplomania.Data.VO
         public Guid EmployerFK { get; set; }
         public Guid? CategoryFK { get; set; }
         public Guid? MunicipalityFK { get; set; }
-        public WorkplaceVO[] WorkPlaces { get; set; } = new WorkplaceVO[7];
+        public List<WorkplaceVO> Workplaces { get; set; }
+
+        private MunicipalityVO municipality;
+        private CategoryVO category;
+
+        public MunicipalityVO Municipality
+        {
+            get { return municipality; }
+            set
+            {
+                municipality = value;
+                if (municipality != null)
+                    MunicipalityFK = municipality.Id;
+            }
+        }
+        public CategoryVO Category
+        {
+            get { return category; }
+            set
+            {
+                category = value;
+                if (category != null)
+                    CategoryFK = category.Id;
+            }
+        }
     }
 }

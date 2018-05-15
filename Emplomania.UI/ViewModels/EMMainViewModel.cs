@@ -106,34 +106,17 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
-        public ICommand InsertUserClientCommand => new RelayCommand(param =>
+        public ICommand InsertEmployerCommand => new RelayCommand(param =>
         {
             var typeName = param.GetType().Name;
-            switch (typeName)
+            var insertEmployerModel = param as InsertEmployerModel;
+            insertEmployerModel.BusinessVO.Workplaces = insertEmployerModel.SelectedWorkplaces.ToList();
+            if (!ServiceLocator.Get<IEmployerService>().AddOrUpdate(insertEmployerModel.UserVO, insertEmployerModel.EmployerVO, insertEmployerModel.BusinessVO))
             {
-                case "InsertEmployerModel":
-                    var insertEmployerModel = param as InsertEmployerModel;
-                     var r=ServiceLocator.Get<IEmployerService>().AddOrUpdate(insertEmployerModel.UserVO, insertEmployerModel.EmployerVO, insertEmployerModel.BusinessVO);
-                    if (r == null)
-                    {
-                        MessageBox.Show("El usuario no pudo ser insertado.");
-                        return;
-                    }
-                    DisplayEmployerSheetView.Execute(insertEmployerModel);
-                    break;
-                case "InsertWorkerModel":
-                    var insertWorkerModel = param as InsertWorkerModel;
-                    //Todo
-                    DisplayWorkerSheetView.Execute(insertWorkerModel);
-                    break;
-                case "InsertTeacherModel":
-                    var insertTeacherModel = param as InsertTeacherModel;
-                    //Todo
-                    DisplayTeacherSheetView.Execute(insertTeacherModel);
-                    break;
-                default:
-                    break;
+                MessageBox.Show("El usuario no pudo ser insertado.");
+                return;
             }
+            DisplayEmployerSheetView.Execute(insertEmployerModel);
         });
 
         public ICommand VerifyClient => new RelayCommand(param =>
@@ -142,7 +125,7 @@ namespace Emplomania.UI.ViewModels
              var userServ = ServiceLocator.Get<IUserService>();
              var id = insertClientModel.UserVO.Id;
              UserVO us = userServ.Get(x => x.Id == id);
-             if(us==null)
+             if (us == null)
              {
                  MessageBox.Show($"El usuario no pudo ser verificado. Error.");
                  return;
@@ -168,7 +151,7 @@ namespace Emplomania.UI.ViewModels
         #endregion
 
         #region Navegation
-        private void DisplayEMView<T>(string v, params object[]p) where T : EMViewModelBase
+        private void DisplayEMView<T>(string v, params object[] p) where T : EMViewModelBase
         {
             CurrentViewModel = typeof(T).GetConstructors().First().Invoke(new object[] { this }.Concat(p).ToArray()) as EMViewModelBase;
             Subitle = v;
@@ -681,29 +664,13 @@ namespace Emplomania.UI.ViewModels
                     switch (InsertClientModel.UserClientRole)
                     {
                         case UserClientRole.Empleador:
-                            var p = new InsertEmployerModel()
-                            {
-                                AuthenticationTypes = InsertClientModel.AuthenticationTypes,
-                                UserClientRole = InsertClientModel.UserClientRole,
-                                UserVO = InsertClientModel.UserVO,
-                            };
-                            p.EmployerVO = new EmployerVO() { Id = Guid.NewGuid(), UserFK = p.UserVO.Id };
-                            p.BusinessVO = new BusinessVO() { Id = Guid.NewGuid(), EmployerFK = p.EmployerVO.Id };
-                            DisplayInsertClientEmployerView.Execute(p);
+                            DisplayInsertClientEmployerView.Execute(new InsertEmployerModel(InsertClientModel.UserVO));
                             break;
                         case UserClientRole.Profesor:
-                            var p1 = new InsertTeacherModel()
-                            {
-                                AuthenticationTypes = InsertClientModel.AuthenticationTypes,
-                                UserClientRole = InsertClientModel.UserClientRole,
-                                UserVO = InsertClientModel.UserVO,
-                            };
-                            DisplayInsertClientTeacherView.Execute(p1);
+                            DisplayInsertClientTeacherView.Execute(new InsertTeacherModel(InsertClientModel.UserVO));
                             break;
                         case UserClientRole.Trabajador:
-                            InsertClientModel.UserVO.AuthenticationType = InsertClientModel.AuthenticationTypes;
-                            var p2 = new InsertWorkerModel(InsertClientModel.UserVO);
-                            DisplayInsertClientWorkerView.Execute(p2);
+                            DisplayInsertClientWorkerView.Execute(new InsertWorkerModel(InsertClientModel.UserVO));
                             break;
                         default:
                             break;
@@ -715,7 +682,7 @@ namespace Emplomania.UI.ViewModels
         #endregion
 
 
-        
+
 
 
         #endregion
@@ -732,7 +699,7 @@ namespace Emplomania.UI.ViewModels
                 CentralMain.IsTracking = false;
             });
         }
-        
+
 
         public void ResetScrollContent()
         {

@@ -41,12 +41,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         {
             CentralEMMain.Subitle = "crear perfil trabajador (paso 1)";
             InsertWorkerModel = insertWorkerModel;
-
-            //if (InsertWorkerModel.Province != null)
-            //    Province = InsertWorkerModel.Province;
-            //if (InsertWorkerModel.UserVO.Municipality != null)
-            //    InsertWorkerModel.UserVO.Municipality = Municipalities.Where(x => x.Id == InsertWorkerModel.UserVO.Municipality.Id).FirstOrDefault();
-
+            CentralEMMain.ResetScrollContent();
         }
 
     }

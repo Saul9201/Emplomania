@@ -1,4 +1,5 @@
 ﻿using Emplomania.Data.VO.Base;
+using Emplomania.Infrastucture;
 using Emplomania.Infrastucture.Enums;
 using Emplomania.Model;
 using System;
@@ -34,7 +35,6 @@ namespace Emplomania.Data.VO
         public Guid? AditionalServiceFK { get; set; }
 
 
-        private Image profileImage;
         private MunicipalityVO municipality;
         private MembershipVO membership;
         private AditionalServiceVO aditionalService;
@@ -42,19 +42,17 @@ namespace Emplomania.Data.VO
         {
             get
             {
-                if (profileImage == null)
-                    profileImage = Image.FromStream(new MemoryStream(ProfileImageRaw));
-                return profileImage;
+                return ProfileImageRaw == null || ProfileImageRaw.Length == 0 ? Resources.sin_imagen : Image.FromStream(new MemoryStream(ProfileImageRaw));
             }
             set
             {
-                SetProperty(ref profileImage, value);
                 if (value != null)
                     using (var ms = new MemoryStream())
                     {
                         value.Save(ms, value.RawFormat);
                         ProfileImageRaw = ms.ToArray();
                     }
+                OnPropertyChanged();
             }
         }
         public MunicipalityVO Municipality
