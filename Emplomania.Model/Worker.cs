@@ -14,6 +14,9 @@ namespace Emplomania.Model
         public string Salary { get; set; }
         public string Experience { get; set; }
         public string OtherCourses { get; set; }
+        public string OtherHomePhoneNumber { get; set; }
+        public string OtherMovilPhoneNumber { get; set; }
+        public string OtherEmail { get; set; }
 
         public Guid UserFK { get; set; }
         public Guid? EyeColorFK { get; set; }

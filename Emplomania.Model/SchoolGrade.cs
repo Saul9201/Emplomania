@@ -10,5 +10,6 @@ namespace Emplomania.Model
     public class SchoolGrade : Nomenclator
     {
         public ICollection<Worker> Workers { get; set; }
+        public ICollection<Teacher> Teachers { get; set; }
     }
 }

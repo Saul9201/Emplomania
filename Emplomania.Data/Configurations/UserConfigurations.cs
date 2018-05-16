@@ -22,6 +22,10 @@ namespace Emplomania.Data.Configurations
             HasMany<Worker>(u => u.Workers)
                 .WithRequired()
                 .HasForeignKey(w => w.UserFK);
+
+            HasMany<Teacher>(u => u.Teachers)
+                .WithRequired()
+                .HasForeignKey(t => t.UserFK);
         }
     }
 
@@ -138,6 +142,15 @@ namespace Emplomania.Data.Configurations
         public WorkerCourseConfigurations()
         {
             ToTable("WorkerCourses");
+            HasKey(x => x.Id);
+        }
+    }
+
+    public class TeacherConfigurations : EntityTypeConfiguration<Teacher>
+    {
+        public TeacherConfigurations()
+        {
+            ToTable("Teachers");
             HasKey(x => x.Id);
         }
     }

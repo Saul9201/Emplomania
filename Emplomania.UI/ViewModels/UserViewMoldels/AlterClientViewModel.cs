@@ -66,6 +66,8 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
                     CentralEMMain.DisplayInsertClientEmployerView.Execute(emplModel);
                     break;
                 case UserClientRole.Profesor:
+                    var teachModel = new InsertTeacherModel(currentUser);
+                    CentralEMMain.DisplayInsertClientTeacherView.Execute(teachModel);
                     break;
                 default:
                     break;

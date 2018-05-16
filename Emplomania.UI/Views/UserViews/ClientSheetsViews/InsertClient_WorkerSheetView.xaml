@@ -251,8 +251,8 @@
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
             <Label Grid.Row="1" Content="PRIVADOS" VerticalAlignment="Center"
                    Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-            <!--<Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
-                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>-->
+            <Label Grid.Row="1" Grid.Column="1"  Content="OTROS" VerticalAlignment="Center"
+                   Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
 
             <StackPanel Grid.Row="2">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
@@ -266,18 +266,18 @@
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
                 <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding UserVO.Email}"/>
             </StackPanel>
-            <!--<StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
+            <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="8768987"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.OtherHomePhoneNumber}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Movil:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="54987098"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.OtherMovilPhoneNumber}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Correo Electrónico:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="dlfkhlkxgb@dsflkg.cu"/>
-            </StackPanel>-->
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="{Binding WorkerVO.OtherEmail}"/>
+            </StackPanel>
         </Grid>
 
         <Grid Grid.Row="2" Grid.ColumnSpan="2">

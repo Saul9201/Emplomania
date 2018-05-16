@@ -5,12 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vw="clr-namespace:Emplomania.UI.Views"
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:convert="clr-namespace:Emplomania.UI.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <convert:ImageConverter x:Key="imageConverter"/>
+    </UserControl.Resources>
     
-    <StackPanel Width="970" DataContext="{Binding InsertClientModel}">
+    <StackPanel Width="970">
 
-        <Grid Margin="{StaticResource StackPanelItemMargin}">
+        <Grid Margin="{StaticResource StackPanelItemMargin}"
+              DataContext="{Binding InsertTeacherModel}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -28,51 +34,82 @@
             <StackPanel Grid.Row="1" Margin="0,0,30,0">
                 <Label Content="Nombre (s)*"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
+                <TextBox Width="Auto"
+                         Text="{Binding UserVO.Name}"/>
             </StackPanel>
             <StackPanel Grid.Row="2" Margin="0,0,30,0">
                 <Label Content="Carnet de identidad *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
+                <TextBox Width="Auto" Text="{Binding TeacherVO.NoCarnet}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
                 <Label Content="Apellidos *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Width="Auto" Margin="0,0,4,0" Tag="Primero" Text="{Binding UserVO.LastName}"/>
+                    <TextBox Grid.Column="1" Width="Auto" Margin="4,0,0,0" Tag="Segundo" Text="{Binding UserVO.LastName2}"/>
+                </Grid>
             </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="0" Margin="0,0,30,0">
-                <Label Content="Teléfono móvil: *"
+            <Grid Grid.Row="3" Grid.ColumnSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Margin="0,0,30,0">
+                    <Label Content="Teléfono móvil: *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="1" Margin="0,0,30,0">
-                <Label Content="Teléfono fijo: *"
+                    <TextBox Width="Auto"
+                         Text="{Binding UserVO.MovilPhoneNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Margin="0,0,30,0">
+                    <Label Content="Teléfono fijo: *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
-            </StackPanel>
-            <StackPanel Grid.Row="3" Grid.Column="2" Margin="0,0,30,0">
-                <Label Content="Correo electrónico: *"
+                    <TextBox Width="Auto"
+                         Text="{Binding UserVO.HomePhoneNumber}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="0,0,30,0">
+                    <Label Content="Correo electrónico: *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
-            </StackPanel>
+                    <TextBox Width="Auto"
+                         Text="{Binding UserVO.Email}"/>
+                </StackPanel>
+                <StackPanel Grid.Column="3">
+                    <Label Content="Sitio web:"
+                       Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
+                    <TextBox Width="Auto"
+                         Text="{Binding TeacherVO.WebSite}"/>
+                </StackPanel>
+            </Grid>
             <StackPanel Grid.Row="2" Grid.Column="1" Margin="0,0,30,0">
                 <Label Content="No. licencia TCP"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <TextBox Width="Auto"/>
+                <TextBox Width="Auto"
+                         Text="{Binding TeacherVO.NoLicencia}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="2">
-                <Label Content="Lugar de residencia*"
+                <Label Content="Direccion *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <StackPanel Orientation="Horizontal" >
-                    <TextBox Width="200" HorizontalAlignment="Left"
-                             Margin="0,0,30,0"/>
-                    <TextBox Width="65"/>
-                </StackPanel>
-                <TextBox Width="Auto" Margin="0,8,0,0"/>
-                <StackPanel Orientation="Horizontal" Margin="0,7,0,0">
-                    <ComboBox Width="150" Margin="0,0,20,0"/>
-                    <ComboBox Width="150"/>
-                </StackPanel>
+                <TextBox Width="Auto"
+                         Text="{Binding TeacherVO.Address}"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Row="2" Grid.Column="2" 
+                        Orientation="Horizontal" Margin="0,7,0,0">
+                <telerik:RadComboBox Width="150" Margin="0,0,20,0" EmptyText="Provincia"
+                              ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Provinces}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding Province}"/>
+                <telerik:RadComboBox Width="150" EmptyText="Municipio"
+                              ItemsSource="{Binding Municipalities}"
+                              DisplayMemberPath="Name"
+                              SelectedValue="{Binding UserVO.Municipality}"/>
             </StackPanel>
         </Grid>
 
@@ -96,12 +133,18 @@
             <StackPanel Grid.Row="1" Margin="0,0,30,0">
                 <Label Content="Nivel de escolaridad *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <ComboBox Width="Auto"/>
+                <ComboBox Width="Auto"
+                          ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=SchoolGrades}"
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding InsertTeacherModel.TeacherVO.SchoolGrade}"/>
             </StackPanel>
             <StackPanel Grid.Row="1" Grid.Column="1" Margin="0,0,30,0">
                 <Label Content="Graduado de *"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <ComboBox Width="Auto"/>
+                <ComboBox Width="Auto"
+                          ItemsSource="{Binding Source={x:Static nomencl:WebNomenclatorsCache.Instance}, Path=Specialities}"
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding InsertTeacherModel.TeacherVO.Specialty}"/>
             </StackPanel>
 
             <Label Grid.Row="2" Grid.ColumnSpan="2"
@@ -111,7 +154,8 @@
 
             <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Margin="0,0,30,0">
                 <Label Content="Detalles"/>
-                <TextBox Style="{StaticResource EMLargeTextBoxStyle}" Width="Auto" Height="110"/>
+                <TextBox Style="{StaticResource EMLargeTextBoxStyle}" Width="Auto" Height="110"
+                         Text="{Binding InsertTeacherModel.TeacherVO.CoursesDetails}"/>
             </StackPanel>
 
             <StackPanel Grid.Row="1" Grid.Column="2" Grid.RowSpan="3">
@@ -120,13 +164,14 @@
                 </Grid>
                 <Image Stretch="Fill" Height="168" Width="168"
                    HorizontalAlignment="Left" Margin="40,0,0,0" 
-                       Source="{Binding ClientImagePath}">
+                       Source="{Binding InsertTeacherModel.UserVO.ProfileImage, Converter={StaticResource imageConverter}}">
                     <Image.Clip>
                         <EllipseGeometry Center="84,84" RadiusX="84" RadiusY="84"/>
                     </Image.Clip>
                 </Image>
                 <Grid Width="168" HorizontalAlignment="Left" Margin="40,-25,0,-10">
-                    <Button Style="{StaticResource EMUpdateClientImageButtonStyle}"/>
+                    <Button Style="{StaticResource EMUpdateClientImageButtonStyle}"
+                            Command="{Binding Path=SelectImagePerfilCommand}"/>
                 </Grid>
             </StackPanel>
 
@@ -136,9 +181,9 @@
             <Button Content="CNACELAR" Margin="0,0,40,0" 
                     Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"/>
             <Button Content="GUARDAR"
-                    Command="{Binding DataContext.DisplayTeacherSheetView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
-                    CommandParameter="{Binding DataContext.InsertClientModel, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"/>
+                    Command="{Binding DataContext.InsertTeacherCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
+                    CommandParameter="{Binding InsertTeacherModel}"/>
         </StackPanel>
-        
+
     </StackPanel>
 </UserControl>

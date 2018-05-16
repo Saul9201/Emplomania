@@ -233,6 +233,10 @@ namespace Emplomania.Data.Configurations
             HasMany<Worker>(sg => sg.Workers)
                 .WithOptional()
                 .HasForeignKey(w => w.SchoolGradeFK);
+
+            HasMany<Teacher>(sg => sg.Teachers)
+                .WithOptional()
+                .HasForeignKey(t => t.SchoolGradeFK);
         }
     }
 
@@ -259,6 +263,10 @@ namespace Emplomania.Data.Configurations
             HasMany<Worker>(sp => sp.Workers)
                 .WithOptional()
                 .HasForeignKey(w => w.SpecialtyFK);
+
+            HasMany<Teacher>(sp => sp.Teachers)
+                .WithOptional()
+                .HasForeignKey(t => t.SpecialtyFK);
         }
     }
 

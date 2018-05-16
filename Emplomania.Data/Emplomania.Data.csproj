@@ -144,6 +144,18 @@
     <Compile Include="Migrations\201805110349308_AddingAuthTypeFieldsToUser.Designer.cs">
       <DependentUpon>201805110349308_AddingAuthTypeFieldsToUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805161311394_AddingOthersContactsNumbersToWorker.cs" />
+    <Compile Include="Migrations\201805161311394_AddingOthersContactsNumbersToWorker.Designer.cs">
+      <DependentUpon>201805161311394_AddingOthersContactsNumbersToWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805161329484_TeacherTableWithRelations.cs" />
+    <Compile Include="Migrations\201805161329484_TeacherTableWithRelations.Designer.cs">
+      <DependentUpon>201805161329484_TeacherTableWithRelations.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201805161628179_AddingWebSiteFieldToTeacherTable.cs" />
+    <Compile Include="Migrations\201805161628179_AddingWebSiteFieldToTeacherTable.Designer.cs">
+      <DependentUpon>201805161628179_AddingWebSiteFieldToTeacherTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminUserService.cs" />
@@ -180,6 +192,7 @@
     <Compile Include="VO\SchoolGradeVO.cs" />
     <Compile Include="VO\SkinColorVO.cs" />
     <Compile Include="VO\SpecialtyVO.cs" />
+    <Compile Include="VO\TeacherVO.cs" />
     <Compile Include="VO\UserVO.cs" />
     <Compile Include="VO\VehicleVO.cs" />
     <Compile Include="VO\WorkAspirationVO.cs" />
@@ -259,6 +272,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805110349308_AddingAuthTypeFieldsToUser.resx">
       <DependentUpon>201805110349308_AddingAuthTypeFieldsToUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805161311394_AddingOthersContactsNumbersToWorker.resx">
+      <DependentUpon>201805161311394_AddingOthersContactsNumbersToWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805161329484_TeacherTableWithRelations.resx">
+      <DependentUpon>201805161329484_TeacherTableWithRelations.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805161628179_AddingWebSiteFieldToTeacherTable.resx">
+      <DependentUpon>201805161628179_AddingWebSiteFieldToTeacherTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

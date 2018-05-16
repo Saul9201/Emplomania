@@ -15,7 +15,6 @@ namespace Emplomania.UI.Model
     {
         public InsertWorkerModel(UserVO user)
         {
-            //AuthenticationTypes = user.AuthenticationType;
             UserClientRole = UserClientRole.Trabajador;
             UserVO = user;
             WorkerVO = new WorkerVO()

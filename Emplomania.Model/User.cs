@@ -32,5 +32,6 @@ namespace Emplomania.Model
         
         public ICollection<Employer> Employers { get; set; }
         public ICollection<Worker> Workers { get; set; }
+        public ICollection<Teacher> Teachers { get; set; }
     }
 }

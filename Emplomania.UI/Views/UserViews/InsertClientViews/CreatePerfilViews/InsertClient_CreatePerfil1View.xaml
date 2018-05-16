@@ -196,19 +196,22 @@
                     <TextBox Width="Auto" Text="{Binding UserVO.Email}"/>
                 </StackPanel>
 
-                <!--<Label Grid.Column="1" Content="OTROS:"/>
+                <Label Grid.Column="1" Content="OTROS:"/>
                 <StackPanel Grid.Row="1" Grid.Column="1" Margin="{StaticResource MarginRight1}">
                     <Label >Teléfono fijo:</Label>
-                    <TextBox Width="Auto"/>
+                    <TextBox Width="Auto"
+                             Text="{Binding WorkerVO.OtherHomePhoneNumber}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Grid.Column="1" Margin="{StaticResource MarginRight1}">
                     <Label>Teléfono móvil:</Label>
-                    <TextBox Width="Auto"/>
+                    <TextBox Width="Auto"
+                             Text="{Binding WorkerVO.OtherMovilPhoneNumber}"/>
                 </StackPanel>
                 <StackPanel Grid.Row="3" Grid.Column="1" Margin="{StaticResource MarginRight1}">
                     <Label>Correo electrónico:</Label>
-                    <TextBox Width="Auto"/>
-                </StackPanel>-->
+                    <TextBox Width="Auto"
+                             Text="{Binding WorkerVO.OtherEmail}"/>
+                </StackPanel>
 
                 <StackPanel Grid.Column="2" HorizontalAlignment="Right" Grid.RowSpan="4">
                     <Label Content="FOTO DE PERFIL:" HorizontalAlignment="Center"/>

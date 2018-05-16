@@ -81,7 +81,9 @@ namespace Emplomania.Data.Services
                         select us;
                     break;
                 case UserClientRole.Profesor:
-                    //TODO: Falta hacer lo mismo para el profesor
+                    q = from t in db.Teachers
+                        join us in q on t.UserFK equals us.Id
+                        select us;
                     break;
                 default:
                     break;
@@ -97,14 +99,13 @@ namespace Emplomania.Data.Services
             return q.ToList();
         }
     }
-
     public interface IUserService : ICrudService<UserVO, User>
     {
         List<UserVO> FilterByUserNameAndFullName(UserClientRole selectedClientType, string userNameToSearch, string fullNameToSearch);
     }
 
 
-
+    #region Employer
 
     internal class EmployerService : CrudService<EmployerVO, Employer>, IEmployerService
     {
@@ -145,7 +146,6 @@ namespace Emplomania.Data.Services
             }
         }
     }
-
     public interface IEmployerService : ICrudService<EmployerVO, Employer>
     {
         bool AddOrUpdate(UserVO userVO, EmployerVO employerVO, BusinessVO businessVO);
@@ -218,7 +218,6 @@ namespace Emplomania.Data.Services
         }
 
     }
-
     public interface IBusinessService : ICrudService<BusinessVO, Business>
     {
         BusinessVO LoadEnumerablesProperties(BusinessVO business);
@@ -277,7 +276,6 @@ namespace Emplomania.Data.Services
                     select wp).ProjectTo<WorkplaceVO>();
         }
     }
-
     public interface IBusinessWorkplaceService : ICrudService<BusinessWorkplaceVO, BusinessWorkplace>
     {
         bool AddToBusiness(Guid businessId, IEnumerable<WorkplaceVO> workPlaces);
@@ -285,7 +283,9 @@ namespace Emplomania.Data.Services
         IQueryable<WorkplaceVO> GetWorkplacesForBusiness(Guid businessId);
     }
 
+    #endregion
 
+    #region Worker
 
     internal class WorkerService : CrudService<WorkerVO, Worker>, IWorkerService
     {
@@ -387,6 +387,9 @@ namespace Emplomania.Data.Services
                         Salary = w.Salary,
                         Experience = w.Experience,
                         OtherCourses = w.OtherCourses,
+                        OtherHomePhoneNumber=w.OtherHomePhoneNumber,
+                        OtherMovilPhoneNumber=w.OtherMovilPhoneNumber,
+                        OtherEmail=w.OtherEmail,
                         CivilStatusFK = w.CivilStatusFK,
                         ComplexionFK = w.ComplexionFK,
                         EyeColorFK = w.EyeColorFK,
@@ -607,7 +610,6 @@ namespace Emplomania.Data.Services
         bool AddToWorker(Guid id, IEnumerable<DriverLicenseVO> driverLicenses);
         bool ClearToWorker(Guid id);
     }
-
 
     internal class WorkerVehicleService : CrudService<WorkerVehicleVO, WorkerVehicle>, IWorkerVehicleService
     {
@@ -875,4 +877,80 @@ namespace Emplomania.Data.Services
         bool AddToWorker(Guid id, IEnumerable<WorkAspirationVO> workAspirations);
         bool ClearToWorker(Guid id);
     }
+
+    #endregion
+
+    #region Teacher
+    internal class TeacherService : CrudService<TeacherVO, Teacher>, ITeacherService
+    {
+        IUserService us;
+        public TeacherService(EmplomaniaAdminDBContext db, IUserService us) : base(db)
+        {
+            this.us = us;
+        }
+
+        public bool AddOrUpdate(UserVO userVO, TeacherVO teacherVO)
+        {
+            var q = (from us in db.Users
+                     where us.Id == userVO.Id
+                     select us).FirstOrDefault();
+
+            try
+            {
+                if (q == null)
+                {
+                    us.Add(userVO);
+                    base.Add(teacherVO);
+                }
+                else
+                {
+                    us.Update(userVO);
+                    base.Update(teacherVO);
+                }
+                return true;
+            }
+            catch (Exception)
+            {
+                this.UndoChanges();
+                return false;
+            }
+        }
+
+        public override IQueryable<TeacherVO> GetAll()
+        {
+            var q = from t in db.Teachers
+                    join sp in db.Specialties on t.SpecialtyFK equals sp.Id into tsp
+                    from sp in tsp.DefaultIfEmpty()
+                    join sg in db.SchoolGrades on t.SchoolGradeFK equals sg.Id into tsg
+                    from sg in tsg.DefaultIfEmpty()
+                    select new TeacherVO
+                    {
+                        Id = t.Id,
+                        Address = t.Address,
+                        CoursesDetails = t.CoursesDetails,
+                        NoCarnet = t.NoCarnet,
+                        NoLicencia = t.NoLicencia,
+                        SchoolGradeFK = t.SchoolGradeFK,
+                        SpecialtyFK = t.SpecialtyFK,
+                        UserFK = t.UserFK,
+                        WebSite=t.WebSite,
+                        Specialty = sp == null ? null : new SpecialtyVO
+                        {
+                            Id = sp.Id,
+                            Name = sp.Name,
+                        },
+                        SchoolGrade = sg == null ? null : new SchoolGradeVO
+                        {
+                            Id = sg.Id,
+                            Name = sg.Name,
+                        },
+                    };
+            return q;
+        }
+    }
+    public interface ITeacherService : ICrudService<TeacherVO, Teacher>
+    {
+        bool AddOrUpdate(UserVO userVO, TeacherVO teacherVO);
+    }
+    #endregion
 }

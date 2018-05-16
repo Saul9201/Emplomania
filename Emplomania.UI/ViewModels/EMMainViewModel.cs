@@ -108,7 +108,6 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand InsertEmployerCommand => new RelayCommand(param =>
         {
-            var typeName = param.GetType().Name;
             var insertEmployerModel = param as InsertEmployerModel;
             insertEmployerModel.BusinessVO.Workplaces = insertEmployerModel.SelectedWorkplaces.ToList();
             if (!ServiceLocator.Get<IEmployerService>().AddOrUpdate(insertEmployerModel.UserVO, insertEmployerModel.EmployerVO, insertEmployerModel.BusinessVO))
@@ -117,6 +116,17 @@ namespace Emplomania.UI.ViewModels
                 return;
             }
             DisplayEmployerSheetView.Execute(insertEmployerModel);
+        });
+
+        public ICommand InsertTeacherCommand => new RelayCommand(param =>
+        {
+            var insertTeacherModel = param as InsertTeacherModel;
+            if(!ServiceLocator.Get<ITeacherService>().AddOrUpdate(insertTeacherModel.UserVO, insertTeacherModel.TeacherVO))
+            {
+                MessageBox.Show("El usuario no pudo ser insertado.");
+                return;
+            }
+            DisplayTeacherSheetView.Execute(insertTeacherModel);
         });
 
         public ICommand VerifyClient => new RelayCommand(param =>

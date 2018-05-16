@@ -5,10 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:vw="clr-namespace:Emplomania.UI.Views"
              xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:convert="clr-namespace:Emplomania.UI.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="1024" d:DesignWidth="1300">
-
-    <Grid Width="970" DataContext="{Binding InsertClientModel}">
+    
+    <UserControl.Resources>
+        <convert:ImageConverter x:Key="imageConverter"/>
+    </UserControl.Resources>
+    <Grid Width="970" DataContext="{Binding InsertTeacherModel}">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="600*"/>
             <ColumnDefinition Width="380*"/>
@@ -43,59 +47,57 @@
                 <Label Content="Nombre y Apellidos:"
                        Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
                 <StackPanel Orientation="Horizontal">
-                    <Label Content="{Binding ClientName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
-                    <Label Margin="-5,0,0,0" Content="{Binding ClientLastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Content="{Binding UserVO.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding UserVO.LastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding UserVO.LastName2}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel Grid.Row="2" Orientation="Vertical">
                 <Label Content="Dirección   :" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="Calle E No. 34 / 9 y calzada " Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding TeacherVO.Address}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="3" Orientation="Vertical">
                 <Label Content="Provincia:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="La Habana" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding Province.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Row="4" Orientation="Vertical">
                 <Label Content="Municipio:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="San Miguel del Padrón" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.Municipality.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
                 <Label Content="Teléfono fijo:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="73454534" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.HomePhoneNumber}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical">
                 <Label Content="Teléfono móvil:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="52369856" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.MovilPhoneNumber}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical">
                 <Label Content="Correo electrónico:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="fulanito@gmail.com" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding UserVO.Email}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="1" Grid.Row="4" Orientation="Vertical">
                 <Label Content="Sitio web:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="www.tales.com" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding TeacherVO.WebSite}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical">
                 <Label Content="No. Carnet de identidad" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="56283515722" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding TeacherVO.NoCarnet}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
             <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical">
                 <Label Content="No. licencia TCP:" Style="{StaticResource EMClientFieldTitleLabelStyle}"/>
-                <Label Content="58957" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                <Label Content="{Binding TeacherVO.NoLicencia}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
             </StackPanel>
         </Grid>
 
         <StackPanel Grid.Column="1">
             <Image Stretch="Fill" Height="168" Width="168" 
-                   Source="{Binding ClientImagePath}"
+                   Source="{Binding UserVO.ProfileImage, Converter={StaticResource imageConverter}}"
                    HorizontalAlignment="Left" Margin="40,0,0,0">
                 <Image.Clip>
                     <EllipseGeometry Center="84,84" RadiusX="84" RadiusY="84"/>
                 </Image.Clip>
             </Image>
-            <Grid Width="168" HorizontalAlignment="Left" Margin="40,-25,0,-10">
-                <Button Style="{StaticResource EMUpdateClientImageButtonStyle}"/>
-            </Grid>
         </StackPanel>
 
         <Grid Grid.Row="1" Margin="0,0,30,0">
@@ -117,13 +119,17 @@
                     Command="{Binding DataContext.DisplayInsertClientTeacherView, RelativeSource={RelativeSource AncestorType=vw:EMMainView}, Mode=OneWay}"
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
             <StackPanel Grid.Row="1" Orientation="Vertical">
-                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Nivel de escolaridad:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Universitario"/>
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                       Content="Nivel de escolaridad:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" 
+                       Content="{Binding TeacherVO.SchoolGrade.Name}"/>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical">
-                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Graduado de:"/>
-                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" Content="Arquitectura"/>
+                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" 
+                       Content="Graduado de:"/>
+                <Label Style="{StaticResource EMClientFieldContentLabelStyle}" 
+                       Content="{Binding TeacherVO.Specialty.Name}"/>
             </StackPanel>
 
         </Grid>
@@ -142,9 +148,9 @@
                     CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
 
             <StackPanel Grid.Row="1" Grid.ColumnSpan="2" Grid.RowSpan="4">
-                <Label Style="{StaticResource EMClientFieldTitleLabelStyle}" Content="Teléfono Fijo:"/>
-                <TextBlock Style="{StaticResource EMBasicTextBlock}" TextElement.FontWeight="Bold">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteumagni dolores eos qui ratione voluptatem sequi nesciunt. Nm aliquam quaerat voluptatem.
+                <TextBlock Style="{StaticResource EMBasicTextBlock}" 
+                           TextElement.FontWeight="Bold"
+                           Text="{Binding TeacherVO.CoursesDetails}">
 
                 </TextBlock>
             </StackPanel>
@@ -157,7 +163,8 @@
                         Command="{Binding DataContext.DisplayPaymentGatewayView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}}"
                         CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
                 <Button Style="{StaticResource EMConfirmIconButtonStyle}"  Margin="30,0,0,0"
-                        Command="{Binding DataContext.DisplayBasicView, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"/>
+                        Command="{Binding DataContext.VerifyClient, RelativeSource={RelativeSource AncestorType={x:Type vw:EMMainView}}, Mode=OneWay}"
+                        CommandParameter="{Binding DataContext, RelativeSource={RelativeSource Self}}"/>
                 <!--<Button Style="{StaticResource EMPrinterIconButtonStyle}" Margin="30,0,10,0"/>-->
             </StackPanel>
         </StackPanel>

@@ -67,6 +67,7 @@
     <Compile Include="SchoolGrade.cs" />
     <Compile Include="SkinColor.cs" />
     <Compile Include="Specialty.cs" />
+    <Compile Include="Teacher.cs" />
     <Compile Include="User.cs" />
     <Compile Include="Vehicle.cs" />
     <Compile Include="WorkAspiration.cs" />

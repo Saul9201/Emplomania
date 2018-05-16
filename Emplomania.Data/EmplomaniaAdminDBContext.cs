@@ -48,6 +48,7 @@ namespace Emplomania.Data
         public DbSet<AditionalService> AditionalServices { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Course> Courses { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

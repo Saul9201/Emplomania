@@ -21,6 +21,16 @@ namespace Emplomania.ConsoleTest
         {
             //AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
 
+
+
+
+            //var ms = ServiceLocator.Get<IMembershipService>();
+            //var m = ms.GetAll().Where(x=>x.UserType==UserClientRole.Empleador).ToList();
+            //foreach (var item in m)
+            //{
+            //    ms.Add(new MembershipVO { Id = Guid.NewGuid(), Name = item.Name, Price = 0, UserType = UserClientRole.Profesor });
+            //}
+            
             //var l=ServiceLocator.Get<IWorkerService>().GetAll().ToList();
 
             //var ass = ServiceLocator.Get<IAditionalServiceService>();
