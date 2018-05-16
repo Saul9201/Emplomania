@@ -3,19 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:Emplomania.UI.Views.AccountingReportViews"
              mc:Ignorable="d" 
              d:DesignHeight="997.5" d:DesignWidth="1300">
-    
-    <StackPanel Width="970">
-        <StackPanel Width="270" Margin="{StaticResource StackPanelItemMargin2}">
-            <Label Content="Fecha de inicio"/>
-            <ComboBox Width="Auto"/>
-        </StackPanel>
 
-        <StackPanel Width="270" Margin="{StaticResource StackPanelItemMargin}">
-            <Label Content="Fecha final"/>
-            <ComboBox Width="Auto"/>
+    <StackPanel Width="970" DataContext="{Binding AccountingReportModel}">
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <StackPanel Width="270" Margin="0,0,40,0" >
+                <Label Content="Fecha de inicio"/>
+                <telerik:RadDateTimePicker Width="Auto"
+                                           DateSelectionMode="Day"
+                                           InputMode="DatePicker"/>
+            </StackPanel>
+
+            <StackPanel Width="270" Margin="{StaticResource StackPanelItemMargin}">
+                <Label Content="Fecha final"/>
+                <telerik:RadDateTimePicker Width="Auto"
+                                           DateSelectionMode="Day"
+                                           InputMode="DatePicker"/>
+            </StackPanel>
         </StackPanel>
 
         <Button Content="BUSCAR"
@@ -48,16 +56,24 @@
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
                     <Label Grid.Row="1" Content="Turquesa"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerTurquesa}"/>
                     <Label Grid.Row="2" Content="Esmeralda"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerEsmeralda}"/>
                     <Label Grid.Row="3" Content="Zafiro"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerZafiro}"/>
                     <Label Grid.Row="4" Content="Rubí"/>
                     <TextBox Grid.Row="4" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerRubi}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -74,14 +90,20 @@
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
                     <Label Grid.Row="1" Content="Ficha destacada"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerFichaDestacada}"/>
                     <Label Grid.Row="2" Content="Ofrezco/Necesito"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerOfrezcoNecesito}"/>
                     <Label Grid.Row="3" Content="Total" Margin="0,0,10,0"
                            HorizontalAlignment="Right" FontWeight="Bold"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerTotal, Mode=OneWay}"/>
                 </Grid>
             </StackPanel>
             <StackPanel Grid.Column="1" Width="230" HorizontalAlignment="Left">
@@ -103,16 +125,24 @@
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
                     <Label Grid.Row="1" Content="Turquesa"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerTurquesa}"/>
                     <Label Grid.Row="2" Content="Esmeralda"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerEsmeralda}"/>
                     <Label Grid.Row="3" Content="Zafiro"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerZafiro}"/>
                     <Label Grid.Row="4" Content="Rubí"/>
                     <TextBox Grid.Row="4" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerRubi}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -127,16 +157,22 @@
                     </Grid.RowDefinitions>
                     <Label Content="Servicio Adicional" FontWeight="Bold"/>
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
-                    <Label Grid.Row="1" Content="Ficha destacada"/>
+                    <Label Grid.Row="1" Content="Asistencia Tecnica"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerAsistenciaTecnica}"/>
                     <Label Grid.Row="2" Content="Ofrezco/Necesito"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerOfrezcoNecesito}"/>
                     <Label Grid.Row="3" Content="Total" Margin="0,0,10,0" 
                            HorizontalAlignment="Right" FontWeight="Bold"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerTotal, Mode=OneWay}"/>
                 </Grid>
             </StackPanel>
 
@@ -159,16 +195,24 @@
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
                     <Label Grid.Row="1" Content="Turquesa"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherTurquesa}"/>
                     <Label Grid.Row="2" Content="Esmeralda"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherEsmeralda}"/>
                     <Label Grid.Row="3" Content="Zafiro"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherZafiro}"/>
                     <Label Grid.Row="4" Content="Rubí"/>
                     <TextBox Grid.Row="4" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherRubi}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -183,16 +227,22 @@
                     </Grid.RowDefinitions>
                     <Label Content="Servicio Adicional" FontWeight="Bold"/>
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
-                    <Label Grid.Row="1" Content="Ficha destacada"/>
+                    <Label Grid.Row="1" Content="Confec de Matricula"/>
                     <TextBox Grid.Row="1" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherConfeccionMatricula}"/>
                     <Label Grid.Row="2" Content="Ofrezco/Necesito"/>
                     <TextBox Grid.Row="2" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherOfrezcoNecesito}"/>
                     <Label Grid.Row="3" Content="Total" Margin="0,0,10,0" 
                            HorizontalAlignment="Right" FontWeight="Bold"/>
                     <TextBox Grid.Row="3" Grid.Column="1"
-                             VerticalAlignment="Top" Width="Auto"/>
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherTotal, Mode=OneWay}"/>
                 </Grid>
             </StackPanel>
         </Grid>
@@ -210,14 +260,20 @@
                 <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Label Content="Total Oficina Comercial" FontWeight="Bold" Margin="0,0,10,0" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="1" VerticalAlignment="Top" Width="Auto"/>
+            <TextBox Grid.Column="1" VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TotalOficinaComercial}"/>
             <Label Grid.Row="1" Content="Total Depósito Bancario" FontWeight="Bold" Margin="0,0,10,0" HorizontalAlignment="Right"/>
-            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="Auto"/>
+            <TextBox Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TotalDepositoBancario}"/>
             <Label Grid.Row="2" Content="Total General" FontWeight="Bold" Margin="0,0,10,0" HorizontalAlignment="Right"/>
-            <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="Auto"/>
+            <TextBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding Total, Mode=OneWay}"/>
         </Grid>
 
         <Button Content="IMPRIMIR"/>
     </StackPanel>
-    
+
 </UserControl>
