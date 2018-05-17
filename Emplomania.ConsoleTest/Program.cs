@@ -19,8 +19,8 @@ namespace Emplomania.ConsoleTest
     {
         static void Main(string[] args)
         {
-            //AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
-
+            AutoMapper.Mapper.Initialize(cfg => MapConfiguration.Configure(cfg));
+            ServiceLocator.Get<IIncomeService>().GetReport(null, null, ClientCategory.CommonCustomer);
 
 
 
@@ -30,7 +30,7 @@ namespace Emplomania.ConsoleTest
             //{
             //    ms.Add(new MembershipVO { Id = Guid.NewGuid(), Name = item.Name, Price = 0, UserType = UserClientRole.Profesor });
             //}
-            
+
             //var l=ServiceLocator.Get<IWorkerService>().GetAll().ToList();
 
             //var ass = ServiceLocator.Get<IAditionalServiceService>();

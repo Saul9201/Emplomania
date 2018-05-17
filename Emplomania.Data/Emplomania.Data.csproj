@@ -156,7 +156,12 @@
     <Compile Include="Migrations\201805161628179_AddingWebSiteFieldToTeacherTable.Designer.cs">
       <DependentUpon>201805161628179_AddingWebSiteFieldToTeacherTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805171349400_SettingIncomeDateRequired.cs" />
+    <Compile Include="Migrations\201805171349400_SettingIncomeDateRequired.Designer.cs">
+      <DependentUpon>201805171349400_SettingIncomeDateRequired.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\AccountingReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AdminUserService.cs" />
     <Compile Include="Services\Base\CrudService.cs" />
@@ -281,6 +286,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805161628179_AddingWebSiteFieldToTeacherTable.resx">
       <DependentUpon>201805161628179_AddingWebSiteFieldToTeacherTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805171349400_SettingIncomeDateRequired.resx">
+      <DependentUpon>201805171349400_SettingIncomeDateRequired.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

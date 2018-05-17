@@ -13,7 +13,7 @@ namespace Emplomania.Model
         public UserClientRole ClientType { get; set; }
         public ClientCategory ClientCategory { get; set; }
         public IncomeType IncomeType { get; set; }
-        public DateTime? IncomeDate { get; set; }
+        public DateTime IncomeDate { get; set; }
         public float? MoneyCountMemberchipCUC { get; set; }
         public float? MoneyCountAditionalServCUC { get; set; }
         public float? Return { get; set; }

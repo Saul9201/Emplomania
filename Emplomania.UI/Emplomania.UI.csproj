@@ -374,7 +374,6 @@
     <Compile Include="Infrastucture\RelayCommand.cs" />
     <Compile Include="Infrastucture\ScrollViewerBehavior.cs" />
     <Compile Include="Infrastucture\SeviceLocator.cs" />
-    <Compile Include="Model\AccountingReportModel.cs" />
     <Compile Include="Model\ContactDataModel.cs" />
     <Compile Include="Model\InsertClientModel.cs" />
     <Compile Include="Model\InsertEmployerModel.cs" />

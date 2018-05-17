@@ -1,4 +1,7 @@
-﻿using Emplomania.UI.Infrastucture;
+﻿using Emplomania.Data.Model;
+using Emplomania.Data.Services;
+using Emplomania.Infrastucture.Enums;
+using Emplomania.UI.Infrastucture;
 using Emplomania.UI.Model;
 using Emplomania.UI.ViewModels.Base;
 using System;
@@ -13,7 +16,8 @@ namespace Emplomania.UI.ViewModels.AccountingReportViewModels
     public class AccountingReportViewModel : EMViewModelBase
     {
         public DateTime? InitDate { get; set; }
-        public DateTime? FinalDate { get; set; }
+        public DateTime? EndDate { get; set; }
+        public ClientCategory SelectedClientCategory { get; set; }
 
         private AccountingReportModel accountingReportModel;
         public AccountingReportModel AccountingReportModel
@@ -24,7 +28,7 @@ namespace Emplomania.UI.ViewModels.AccountingReportViewModels
 
         public ICommand SearchCommand => new RelayCommand(param =>
         {
-            //TODO:Calcular aqui el reporte contable mediante IncomeService
+            AccountingReportModel = ServiceLocator.Get<IIncomeService>().GetReport(InitDate,EndDate, SelectedClientCategory);
         });
 
 

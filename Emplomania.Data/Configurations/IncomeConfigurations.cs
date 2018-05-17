@@ -14,6 +14,9 @@ namespace Emplomania.Data.Configurations
         {
             ToTable("Income");
             HasKey(i => i.Id);
+
+            Property(x => x.IncomeDate)
+                .IsRequired();
         }
     }
 }

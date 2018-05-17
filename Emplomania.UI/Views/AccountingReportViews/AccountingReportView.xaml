@@ -4,30 +4,47 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
+             xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
              xmlns:local="clr-namespace:Emplomania.UI.Views.AccountingReportViews"
              mc:Ignorable="d" 
              d:DesignHeight="997.5" d:DesignWidth="1300">
 
     <StackPanel Width="970" DataContext="{Binding AccountingReportModel}">
         <StackPanel Orientation="Horizontal"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="{StaticResource StackPanelItemMargin}">
             <StackPanel Width="270" Margin="0,0,40,0" >
                 <Label Content="Fecha de inicio"/>
                 <telerik:RadDateTimePicker Width="Auto"
                                            DateSelectionMode="Day"
-                                           InputMode="DatePicker"/>
+                                           InputMode="DatePicker"
+                                           SelectedValue="{Binding DataContext.InitDate, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </StackPanel>
 
-            <StackPanel Width="270" Margin="{StaticResource StackPanelItemMargin}">
+            <StackPanel Width="270" 
+                        Margin="0,0,40,0">
                 <Label Content="Fecha final"/>
                 <telerik:RadDateTimePicker Width="Auto"
                                            DateSelectionMode="Day"
-                                           InputMode="DatePicker"/>
+                                           InputMode="DatePicker"
+                                           SelectedValue="{Binding DataContext.EndDate, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </StackPanel>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Label Content="Categoría de Cliente"/>
+                <telerik:RadComboBox Width="270" HorizontalAlignment="Left"
+                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:ClientCategory}}}"
+                          DisplayMemberPath="Description"
+                          SelectedValuePath="Value"
+                          SelectedValue="{Binding DataContext.SelectedClientCategory, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+            </StackPanel>
+
         </StackPanel>
 
         <Button Content="BUSCAR"
-                Margin="{StaticResource StackPanelItemMargin}"/>
+                Margin="{StaticResource StackPanelItemMargin}"
+                Command="{Binding DataContext.SearchCommand, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
         <Label Style="{StaticResource EMSearchHeaderLabelStyle}"
                Content="Resultados de la búsqueda"
                Margin="{StaticResource StackPanelItemMargin}"/>
@@ -46,6 +63,7 @@
                         <ColumnDefinition Width="40*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
@@ -74,6 +92,11 @@
                              VerticalAlignment="Top" Width="Auto"
                              IsReadOnly="True"
                              Text="{Binding WorkerRubi}"/>
+                    <Label Grid.Row="5" Content="Diamante"/>
+                    <TextBox Grid.Row="5" Grid.Column="1"
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding WorkerDiamante}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -120,6 +143,7 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Label Content="Membresías" FontWeight="Bold"/>
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
@@ -143,6 +167,11 @@
                              VerticalAlignment="Top" Width="Auto"
                              IsReadOnly="True"
                              Text="{Binding EmployerRubi}"/>
+                    <Label Grid.Row="5" Content="Diamante"/>
+                    <TextBox Grid.Row="5" Grid.Column="1"
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding EmployerDiamante}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -190,6 +219,7 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
                     </Grid.RowDefinitions>
                     <Label Content="Membresías" FontWeight="Bold"/>
                     <Label Grid.Column="1" Content="Ingresos" HorizontalAlignment="Right" FontWeight="Bold"/>
@@ -213,6 +243,11 @@
                              VerticalAlignment="Top" Width="Auto"
                              IsReadOnly="True"
                              Text="{Binding TeacherRubi}"/>
+                    <Label Grid.Row="5" Content="Diamante"/>
+                    <TextBox Grid.Row="5" Grid.Column="1"
+                             VerticalAlignment="Top" Width="Auto"
+                             IsReadOnly="True"
+                             Text="{Binding TeacherDiamante}"/>
                 </Grid>
                 <Grid>
                     <Grid.ColumnDefinitions>

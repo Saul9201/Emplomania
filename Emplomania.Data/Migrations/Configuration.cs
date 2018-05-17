@@ -1,5 +1,6 @@
 namespace Emplomania.Data.Migrations
 {
+    using Emplomania.Model;
     using Microsoft.AspNet.Identity;
     using System;
     using System.Data.Entity;
@@ -20,7 +21,7 @@ namespace Emplomania.Data.Migrations
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data.
             if (context.AdminUsers.Count() == 0)
-                context.AdminUsers.Add(new Model.AdminUser() { Id = Guid.NewGuid(), Name = "saul", PasswordHash = new PasswordHasher().HashPassword("1234"), Role = Infrastucture.Enums.UserAdminRole.Administrador });
+                context.AdminUsers.Add(new AdminUser() { Id = Guid.NewGuid(), Name = "saul", PasswordHash = new PasswordHasher().HashPassword("1234"), Role = Infrastucture.Enums.UserAdminRole.Administrador });
         }
     }
 }
