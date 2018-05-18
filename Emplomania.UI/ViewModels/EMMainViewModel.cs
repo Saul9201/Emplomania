@@ -98,6 +98,12 @@ namespace Emplomania.UI.ViewModels
         }
 
         #region Commands
+        public ICommand CloseSesionCommand => new RelayCommand(param =>
+          {
+              CentralMain.CurrentViewModel = new LoginViewModel(this.CentralMain);
+          });
+
+
         public ICommand UpdateDBCommand
         {
             get

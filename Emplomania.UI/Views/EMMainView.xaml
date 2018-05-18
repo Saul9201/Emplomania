@@ -50,6 +50,8 @@
                           Command="{Binding DisplayCreateUserView}"/>
                 <MenuItem Header="Actualizar BD"
                           Command="{Binding UpdateDBCommand}"/>
+                <MenuItem Header="Cerrar sesión "
+                          Command="{Binding CloseSesionCommand}"/>
                 <MenuItem Header="Salir" 
                           Command="{Binding DataContext.CloseWindowsCommand, RelativeSource={RelativeSource AncestorType={x:Type vw:MainView}}, Mode=OneWay}"/>
             </MenuItem>

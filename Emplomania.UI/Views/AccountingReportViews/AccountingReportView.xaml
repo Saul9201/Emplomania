@@ -17,8 +17,7 @@
             <StackPanel Width="270" Margin="0,0,40,0" >
                 <Label Content="Fecha de inicio"/>
                 <telerik:RadDateTimePicker Width="Auto"
-                                           DateSelectionMode="Day"
-                                           InputMode="DatePicker"
+                                           InputMode="DateTimePicker"
                                            SelectedValue="{Binding DataContext.InitDate, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </StackPanel>
 
@@ -26,8 +25,7 @@
                         Margin="0,0,40,0">
                 <Label Content="Fecha final"/>
                 <telerik:RadDateTimePicker Width="Auto"
-                                           DateSelectionMode="Day"
-                                           InputMode="DatePicker"
+                                           InputMode="DateTimePicker"
                                            SelectedValue="{Binding DataContext.EndDate, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </StackPanel>
 
