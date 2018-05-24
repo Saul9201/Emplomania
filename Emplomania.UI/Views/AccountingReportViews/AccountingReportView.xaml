@@ -29,14 +29,14 @@
                                            SelectedValue="{Binding DataContext.EndDate, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical">
+            <!--<StackPanel Grid.Column="0" Orientation="Vertical">
                 <Label Content="Categoría de Cliente"/>
                 <telerik:RadComboBox Width="270" HorizontalAlignment="Left"
                           ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:ClientCategory}}}"
                           DisplayMemberPath="Description"
                           SelectedValuePath="Value"
                           SelectedValue="{Binding DataContext.SelectedClientCategory, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
-            </StackPanel>
+            </StackPanel>-->
 
         </StackPanel>
 

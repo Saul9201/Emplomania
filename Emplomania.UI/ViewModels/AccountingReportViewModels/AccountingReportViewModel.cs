@@ -28,6 +28,7 @@ namespace Emplomania.UI.ViewModels.AccountingReportViewModels
 
         public ICommand SearchCommand => new RelayCommand(param =>
         {
+            SelectedClientCategory = ClientCategory.CommonCustomer;
             AccountingReportModel = ServiceLocator.Get<IIncomeService>().GetReport(InitDate,EndDate, SelectedClientCategory);
         });
 

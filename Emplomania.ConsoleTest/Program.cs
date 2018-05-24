@@ -25,7 +25,7 @@ namespace Emplomania.ConsoleTest
 
 
             //var ms = ServiceLocator.Get<IMembershipService>();
-            //var m = ms.GetAll().Where(x=>x.UserType==UserClientRole.Empleador).ToList();
+            //var m = ms.GetAll().Where(x => x.UserType == UserClientRole.Empleador).ToList();
             //foreach (var item in m)
             //{
             //    ms.Add(new MembershipVO { Id = Guid.NewGuid(), Name = item.Name, Price = 0, UserType = UserClientRole.Profesor });
