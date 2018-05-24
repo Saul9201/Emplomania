@@ -160,6 +160,10 @@
     <Compile Include="Migrations\201805171349400_SettingIncomeDateRequired.Designer.cs">
       <DependentUpon>201805171349400_SettingIncomeDateRequired.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201805242335537_AddingCupponToIncomeTable.cs" />
+    <Compile Include="Migrations\201805242335537_AddingCupponToIncomeTable.Designer.cs">
+      <DependentUpon>201805242335537_AddingCupponToIncomeTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountingReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,6 +293,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805171349400_SettingIncomeDateRequired.resx">
       <DependentUpon>201805171349400_SettingIncomeDateRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201805242335537_AddingCupponToIncomeTable.resx">
+      <DependentUpon>201805242335537_AddingCupponToIncomeTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -16,6 +16,7 @@ namespace Emplomania.Data.VO
         public DateTime IncomeDate { get; set; }
         public float? MoneyCountMemberchipCUC { get; set; }
         public float? MoneyCountAditionalServCUC { get; set; }
+        public float? MoneyCountCredCupponCUC { get; set; }
         public float? Return { get; set; }
         public Guid? User { get; set; }
 

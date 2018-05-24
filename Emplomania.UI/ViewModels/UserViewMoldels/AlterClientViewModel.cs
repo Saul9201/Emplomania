@@ -53,8 +53,6 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
 
         public ICommand AlterButtonCommand => new RelayCommand(param =>
         {
-            //TODO: Crear un InsertClientModel con los datos que tengo en el viewmodel(si estos son validos) y llamar al
-            //command dedicado a mostrar la vista correspondiente.
             switch (SelectedClientType)
             {
                 case UserClientRole.Trabajador:

@@ -60,12 +60,12 @@
 							      CanUserResizeColumns="True"
                                   SelectedItem="{Binding CurrentUser}">
                 <telerik:RadGridView.Columns>
-                    <telerik:GridViewImageColumn Header="Foto"
+                    <!--<telerik:GridViewImageColumn Header="Foto"
                                                  DataMemberBinding="{Binding ProfileImage, Converter={StaticResource imageConverter}}"
                                                  ImageHeight="35"
                                                  ImageWidth="35"
-                                                 MinWidth="50"/>
-                    <!--<telerik:GridViewDataColumn DataMemberBinding="{Binding Name}"
+                                                 MinWidth="50"/>-->
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}"
                                                 Header="Foto"
                                                 MinWidth="60">
                         <telerik:GridViewDataColumn.CellTemplate>
@@ -74,12 +74,12 @@
                                        HorizontalAlignment="Left"
                                        Source="{Binding ProfileImage, Converter={StaticResource imageConverter}}">
                                     <Image.Clip>
-                                        <EllipseGeometry Center="18,18" RadiusX="84" RadiusY="84"/>
+                                        <EllipseGeometry Center="18,18" RadiusX="18" RadiusY="18"/>
                                     </Image.Clip>
                                 </Image>
                             </DataTemplate>
                         </telerik:GridViewDataColumn.CellTemplate>
-                    </telerik:GridViewDataColumn>-->
+                    </telerik:GridViewDataColumn>
                     <telerik:GridViewDataColumn DataMemberBinding="{Binding UserName}"
                                                 Header="UserName"
                                                 Width="270">

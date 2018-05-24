@@ -21,18 +21,7 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
         public string UserNameToSearch { get; set; }
         public string FullNameToSearch { get; set; }
         public bool UserClientIdetityKnow { get; set; } = false;
-        //private UserVO currentUser;
-        //public UserVO CurrentUser
-        //{
-        //    get
-        //    {
-        //        return currentUser;
-        //    }
-        //    set
-        //    {
-        //        SetProperty(ref currentUser, value);
-        //    }
-        //}
+
         private UserVO currentUser;
         public UserVO CurrentUser
         {
