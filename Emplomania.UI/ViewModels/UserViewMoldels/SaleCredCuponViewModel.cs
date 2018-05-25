@@ -56,8 +56,9 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
             if (CurrentUser != null && MoneyCount > 0)
             {
                 float moneyCountCUC = MoneyType == MoneyType.CUP ? MoneyCount / 25 : MoneyCount;
-                //TODO: Chequear si el usuario ya tiene insertado un cupon antes de insertar y de ser asi notificar o preguntar a yoanna que hacer
-                //pensar en lo mismo en el caso de las membresias y los servicios adicionales
+                //TODO: Poner otro campo bool en la tabla Income que diga si la fila correspondiente ya fue
+                //sincronizada con el sitio web. Chequear si existe en la db algun ingreso con el mismo usuario que el ingreso que se
+                //decea insertar, de ser asi notificar o preguntar a yoanna que hacer. Resordar cambiar esto en la pasarela de pago.
                 var i=ServiceLocator.Get<IIncomeService>().Add(new IncomeVO
                 {
                     ClientType = SelectedClientType,
