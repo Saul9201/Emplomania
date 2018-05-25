@@ -95,7 +95,7 @@ namespace Emplomania.Data.Services
 
             res.TotalDepositoBancario = q7.Sum(i => i.MoneyCountMemberchipCUC) + q7.Sum(i => i.MoneyCountAditionalServCUC) ?? 0;
             res.TotalOficinaComercial = q8.Sum(i => i.MoneyCountMemberchipCUC) + q8.Sum(i => i.MoneyCountAditionalServCUC) ?? 0;
-            res.TotalVentaCupon = q9.Sum(i => i.MoneyCountMemberchipCUC) + q9.Sum(i => i.MoneyCountAditionalServCUC) ?? 0;
+            res.TotalVentaCupon = q9.Sum(i => i.MoneyCountCredCupponCUC) ?? 0;
             return res;
 
         }

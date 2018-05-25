@@ -59,12 +59,13 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
                 //TODO: Poner otro campo bool en la tabla Income que diga si la fila correspondiente ya fue
                 //sincronizada con el sitio web. Chequear si existe en la db algun ingreso con el mismo usuario que el ingreso que se
                 //decea insertar, de ser asi notificar o preguntar a yoanna que hacer. Resordar cambiar esto en la pasarela de pago.
-                var i=ServiceLocator.Get<IIncomeService>().Add(new IncomeVO
+                var i = ServiceLocator.Get<IIncomeService>().Add(new IncomeVO
                 {
                     ClientType = SelectedClientType,
                     IncomeDate = DateTime.Now,
                     User = CurrentUser.Id,
                     IncomeType = IncomeType.CouponSale,
+                    ClientCategory = ClientCategory.CommonCustomer,
                     MoneyCountCredCupponCUC = moneyCountCUC,
                 });
                 if(i!=null)
