@@ -50,6 +50,7 @@ namespace Emplomania.Data
         public DbSet<Course> Courses { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Income> Incomes { get; set; }
+        public DbSet<OfferNeed> OffersNeeds { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

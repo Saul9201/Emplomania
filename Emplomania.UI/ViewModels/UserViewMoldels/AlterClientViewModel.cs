@@ -53,6 +53,11 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
 
         public ICommand AlterButtonCommand => new RelayCommand(param =>
         {
+            if (CurrentUser == null)
+            {
+                MessageBox.Show("Debe seleccionar algun usuario");
+                return;
+            }
             switch (SelectedClientType)
             {
                 case UserClientRole.Trabajador:

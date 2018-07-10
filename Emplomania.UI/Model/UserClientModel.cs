@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Emplomania.UI.Model
 {
+    //TODO: OJO Recordar elimnar esta clase
     public class UserClientModel:BindableBase
     {
 

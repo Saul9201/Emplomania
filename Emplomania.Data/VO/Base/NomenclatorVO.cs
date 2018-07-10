@@ -24,7 +24,7 @@ namespace Emplomania.Data.VO.Base
         {
             int hash = 13;
             hash = (hash * 7) + this.Id.GetHashCode();
-            hash = (hash * 7) + this.Name.GetHashCode();
+            hash = (hash * 7) + (this.Name != null ? this.Name.GetHashCode() : 0);
             return hash;
         }
     }

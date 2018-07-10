@@ -5,55 +5,151 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Emplomania.UI.Views.FormViews"
              xmlns:enums="clr-namespace:Emplomania.Infrastucture.Enums;assembly=Emplomania.Infrastucture"
+             xmlns:converters="clr-namespace:Emplomania.UI.Converters"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:vos="clr-namespace:Emplomania.Data.VO;assembly=Emplomania.Data"
+             xmlns:infr="clr-namespace:Emplomania.UI.Infrastucture"
              xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1300">
-    
+             d:DesignHeight="1263.592" d:DesignWidth="1300">
+    <UserControl.Resources>
+        <converters:ImageConverter x:Key="imageConverter"/>
+    </UserControl.Resources>
     <StackPanel Width="970" 
                 HorizontalAlignment="Center">
-        <DockPanel Width="702" Margin="{StaticResource StackPanelItemMargin}">
-            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
-                <Label Content="Tipo de cliente"/>
-                <ComboBox Width="200"
+        <StackPanel>
+            <DockPanel Width="870" Margin="{StaticResource StackPanelItemMargin}">
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
+                    <Label Content="Tipo de Usuario"/>
+                    <telerik:RadComboBox Width="200"
                           ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserClientRole}}}"
                           SelectedValue="{Binding SelectedClientType}"
                           DisplayMemberPath="Description"
                           SelectedValuePath="Value"/>
-            </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="0,0,45,0">
-                <Label Content="Usuario"/>
-                <TextBox Width="200" Text="{Binding UserName}"/>
-            </StackPanel>
-            <Button Content="BUSCAR" VerticalAlignment="Bottom"/>
-        </DockPanel>
-        <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
+                    <Label Content="Usuario"/>
+                    <TextBox Width="200" Text="{Binding UserNameToSearch}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Margin="0,0,30,0">
+                    <Label Content="Nombre y Apellidos"/>
+                    <TextBox Width="200" Text="{Binding FullNameToSearch}"/>
+                </StackPanel>
+                <Button Content="BUSCAR" Width="170" VerticalAlignment="Bottom"
+                        Command="{Binding SearchButtonCommand}"/>
+            </DockPanel>
+            <Label Style="{StaticResource EMSearchHeaderLabelStyle}" 
                Content="Resultados de la búsqueda"
                Margin="{StaticResource StackPanelItemMargin}"/>
-        <StackPanel HorizontalAlignment="Center">
+            <telerik:RadGridView  Margin="{StaticResource StackPanelItemMargin}"
+                                  ItemsSource="{Binding UsersSearchResult}"
+                                  SelectionUnit="FullRow"
+                                  SelectionMode="Single"
+                                  IsReadOnly="True"
+                                  Height="500"
+                                  RowHeight="50"
+                                  AutoGenerateColumns="False"
+                                  IsFilteringAllowed="False"
+                                  ShowGroupPanel="False"
+                                  IsSynchronizedWithCurrentItem="True"
+                                  CanUserFreezeColumns="False"
+							      CanUserResizeColumns="True"
+                                  SelectedItem="{Binding CurrentUser}">
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Name}"
+                                                Header="Foto"
+                                                MinWidth="60">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type vos:UserVO}">
+                                <Image Stretch="Fill" Height="36" Width="36"
+                                       HorizontalAlignment="Left"
+                                       Source="{Binding ProfileImage, Converter={StaticResource imageConverter}}">
+                                    <Image.Clip>
+                                        <EllipseGeometry Center="18,18" RadiusX="18" RadiusY="18"/>
+                                    </Image.Clip>
+                                </Image>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding UserName}"
+                                                Header="UserName"
+                                                Width="270">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type vos:UserVO}">
+                                <Label Content="{Binding UserName}"/>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDataColumn Header="Nombre y Apellidos"
+                                                Width="230"
+                                                DataMemberBinding="{Binding Name}">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type vos:UserVO}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Label Content="{Binding Name}"/>
+                                    <Label Margin="-5,0,0,0" Content="{Binding LastName}"/>
+                                    <Label Margin="-5,0,0,0" Content="{Binding LastName2}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                    <telerik:GridViewDynamicHyperlinkColumn DataMemberBinding="{Binding Email}"
+                                                            Header="Email"
+                                                            NavigateUrlFormatString="mailto:{0}?subject=De Emplomania&amp;body=Lo contactamos de Emplomania"
+                                                            NavigateUrlMemberPaths="Email"
+                                                            TargetName="_blank"
+                                                            Width="200"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding HomePhoneNumber}"
+                                                Header="Telefono Fijo"
+                                                Width="180">
+                        <telerik:GridViewDataColumn.CellTemplate>
+                            <DataTemplate DataType="{x:Type vos:UserVO}">
+                                <Label Content="{Binding HomePhoneNumber}"/>
+                            </DataTemplate>
+                        </telerik:GridViewDataColumn.CellTemplate>
+                    </telerik:GridViewDataColumn>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
             <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}"
                 Margin="{StaticResource StackPanelItemMargin}">
-            </Border>
+                <StackPanel Orientation="Horizontal" Margin="20,10,20,0" VerticalAlignment="Top">
+                    <Label Content="{Binding CurrentUser.Name}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding CurrentUser.LastName}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                    <Label Margin="-5,0,0,0" Content="{Binding CurrentUser.LastName2}" Style="{StaticResource EMClientFieldContentLabelStyle}"/>
+                </StackPanel>
 
+            </Border>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Center">
             <Label Content="FORMULARIO" HorizontalAlignment="Center"/>
             <StackPanel HorizontalAlignment="Stretch"
+                        Width="370"
                     Margin="{StaticResource StackPanelItemMargin2}">
                 <Label Content="Se ofrece"/>
-                <ComboBox Width="Auto" />
+                <ComboBox Width="Auto"
+                          ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}"
+                          DisplayMemberPath="Name"
+                          SelectedValue="{Binding Offer.WorkplaceFK}"
+                          SelectedValuePath="Id"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Stretch"
                     Margin="{StaticResource StackPanelItemMargin2}">
                 <Label Content="Otros"/>
-                <TextBox Width="Auto" />
+                <TextBox Width="Auto" 
+                         Text="{Binding Offer.Others}"/>
             </StackPanel>
             <StackPanel HorizontalAlignment="Stretch"
                     Margin="{StaticResource StackPanelItemMargin}">
                 <Label Content="Detalles de la oferta"/>
                 <TextBox Width="Auto" 
                          Style="{StaticResource EMLargeTextBoxStyle}"
-                         Height="100"/>
+                         Height="100"
+                         Text="{Binding Offer.Details}"/>
             </StackPanel>
         </StackPanel>
-        <Button Content="PUBLICAR"/>
+        <Button Content="PUBLICAR"
+                Command="{Binding InsertOfferCommand}"/>
 
     </StackPanel>
 </UserControl>

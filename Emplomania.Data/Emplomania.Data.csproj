@@ -69,6 +69,7 @@
     <Compile Include="Configurations\AdminUserConfigurations.cs" />
     <Compile Include="Configurations\IncomeConfigurations.cs" />
     <Compile Include="Configurations\NomenclatorsConfigurations.cs" />
+    <Compile Include="Configurations\OfferNeedConfigurations.cs" />
     <Compile Include="Configurations\UserConfigurations.cs" />
     <Compile Include="EmplomaniaAdminDBContext.cs" />
     <Compile Include="MapConfiguration.cs" />
@@ -164,6 +165,18 @@
     <Compile Include="Migrations\201805242335537_AddingCupponToIncomeTable.Designer.cs">
       <DependentUpon>201805242335537_AddingCupponToIncomeTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201807091515121_AddPropsToCourse.cs" />
+    <Compile Include="Migrations\201807091515121_AddPropsToCourse.Designer.cs">
+      <DependentUpon>201807091515121_AddPropsToCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101432091_AddCostToCourse.cs" />
+    <Compile Include="Migrations\201807101432091_AddCostToCourse.Designer.cs">
+      <DependentUpon>201807101432091_AddCostToCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201807101911052_AddOffersNeeds.cs" />
+    <Compile Include="Migrations\201807101911052_AddOffersNeeds.Designer.cs">
+      <DependentUpon>201807101911052_AddOffersNeeds.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountingReportModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -174,6 +187,7 @@
     <Compile Include="Services\Base\ServiceBase.cs" />
     <Compile Include="Services\IncomeService.cs" />
     <Compile Include="Services\NomenclatorServices.cs" />
+    <Compile Include="Services\OfferNeedService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="VO\AditionalServiceVO.cs" />
     <Compile Include="VO\AdminUserVO.cs" />
@@ -195,6 +209,7 @@
     <Compile Include="VO\LanguageVO.cs" />
     <Compile Include="VO\MembershipVO.cs" />
     <Compile Include="VO\MunicipalityVO.cs" />
+    <Compile Include="VO\OfferNeedVO.cs" />
     <Compile Include="VO\PrizeVO.cs" />
     <Compile Include="VO\ProvinceVO.cs" />
     <Compile Include="VO\ScheduleVO.cs" />
@@ -296,6 +311,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201805242335537_AddingCupponToIncomeTable.resx">
       <DependentUpon>201805242335537_AddingCupponToIncomeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807091515121_AddPropsToCourse.resx">
+      <DependentUpon>201807091515121_AddPropsToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101432091_AddCostToCourse.resx">
+      <DependentUpon>201807101432091_AddCostToCourse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201807101911052_AddOffersNeeds.resx">
+      <DependentUpon>201807101911052_AddOffersNeeds.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

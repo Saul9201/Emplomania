@@ -11,5 +11,6 @@ namespace Emplomania.Model
     {
         public ICollection<BusinessWorkplace> Business { get; set; }
         public ICollection<WorkAspiration> WorkAspirations { get; set; }
+        public ICollection<OfferNeed> OffersNeeds { get; set; }
     }
 }

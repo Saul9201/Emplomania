@@ -10,5 +10,6 @@ namespace Emplomania.Model
     public class Category : Nomenclator
     {
         public ICollection<Business> Business { get; set; }
+        public ICollection<Course> Courses { get; set; }
     }
 }

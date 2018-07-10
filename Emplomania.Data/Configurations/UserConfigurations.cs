@@ -26,6 +26,10 @@ namespace Emplomania.Data.Configurations
             HasMany<Teacher>(u => u.Teachers)
                 .WithRequired()
                 .HasForeignKey(t => t.UserFK);
+
+            HasMany<OfferNeed>(u => u.OffersNeeds)
+                .WithOptional()
+                .HasForeignKey(on => on.UserFK);
         }
     }
 

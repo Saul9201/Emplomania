@@ -20,6 +20,9 @@ namespace Emplomania.Data.Configurations
                 .WithOptional()
                 .HasForeignKey(b => b.CategoryFK);
 
+            HasMany<Course>(c => c.Courses)
+                .WithOptional()
+                .HasForeignKey(co => co.CategoryFK);
         }
     }
 
@@ -296,6 +299,10 @@ namespace Emplomania.Data.Configurations
             HasMany<WorkAspiration>(wp => wp.WorkAspirations)
                 .WithOptional()
                 .HasForeignKey(wa => wa.WorkplaceFK);
+            HasMany<OfferNeed>(wp => wp.OffersNeeds)
+                .WithOptional()
+                .HasForeignKey(on => on.WorkplaceFK);
         }
+        
     }
 }

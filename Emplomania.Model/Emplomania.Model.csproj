@@ -60,6 +60,7 @@
     <Compile Include="LanguageLevel.cs" />
     <Compile Include="Membership.cs" />
     <Compile Include="Municipality.cs" />
+    <Compile Include="OfferNeed.cs" />
     <Compile Include="Prize.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Province.cs" />

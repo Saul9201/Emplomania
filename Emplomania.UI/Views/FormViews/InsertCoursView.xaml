@@ -3,48 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:local="clr-namespace:Emplomania.UI.Views.FormViews"
+             xmlns:infr="clr-namespace:Emplomania.UI.Infrastucture"
              mc:Ignorable="d" 
              d:DesignHeight="1173" d:DesignWidth="1300">
-    
+    <UserControl.Resources>
+        <DataTemplate x:Key="RadioBtItemTemplate">
+            <RadioButton Content="{Binding Name}" Width="250" IsChecked="{Binding RelativeSource={RelativeSource AncestorType=telerik:RadListBoxItem}, Path=IsSelected}"/>
+        </DataTemplate>
+
+    </UserControl.Resources>
     <StackPanel Width="970">
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Nombre del curso"/>
-            <TextBox Width="Auto"/>
+            <TextBox Width="Auto" Text="{Binding CourseVO.Name}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Categoría"/>
-            <Border Style="{StaticResource EMSearchResultPresenterBorderStyle}" Width="Auto" Height="215"/>
+                                    <!--ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Categories}"-->
+                <telerik:RadListBox Width="Auto" Height="270" Margin="0,0,0,10"
+                                    ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Categories}"
+                                    SelectedItem="{Binding CourseVO.Category, Mode=TwoWay}"
+                                    ItemTemplate="{StaticResource RadioBtItemTemplate}">
+                    <telerik:RadListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel Orientation="Vertical" Height="240"/>
+                        </ItemsPanelTemplate>
+                    </telerik:RadListBox.ItemsPanel>
+                </telerik:RadListBox>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Detalles del curso o materia"/>
-            <TextBox Width="Auto" Height="125" Style="{StaticResource EMLargeTextBoxStyle}"/>
+            <TextBox Width="Auto" Height="125" Style="{StaticResource EMLargeTextBoxStyle}"
+                     Text="{Binding CourseVO.Details}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Duración del curso"/>
-            <TextBox Width="Auto"/>
+            <TextBox Width="Auto" 
+                     Text="{Binding CourseVO.Duration}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Frecuencia"/>
-            <TextBox Width="Auto"/>
-        </StackPanel>
-        <StackPanel Margin="{StaticResource StackPanelItemMargin}">
-            <Label Content="Nombre del curso"/>
-            <TextBox Width="Auto"/>
+            <TextBox Width="Auto"
+                     Text="{Binding CourseVO.Frequency}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Costo"/>
-            <TextBox Width="Auto"/>
+            <TextBox Width="Auto"
+                     Text="{Binding CourseVO.Cost}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Tiempo para matricular"/>
-            <TextBox Width="Auto"/>
+            <TextBox Width="Auto"
+                     Text="{Binding CourseVO.TimeToRegister}"/>
         </StackPanel>
         <StackPanel Margin="{StaticResource StackPanelItemMargin}">
             <Label Content="Contactar a"/>
-            <TextBox Width="Auto" Height="90" Style="{StaticResource EMLargeTextBoxStyle}"/>
+            <TextBox Width="Auto" Height="90" Style="{StaticResource EMLargeTextBoxStyle}"
+                     Text="{Binding CourseVO.Contact}"/>
         </StackPanel>
-        <Button Content="INSERTAR"/>
+        <Button Content="INSERTAR"
+                Command="{Binding InsertCourseCommand}"/>
 
     </StackPanel>
 </UserControl>
