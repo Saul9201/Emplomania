@@ -43,11 +43,17 @@ namespace Emplomania.UI.ViewModels.FormViewModels
         {
             if (CurrentUser == null)
             {
-                MessageBox.Show("Debe seleccionar algun usuario");
+                MessageBox.Show("Debe seleccionar algun usuario.");
+                return;
+            }
+            if (Offer.WorkplaceFK == null)
+            {
+                MessageBox.Show("Debe seleccionar una categoria.");
                 return;
             }
             Offer.UserFK = CurrentUser.Id;
-            var o=ServiceLocator.Get<IOfferNeedService>().Add(Offer);
+            //TODO: Chequear antes de insertar que no excista una oferta con el mismo user y workplacefk, de ser true preguntar al usuario si se desea continuar con la insercion
+            var o =ServiceLocator.Get<IOfferNeedService>().Add(Offer);
             if (o != null)
                 MessageBox.Show("La Oferta se inserto correctamente en la base de datos local.");
             else 

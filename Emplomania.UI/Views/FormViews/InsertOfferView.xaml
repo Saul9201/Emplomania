@@ -9,7 +9,6 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:vos="clr-namespace:Emplomania.Data.VO;assembly=Emplomania.Data"
              xmlns:infr="clr-namespace:Emplomania.UI.Infrastucture"
-             xmlns:nomencl="clr-namespace:Emplomania.UI.Infrastucture"
              mc:Ignorable="d" 
              d:DesignHeight="1263.592" d:DesignWidth="1300">
     <UserControl.Resources>
@@ -22,7 +21,7 @@
                 <StackPanel Orientation="Vertical" Margin="0,0,30,0">
                     <Label Content="Tipo de Usuario"/>
                     <telerik:RadComboBox Width="200"
-                          ItemsSource="{Binding Source={nomencl:Enumeration {x:Type enums:UserClientRole}}}"
+                          ItemsSource="{Binding Source={infr:Enumeration {x:Type enums:UserClientRole}}}"
                           SelectedValue="{Binding SelectedClientType}"
                           DisplayMemberPath="Description"
                           SelectedValuePath="Value"/>
@@ -121,11 +120,11 @@
 
             </Border>
         </StackPanel>
-        <StackPanel HorizontalAlignment="Center">
+        <StackPanel HorizontalAlignment="Center"
+                    Width="370">
             <Label Content="FORMULARIO" HorizontalAlignment="Center"/>
             <StackPanel HorizontalAlignment="Stretch"
-                        Width="370"
-                    Margin="{StaticResource StackPanelItemMargin2}">
+                        Margin="{StaticResource StackPanelItemMargin2}">
                 <Label Content="Se ofrece"/>
                 <ComboBox Width="Auto"
                           ItemsSource="{Binding Source={x:Static infr:WebNomenclatorsCache.Instance}, Path=Workplaces}"

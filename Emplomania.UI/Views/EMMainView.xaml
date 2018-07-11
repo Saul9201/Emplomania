@@ -141,6 +141,9 @@
             <MenuItem Grid.Column="8" Header="REPORTE CONTABLE"
                       IsEnabled="{Binding CurrentUserType, Converter={StaticResource userTypeToEnabilityConverter}}"
                       Command="{Binding DisplayAccountingReportView}"/>
+            
+            <MenuItem Grid.Column="9"
+                      Command="{Binding DisplayBasicView}"/>
         </Menu>
 
         <Grid Grid.Row="1" Background="#fbcd05" Visibility="{Binding IsBasicView}">
