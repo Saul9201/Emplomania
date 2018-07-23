@@ -20,6 +20,8 @@ using Emplomania.UI.Views.UtilsTemplatesViews;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,8 +34,11 @@ namespace Emplomania.UI.ViewModels
 {
     public enum TaskType
     {
+        [Description("Crear usuario Administrativo")]
         CreateUser,
     }
+
+
     public class EMMainViewModel : ViewModelBase
     {
         private EMViewModelBase currentViewModel;
@@ -51,7 +56,7 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
-        
+
 
         private UserAdminRole currentUserType;
         public UserAdminRole CurrentUserType
@@ -98,6 +103,7 @@ namespace Emplomania.UI.ViewModels
             this.OpenedTasks = new ObservableCollection<MenuItem>();
             this.Tasks = new Dictionary<TaskType, EMViewModelBase>();
             //this.OpenedStacks.Add(new MenuItem() { Header = "Create User", Command = DisplayCreateUserView });
+
         }
 
         #region Commands
@@ -170,24 +176,52 @@ namespace Emplomania.UI.ViewModels
         #endregion
 
         #region Navegation
-        private void DisplayEMView<T>(string v, params object[] p) where T : EMViewModelBase
+        private void DisplayEMView<T>(params object[] p) where T : EMViewModelBase
         {
             CurrentViewModel = typeof(T).GetConstructors().First().Invoke(new object[] { this }.Concat(p).ToArray()) as EMViewModelBase;
             ResetScrollContent();
         }
 
-        //private void DisplayEMView<T>(string v, params object[] p) where T : EMViewModelBase
-        //{
-        //    CurrentViewModel = typeof(T).GetConstructors().First().Invoke(new object[] { this }.Concat(p).ToArray()) as EMViewModelBase;
-        //    Subitle = v;
-        //    ResetScrollContent();
-        //}
+        private void DisplayEMRootView<T>(TaskType tt)
+        {
+            if (Tasks.ContainsKey(tt))
+                MessageBox.Show("Ya exciste una tarea de tipo. Debe terminar la misma.");
+            else
+                Tasks[tt] = typeof(T).GetConstructors().First().Invoke(new object[] { this }.ToArray()) as EMViewModelBase;
+            CurrentViewModel = Tasks[tt];
+            OpenedTasks.Add(new MenuItem() { Header = GetDescription(tt), Command = new RelayCommand(action => CurrentViewModel = Tasks[TaskType.CreateUser]) });
 
+        }
+        private string GetDescription(object enumValue)
+        {
+            var descriptionAttribute = enumValue.GetType()
+              .GetField(enumValue.ToString())
+              .GetCustomAttributes(typeof(DescriptionAttribute), false)
+              .FirstOrDefault() as DescriptionAttribute;
+
+
+            return descriptionAttribute != null
+              ? descriptionAttribute.Description
+              : enumValue.ToString();
+        }
+        
+        //OJO: Si le llega como parametro algo distinto de null entonces asume que es de una vista que cierra una tarea
         public ICommand DisplayBasicView
         {
             get
             {
-                return new RelayCommand(param => CurrentViewModel = new BasicViewModel(this));
+                return new RelayCommand(param =>
+                {
+                    CurrentViewModel = new BasicViewModel(this);
+                    if (param != null && param.GetType().Name == "CreateUserViewModel")
+                    {
+
+                        //Eliminar la tupla del diccionario
+                        //Quitar el MenuItem del menu de ventanas abiertas
+                        Tasks.Remove(TaskType.CreateUser);
+                        OpenedTasks.Remove(OpenedTasks.Where(mi => mi.Header.ToString() == GetDescription(TaskType.CreateUser)).FirstOrDefault());
+                    }
+                });
             }
         }
 
@@ -197,11 +231,7 @@ namespace Emplomania.UI.ViewModels
             {
                 return new RelayCommand(param =>
                 {
-                    if (Tasks.ContainsKey(TaskType.CreateUser))
-                        MessageBox.Show("Ya exciste una tarea de tipo crear usuario. Debe terminar la misma.");
-                    else
-                        Tasks[TaskType.CreateUser] = new CreateUserViewModel(this);
-                    CurrentViewModel = Tasks[TaskType.CreateUser];
+                    DisplayEMRootView<CreateUserViewModel>(TaskType.CreateUser);
                 });
             }
         }
@@ -254,7 +284,7 @@ namespace Emplomania.UI.ViewModels
                   CurrentViewModel = vm;
               }
               else
-                  DisplayEMView<PaymentGatewayViewModel>("Pasarela de pago");
+                  DisplayEMView<PaymentGatewayViewModel>();
           });
 
 
@@ -582,37 +612,37 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand DisplayAllClientsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<AllClientsViewModel>("todos los clientes");
+              DisplayEMView<AllClientsViewModel>();
           });
 
         public ICommand DisplayUserByMembresyView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<UserByMembresyViewModel>("usuarios por membresía");
+              DisplayEMView<UserByMembresyViewModel>();
           });
 
         public ICommand DisplayUserByMembresy_DetailsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<UserByMembresy_DetailsViewModel>("usuarios por membresía", (Gender)paramEx);
+              DisplayEMView<UserByMembresy_DetailsViewModel>((Gender)paramEx);
           });
 
         public ICommand DisplayEvaluatesPersonsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<EvaluatesPersonsViewModel>("Personas Evaluadas");
+              DisplayEMView<EvaluatesPersonsViewModel>();
           });
 
         public ICommand DisplayEvaluatesPersons_WorkerDetailsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<EvaluatesPersons_WorkerDetailsViewModel>("personas evaluadas (detalles trabajador)");
+              DisplayEMView<EvaluatesPersons_WorkerDetailsViewModel>();
           });
 
         public ICommand DisplayContractedWorkersView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<ContractedWorkersViewModel>("Trabajadores Contratados");
+              DisplayEMView<ContractedWorkersViewModel>();
           });
 
         public ICommand DisplaySalledCuponsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SalledCuponsViewModel>("Cupones Vendidos");
+              DisplayEMView<SalledCuponsViewModel>();
           });
 
         public ICommand DisplayClientContactWindowsView => new RelayCommand(paramEx =>
@@ -625,17 +655,17 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand DisplayConnectedUsersView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<ConnectedUsersViewModel>("Usuarios Conectados");
+              DisplayEMView<ConnectedUsersViewModel>();
           });
 
         public ICommand DisplaySalesForWorkerView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SalesForWorkerViewModel>("Ventas por trabajador");
+              DisplayEMView<SalesForWorkerViewModel>();
           });
 
         public ICommand DisplaySurveyAnalysisViewModel => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SurveyAnalysisViewModel>("Análisis de encuesta");
+              DisplayEMView<SurveyAnalysisViewModel>();
           });
 
 

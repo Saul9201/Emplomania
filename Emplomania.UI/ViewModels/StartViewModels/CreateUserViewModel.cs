@@ -24,6 +24,7 @@ namespace Emplomania.UI.ViewModels.StartViewModels
                 if (!string.IsNullOrEmpty(UserName))
                     return true;
                 else return false;
+
             });
         }
 
@@ -38,7 +39,7 @@ namespace Emplomania.UI.ViewModels.StartViewModels
             var adminUserService = ServiceLocator.Get<IAdminUserService>();
             
             if (adminUserService.Create( SelectedUserRole, UserName, passwordBox.Password))
-                CentralEMMain.CurrentViewModel = new BasicViewModel(CentralEMMain);
+                CentralEMMain.DisplayBasicView.Execute(this);
             else
                 MessageBox.Show("El usuario que decea insertar ya exciste");
         }
