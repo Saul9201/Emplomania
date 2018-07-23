@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public RaffleWinnersViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Ganadores de rifas";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

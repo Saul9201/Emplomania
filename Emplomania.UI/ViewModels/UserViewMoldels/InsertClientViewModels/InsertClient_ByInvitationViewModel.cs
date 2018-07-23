@@ -16,7 +16,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
 
         public InsertClient_ByInvitationViewModel(EMMainViewModel centralEMMain, InsertClientModel insertClientModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "Insertar cliente por invitación";
+            Subtitle = "Insertar cliente por invitación";
             InsertClientModel = insertClientModel;
         }
     }

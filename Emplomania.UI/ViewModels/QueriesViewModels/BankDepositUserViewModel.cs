@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public BankDepositUserViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "usuarios depósito bancario";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

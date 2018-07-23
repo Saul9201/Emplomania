@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public EvaluatesPersonsViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Personas Evaluadas";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

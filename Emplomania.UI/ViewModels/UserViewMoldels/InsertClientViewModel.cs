@@ -23,6 +23,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
 
         public InsertClientViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
+            Subtitle = "Insertar Cliente";
             InsertClientModel = new InsertClientModel();
         }
     

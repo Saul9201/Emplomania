@@ -14,6 +14,7 @@ namespace Emplomania.UI.ViewModels.ServicesViewModels
     {
         public QueryClientByUserViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "cLIENTE por usuario (membresía)";
         }
 
         private IEnumerable<UserClientModel> userClientCollection;

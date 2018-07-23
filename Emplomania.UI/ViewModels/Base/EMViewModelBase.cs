@@ -12,6 +12,15 @@ namespace Emplomania.UI.ViewModels.Base
     public class EMViewModelBase : BindableBase
     {
         public EMMainViewModel CentralEMMain { get; set; }// View Model de la ventana que me contiene
+        private string subtitle;
+        public string Subtitle
+        {
+            get { return subtitle; }
+            set
+            {
+                SetProperty(ref subtitle, value.ToUpper());
+            }
+        }
         public EMViewModelBase(EMMainViewModel centralEMMain)
         {
             CentralEMMain = centralEMMain;

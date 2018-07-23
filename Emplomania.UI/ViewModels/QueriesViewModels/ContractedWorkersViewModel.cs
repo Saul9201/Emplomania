@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public ContractedWorkersViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Trabajadores Contratados";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

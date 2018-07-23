@@ -24,11 +24,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Emplomania.UI.ViewModels
 {
+    public enum TaskType
+    {
+        CreateUser,
+    }
     public class EMMainViewModel : ViewModelBase
     {
         private EMViewModelBase currentViewModel;
@@ -46,15 +51,7 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
-        private string subtitle;
-        public string Subitle
-        {
-            get { return subtitle; }
-            set
-            {
-                SetProperty(ref subtitle, value.ToUpper());
-            }
-        }
+        
 
         private UserAdminRole currentUserType;
         public UserAdminRole CurrentUserType
@@ -90,11 +87,17 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
+        public ObservableCollection<MenuItem> OpenedTasks { get; set; }
+        public Dictionary<TaskType, EMViewModelBase> Tasks { get; set; }
+
         public EMMainViewModel(MainViewModel centralMain, UserAdminRole currentUser) : base(centralMain)
         {
             this.CurrentUserType = currentUser;
             CentralMain.Title = "emplomania";
             this.CurrentViewModel = new BasicViewModel(this);
+            this.OpenedTasks = new ObservableCollection<MenuItem>();
+            this.Tasks = new Dictionary<TaskType, EMViewModelBase>();
+            //this.OpenedStacks.Add(new MenuItem() { Header = "Create User", Command = DisplayCreateUserView });
         }
 
         #region Commands
@@ -127,7 +130,7 @@ namespace Emplomania.UI.ViewModels
         public ICommand InsertTeacherCommand => new RelayCommand(param =>
         {
             var insertTeacherModel = param as InsertTeacherModel;
-            if(!ServiceLocator.Get<ITeacherService>().AddOrUpdate(insertTeacherModel.UserVO, insertTeacherModel.TeacherVO))
+            if (!ServiceLocator.Get<ITeacherService>().AddOrUpdate(insertTeacherModel.UserVO, insertTeacherModel.TeacherVO))
             {
                 MessageBox.Show("El usuario no pudo ser insertado.");
                 return;
@@ -170,9 +173,15 @@ namespace Emplomania.UI.ViewModels
         private void DisplayEMView<T>(string v, params object[] p) where T : EMViewModelBase
         {
             CurrentViewModel = typeof(T).GetConstructors().First().Invoke(new object[] { this }.Concat(p).ToArray()) as EMViewModelBase;
-            Subitle = v;
             ResetScrollContent();
         }
+
+        //private void DisplayEMView<T>(string v, params object[] p) where T : EMViewModelBase
+        //{
+        //    CurrentViewModel = typeof(T).GetConstructors().First().Invoke(new object[] { this }.Concat(p).ToArray()) as EMViewModelBase;
+        //    Subitle = v;
+        //    ResetScrollContent();
+        //}
 
         public ICommand DisplayBasicView
         {
@@ -186,7 +195,14 @@ namespace Emplomania.UI.ViewModels
         {
             get
             {
-                return new RelayCommand(param => CurrentViewModel = new CreateUserViewModel(this));
+                return new RelayCommand(param =>
+                {
+                    if (Tasks.ContainsKey(TaskType.CreateUser))
+                        MessageBox.Show("Ya exciste una tarea de tipo crear usuario. Debe terminar la misma.");
+                    else
+                        Tasks[TaskType.CreateUser] = new CreateUserViewModel(this);
+                    CurrentViewModel = Tasks[TaskType.CreateUser];
+                });
             }
         }
 
@@ -227,7 +243,6 @@ namespace Emplomania.UI.ViewModels
               if (paramEx != null)
               {
                   //TODO: Castear paramEx a insertClient
-                  this.Subitle = "Pasarela de pago";
                   ResetScrollContent();
                   var vm = new PaymentGatewayViewModel(this) { UserClientIdetityKnow = true, CurrentUser = (paramEx as InsertClientModel).UserVO };
                   if (paramEx is InsertWorkerModel)
@@ -241,7 +256,7 @@ namespace Emplomania.UI.ViewModels
               else
                   DisplayEMView<PaymentGatewayViewModel>("Pasarela de pago");
           });
-        
+
 
         public ICommand DisplayInsertClientNaturalView
         {
@@ -427,7 +442,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new QueryUserRecomendationLevelViewModel(this);
-                    Subitle = "USUARIOS NIVEL DE RECOMENDACIóN";
                 });
             }
         }
@@ -439,7 +453,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new QueryUserToRecomendationLevelViewModel(this);
-                    Subitle = "USUARIOS PARA NIVEL DE RECOMENDACIóN (detalles)";
                 });
             }
         }
@@ -451,7 +464,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new QueryUserWithRecomendationLevelViewModel(this);
-                    Subitle = "USUARIOS CON NIVEL DE RECOMENDACIóN (DETALLES)";
                 });
             }
         }
@@ -463,7 +475,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new QueryWorkerForPlaceViewModel(this);
-                    Subitle = "trabajadores por plaza (servicio adicional)";
                 });
             }
         }
@@ -475,7 +486,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new QueryClientByUserViewModel(this);
-                    Subitle = "cLIENTE por usuario (membresía)";
                 });
             }
         }
@@ -487,7 +497,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new InsertCoursViewModel(this);
-                    Subitle = "Insertar Cursos";
                     ResetScrollContent();
                 });
             }
@@ -500,7 +509,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new InsertOfferViewModel(this);
-                    Subitle = "insertar ofrezco";
                     ResetScrollContent();
                 });
             }
@@ -513,7 +521,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new InsertNeedViewModel(this);
-                    Subitle = "insertar necesito";
                     ResetScrollContent();
                 });
             }
@@ -526,7 +533,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new InsertJobVacanciesViewModel(this);
-                    Subitle = "insertar ofertas de empleo";
                     ResetScrollContent();
                 });
             }
@@ -539,7 +545,6 @@ namespace Emplomania.UI.ViewModels
                 return new RelayCommand(paramAction =>
                 {
                     CurrentViewModel = new InsertRafflesViewModel(this);
-                    Subitle = "insertar rifas";
                     ResetScrollContent();
                 });
             }
@@ -548,35 +553,30 @@ namespace Emplomania.UI.ViewModels
         public ICommand DisplayNomenclatorsView => new RelayCommand(paramEx =>
          {
              CurrentViewModel = new NomenclatorsViewModel(this);
-             Subitle = "Nomencladores";
              ResetScrollContent();
          });
 
         public ICommand DisplayAccountingReportView => new RelayCommand(paramEx =>
         {
             CurrentViewModel = new AccountingReportViewModel(this);
-            Subitle = "Reporte Contable";
             ResetScrollContent();
         });
 
         public ICommand DisplayQueryNoVerificUserView => new RelayCommand(paramEx =>
         {
             CurrentViewModel = new QueryNoVerificUserViewModel(this);
-            Subitle = "Usuarios no verificados";
             ResetScrollContent();
         });
 
         public ICommand DisplayRaffleWinnersView => new RelayCommand(paramEx =>
         {
             CurrentViewModel = new RaffleWinnersViewModel(this);
-            Subitle = "Ganadores de rifas";
             ResetScrollContent();
         });
 
         public ICommand DisplayBankDepositUserView => new RelayCommand(paramEx =>
           {
               CurrentViewModel = new BankDepositUserViewModel(this);
-              Subitle = "usuarios depósito bancario";
               ResetScrollContent();
           });
 

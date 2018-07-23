@@ -18,7 +18,7 @@ namespace Emplomania.UI.ViewModels.StartViewModels
     {
         public CreateUserViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
-            CentralEMMain.Subitle = "Crear usuario administrativo";
+            Subtitle = "Crear usuario administrativo";
             CreateCommand = new RelayCommand(this.OnCreateCommandExecute, p =>
             {
                 if (!string.IsNullOrEmpty(UserName))

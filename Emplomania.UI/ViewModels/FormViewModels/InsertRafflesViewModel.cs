@@ -11,6 +11,7 @@ namespace Emplomania.UI.ViewModels.FormViewModels
     {
         public InsertRafflesViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "insertar rifas";
         }
     }
 }

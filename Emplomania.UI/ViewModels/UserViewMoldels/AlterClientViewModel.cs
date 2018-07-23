@@ -20,7 +20,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
     {
         public AlterClientViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
-            CentralEMMain.Subitle = "MODIFICAR CLIENTE";
+            Subtitle = "MODIFICAR CLIENTE";
             CentralEMMain.ResetScrollContent();
         }
 

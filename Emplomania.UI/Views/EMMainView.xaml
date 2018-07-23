@@ -143,12 +143,13 @@
                       Command="{Binding DisplayAccountingReportView}"/>
             
             <MenuItem Grid.Column="9"
-                      Command="{Binding DisplayBasicView}"/>
+                      Command="{Binding DisplayBasicView}"
+                      ItemsSource="{Binding OpenedTasks}"/>
         </Menu>
 
         <Grid Grid.Row="1" Background="#fbcd05" Visibility="{Binding IsBasicView}">
             <Label Style="{StaticResource EMHeaderLabelStyle}" 
-                   Content="{Binding Subitle}"/>
+                   Content="{Binding CurrentViewModel.Subtitle}"/>
         </Grid>
 
         <ScrollViewer Grid.Row="2" BorderBrush="Transparent"

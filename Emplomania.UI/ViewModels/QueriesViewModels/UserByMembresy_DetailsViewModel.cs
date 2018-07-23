@@ -16,6 +16,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
 
         public UserByMembresy_DetailsViewModel(EMMainViewModel centralEMMain, UserClientRole clientType) : base(centralEMMain)
         {
+            Subtitle = "usuarios por membresía";
             CurrentClientTypeDetails = clientType;
 
             //TODO RECORDAR BORRAR ESTO

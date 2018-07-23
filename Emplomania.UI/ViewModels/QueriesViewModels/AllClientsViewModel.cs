@@ -12,7 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public AllClientsViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-
+            Subtitle = "todos los clientes";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

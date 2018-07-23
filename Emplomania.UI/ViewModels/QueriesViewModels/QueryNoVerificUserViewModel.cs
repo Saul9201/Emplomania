@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public QueryNoVerificUserViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Usuarios no verificados";
             //TODO RECORDAR BORRAR ESTO
             UserClientCollection = new List<UserClientModel>()
                     {

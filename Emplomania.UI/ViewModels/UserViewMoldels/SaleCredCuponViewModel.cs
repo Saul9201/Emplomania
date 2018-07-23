@@ -18,7 +18,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels
     {
         public SaleCredCuponViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
-            CentralEMMain.Subitle = "VENTA DE CUPÓN DE CRÉDITO";
+            Subtitle = "VENTA DE CUPÓN DE CRÉDITO";
             CentralEMMain.ResetScrollContent();
         }
 

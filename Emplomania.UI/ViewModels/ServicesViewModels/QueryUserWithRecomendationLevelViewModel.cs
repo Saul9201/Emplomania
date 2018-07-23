@@ -12,7 +12,8 @@ namespace Emplomania.UI.ViewModels.ServicesViewModels
     {
         public QueryUserWithRecomendationLevelViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-            
+            Subtitle = "USUARIOS CON NIVEL DE RECOMENDACIóN (DETALLES)";
+
         }
 
         public IEnumerable<UserClientModel> UserClientCollection { get; set; }

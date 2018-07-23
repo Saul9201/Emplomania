@@ -17,7 +17,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
 
         public InsertClient_NaturalViewModel(EMMainViewModel centralEMMain, InsertClientModel insertClientModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "Insertar cliente natural";
+            Subtitle = "Insertar cliente natural";
             InsertClientModel = insertClientModel;
         }
         

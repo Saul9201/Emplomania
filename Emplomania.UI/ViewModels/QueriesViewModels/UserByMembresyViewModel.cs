@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public UserByMembresyViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "usuarios por membresía";
         }
 
 

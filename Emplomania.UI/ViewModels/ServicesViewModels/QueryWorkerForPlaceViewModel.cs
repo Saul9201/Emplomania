@@ -14,7 +14,7 @@ namespace Emplomania.UI.ViewModels.ServicesViewModels
     {
         public QueryWorkerForPlaceViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-
+            Subtitle = "trabajadores por plaza (servicio adicional)";
         }
 
         private IEnumerable<UserClientModel> userClientCollection;

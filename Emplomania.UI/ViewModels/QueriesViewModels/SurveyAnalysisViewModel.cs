@@ -11,6 +11,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public SurveyAnalysisViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Análisis de encuesta";
         }
     }
 }

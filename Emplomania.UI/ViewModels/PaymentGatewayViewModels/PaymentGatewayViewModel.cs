@@ -31,7 +31,7 @@ namespace Emplomania.UI.ViewModels.PaymentGatewayViewModels
         public IncomeVO IncomeVO { get; set; }
         public PaymentGatewayViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "Pasarela de pago";
+            Subtitle = "Pasarela de pago";
             SelectedClientType = UserClientRole.Trabajador;
             IncomeVO = new IncomeVO();
             MembershipMoney = 0;

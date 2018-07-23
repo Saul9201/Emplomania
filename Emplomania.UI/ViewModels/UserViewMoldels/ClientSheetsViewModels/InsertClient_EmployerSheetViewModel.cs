@@ -19,7 +19,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         
         public InsertClient_EmployerSheetViewModel(EMMainViewModel centralEMMain, InsertEmployerModel insertEmployerModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "ficha del empleador";
+            Subtitle = "ficha del empleador";
             InsertEmployerModel = insertEmployerModel;
             CentralEMMain.ResetScrollContent();
         }

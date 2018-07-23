@@ -53,16 +53,17 @@ namespace Emplomania.UI.ViewModels.FormViewModels
             }
             Offer.UserFK = CurrentUser.Id;
             //TODO: Chequear antes de insertar que no excista una oferta con el mismo user y workplacefk, de ser true preguntar al usuario si se desea continuar con la insercion
-            var o =ServiceLocator.Get<IOfferNeedService>().Add(Offer);
+            var o = ServiceLocator.Get<IOfferNeedService>().Add(Offer);
             if (o != null)
                 MessageBox.Show("La Oferta se inserto correctamente en la base de datos local.");
-            else 
+            else
                 MessageBox.Show("La Oferta no se inserto correctamente.");
         });
 
         public InsertOfferViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-            Offer = new OfferNeedVO() { Id = Guid.NewGuid(), Discriminator=OfferNeedType.Ofrezco };
+            Subtitle = "insertar ofrezco";
+            Offer = new OfferNeedVO() { Id = Guid.NewGuid(), Discriminator = OfferNeedType.Ofrezco };
         }
 
 

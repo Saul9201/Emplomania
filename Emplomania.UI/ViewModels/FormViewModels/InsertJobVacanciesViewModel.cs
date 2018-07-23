@@ -11,6 +11,7 @@ namespace Emplomania.UI.ViewModels.FormViewModels
     {
         public InsertJobVacanciesViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "insertar ofertas de empleo";
         }
     }
 }

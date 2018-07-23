@@ -13,7 +13,7 @@ namespace Emplomania.UI.ViewModels.ServicesViewModels
     {
         public InsertRecomendationViewModel(EMMainViewModel emMainViewModel) : base(emMainViewModel)
         {
-            CentralEMMain.Subitle = "INSERTAR NIVEL DE RECOMENDACIÓN";
+            Subtitle = "INSERTAR NIVEL DE RECOMENDACIÓN";
         }
 
         //Propiedades Bindeadas

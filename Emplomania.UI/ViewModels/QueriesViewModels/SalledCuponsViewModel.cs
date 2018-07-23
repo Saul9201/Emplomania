@@ -11,6 +11,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public SalledCuponsViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Cupones Vendidos";
         }
     }
 }

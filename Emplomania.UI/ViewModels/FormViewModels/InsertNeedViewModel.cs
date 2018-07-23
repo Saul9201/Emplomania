@@ -62,6 +62,7 @@ namespace Emplomania.UI.ViewModels.FormViewModels
 
         public InsertNeedViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "insertar necesito";
             Need = new OfferNeedVO() { Id = Guid.NewGuid(), Discriminator = OfferNeedType.Necesito };
         }
     }

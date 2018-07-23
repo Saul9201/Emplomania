@@ -16,7 +16,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
         public InsertTeacherModel InsertTeacherModel { get; set; }
         public InsertClient_TeacherSheetViewModel(EMMainViewModel centralEMMain, InsertTeacherModel insertTeacherModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "ficha del profesor";
+            Subtitle = "ficha del profesor";
             InsertTeacherModel = insertTeacherModel;
         }
 

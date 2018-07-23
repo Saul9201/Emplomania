@@ -11,6 +11,7 @@ namespace Emplomania.UI.ViewModels.NomenclatorsViewModels
     {
         public NomenclatorsViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+             Subtitle = "Nomencladores";
         }
     }
 }

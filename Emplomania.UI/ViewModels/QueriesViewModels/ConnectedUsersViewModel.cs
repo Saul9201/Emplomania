@@ -12,6 +12,7 @@ namespace Emplomania.UI.ViewModels.QueriesViewModels
     {
         public ConnectedUsersViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Usuarios Conectados";
             ContactDataModel cdm = new ContactDataModel()
             {
                 PrivateHomeTelephone = "76587876",

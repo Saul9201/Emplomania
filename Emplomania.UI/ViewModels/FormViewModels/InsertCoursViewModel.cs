@@ -17,12 +17,13 @@ namespace Emplomania.UI.ViewModels.FormViewModels
         public CourseVO CourseVO { get; set; }
         public InsertCoursViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
-            this.CourseVO = new CourseVO() { Id=Guid.NewGuid()};
+            Subtitle = "Insertar Cursos";
+            this.CourseVO = new CourseVO() { Id = Guid.NewGuid() };
         }
 
         public ICommand InsertCourseCommand => new RelayCommand(param =>
         {
-            var c=ServiceLocator.Get<ICourseService>().Add(CourseVO);
+            var c = ServiceLocator.Get<ICourseService>().Add(CourseVO);
             if (c != null)
                 MessageBox.Show("El Curso fue agregado correcamente en la db local.");
             else

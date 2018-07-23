@@ -39,7 +39,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.InsertClientViewModels
 
         public InsertClient_CreatePerfil1ViewModel(EMMainViewModel centralEMMain, InsertWorkerModel insertWorkerModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "crear perfil trabajador (paso 1)";
+            Subtitle = "crear perfil trabajador (paso 1)";
             InsertWorkerModel = insertWorkerModel;
             CentralEMMain.ResetScrollContent();
         }

@@ -35,7 +35,7 @@ namespace Emplomania.UI.ViewModels.UserViewMoldels.ClientFormsViewModels
 
         public TeacherFormViewModel(EMMainViewModel centralEMMain, InsertTeacherModel insertTeacherModel) : base(centralEMMain)
         {
-            CentralEMMain.Subitle = "crear perfil profesor";
+            Subtitle = "crear perfil profesor";
             InsertTeacherModel = insertTeacherModel;
             CentralEMMain.ResetScrollContent();
         }

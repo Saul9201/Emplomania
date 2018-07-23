@@ -35,6 +35,7 @@ namespace Emplomania.UI.ViewModels.AccountingReportViewModels
 
         public AccountingReportViewModel(EMMainViewModel centralEMMain) : base(centralEMMain)
         {
+            Subtitle = "Reporte Contable";
             AccountingReportModel = new AccountingReportModel();
         }
     }
