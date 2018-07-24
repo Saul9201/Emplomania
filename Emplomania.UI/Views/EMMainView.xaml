@@ -150,6 +150,9 @@
         <Grid Grid.Row="1" Background="#fbcd05" Visibility="{Binding IsBasicView}">
             <Label Style="{StaticResource EMHeaderLabelStyle}" 
                    Content="{Binding CurrentViewModel.Subtitle}"/>
+            <Button HorizontalAlignment="Right" Style="{StaticResource EMCloseIconButtonStyle2}"
+                    Margin="8,2" Width="Auto" Height="Auto"/>
+
         </Grid>
 
         <ScrollViewer Grid.Row="2" BorderBrush="Transparent"

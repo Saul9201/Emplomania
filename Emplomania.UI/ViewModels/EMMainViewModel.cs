@@ -204,37 +204,24 @@ namespace Emplomania.UI.ViewModels
               ? descriptionAttribute.Description
               : enumValue.ToString();
         }
-        
+
         //OJO: Si le llega como parametro algo distinto de null entonces asume que es de una vista que cierra una tarea
-        public ICommand DisplayBasicView
-        {
-            get
-            {
-                return new RelayCommand(param =>
+        public ICommand DisplayBasicView => 
+            new RelayCommand(param =>
                 {
                     CurrentViewModel = new BasicViewModel(this);
                     if (param != null && param.GetType().Name == "CreateUserViewModel")
                     {
-
-                        //Eliminar la tupla del diccionario
-                        //Quitar el MenuItem del menu de ventanas abiertas
                         Tasks.Remove(TaskType.CreateUser);
                         OpenedTasks.Remove(OpenedTasks.Where(mi => mi.Header.ToString() == GetDescription(TaskType.CreateUser)).FirstOrDefault());
                     }
                 });
-            }
-        }
 
-        public ICommand DisplayCreateUserView
-        {
-            get
-            {
-                return new RelayCommand(param =>
+        public ICommand DisplayCreateUserView =>
+            new RelayCommand(param =>
                 {
                     DisplayEMRootView<CreateUserViewModel>(TaskType.CreateUser);
                 });
-            }
-        }
 
         public ICommand DisplayInsertClientView
         {
