@@ -104,7 +104,7 @@
                     </telerik:GridViewDataColumn>
                     <telerik:GridViewDynamicHyperlinkColumn DataMemberBinding="{Binding Email}"
                                                             Header="Email"
-                                                            NavigateUrlFormatString="mailto:{0}?subject=De Emplomania&amp;body=Lo contactamos de Emplomania"
+                                                            NavigateUrlFormatString="mailto:{0}?subject=De Emplomania&amp;body=Este correo es la constancia de que ha sido cobrado el servicio que solicitó. Saludos Equipo de Emplomania. Le informamos que el servicio solicitado fue habilitado. Por favor contactenos para coordinar el cobro en un término de 7 días o en su defecto lo visitará nuestro comercial. Saludos Equipo de Emplomania."
                                                             NavigateUrlMemberPaths="Email"
                                                             TargetName="_blank"
                                                             Width="200"/>
@@ -246,7 +246,7 @@
                                                    />
             </StackPanel>
             <Button Grid.Column="3" Style="{StaticResource EMNoteIconButtonStyle}"/>
-            <Button Grid.Column="3" Grid.Row="1" Style="{StaticResource EMEmailIconButtonStyle}"/>
+            <!--<Button Grid.Column="3" Grid.Row="1" Style="{StaticResource EMEmailIconButtonStyle}"/>-->
             <!--<Button Grid.Column="2" Grid.Row="2" Style="{StaticResource EMPrinterIconButtonStyle}" Margin="11,18,10,18"/>-->
             <Button Grid.Row="3" Content="COBRAR" Grid.ColumnSpan="3"
                     Command="{Binding CobrarButtonCommand}"/>
