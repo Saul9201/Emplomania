@@ -32,10 +32,13 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Emplomania.UI.ViewModels
 {
+    //OJO: Enum que representa a las tareas que se puedan realizar, ej insertar un usuario, crear usuario administrativo etc.
     public enum TaskType
     {
         [Description("Crear usuario Administrativo")]
         CreateUser,
+        [Description("Insertar cliente")]
+        InsertClient,
     }
 
 
@@ -92,7 +95,9 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
+        //Coleccion observable para bindear el menu de las tareas
         public ObservableCollection<MenuItem> OpenedTasks { get; set; }
+        //Diccionario que representa cual user-control se esta mostrando en una tarea de un tipo determinado
         public Dictionary<TaskType, EMViewModelBase> Tasks { get; set; }
 
         public EMMainViewModel(MainViewModel centralMain, UserAdminRole currentUser) : base(centralMain)
@@ -173,6 +178,14 @@ namespace Emplomania.UI.ViewModels
 
             DisplayWorkerSheetView.Execute(new InsertWorkerModel(insertWorkerModel));
         });
+
+        public ICommand CloseButtomCommand => new RelayCommand(param =>
+        {
+            if (MessageBox.Show("Desea cerrar la sub-ventana?", "Pregunta", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
+            {
+                DisplayBasicView.Execute(CurrentViewModel);
+            }
+        });
         #endregion
 
         #region Navegation
@@ -204,18 +217,25 @@ namespace Emplomania.UI.ViewModels
               ? descriptionAttribute.Description
               : enumValue.ToString();
         }
+        
 
         //OJO: Si le llega como parametro algo distinto de null entonces asume que es de una vista que cierra una tarea
         public ICommand DisplayBasicView => 
             new RelayCommand(param =>
                 {
                     CurrentViewModel = new BasicViewModel(this);
-                    if (param != null && param.GetType().Name == "CreateUserViewModel")
-                    {
-                        Tasks.Remove(TaskType.CreateUser);
-                        OpenedTasks.Remove(OpenedTasks.Where(mi => mi.Header.ToString() == GetDescription(TaskType.CreateUser)).FirstOrDefault());
-                    }
+
+                    //Se toman los nombres de las clases que tengan el atributo closeable
+                    //var closeablesClass = typeof(CreateUserViewModel).Assembly.GetTypes().Where(x => x.IsClass && x.GetCustomAttributes(typeof(CloseableAttribute), false).Length != 0).Select(x=>x.Name).ToList();
+                    //TODO: Si es una sub-ventana de root process se debe quitar del menu de acceso rapido.
+                    //if (param != null && closeablesClass.Contains(param.GetType().Name))
+                    //if (param != null && param.GetType().Name=="CreateUserViewModel")
+                    //{
+                    //    Tasks.Remove(TaskType.CreateUser);
+                    //    OpenedTasks.Remove(OpenedTasks.Where(mi => mi.Header.ToString() == GetDescription(TaskType.CreateUser)).FirstOrDefault());
+                    //}
                 });
+
 
         public ICommand DisplayCreateUserView =>
             new RelayCommand(param =>
@@ -223,13 +243,11 @@ namespace Emplomania.UI.ViewModels
                     DisplayEMRootView<CreateUserViewModel>(TaskType.CreateUser);
                 });
 
-        public ICommand DisplayInsertClientView
-        {
-            get
+        public ICommand DisplayInsertClientView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(action => CurrentViewModel = new InsertClientViewModel(this));
-            }
-        }
+                DisplayEMRootView<InsertClientViewModel>(TaskType.InsertClient);
+            });
 
         public ICommand DisplayAlterClientView
         {

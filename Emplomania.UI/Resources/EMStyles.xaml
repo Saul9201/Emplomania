@@ -922,12 +922,12 @@
             <Setter.Value>
                 <ControlTemplate TargetType="Button">
                     <Grid>
-                        <Image x:Name="Image" Source="/Emplomania.UI;component/Images/16.png"/>
+                        <Image x:Name="Image" Source="/Emplomania.UI;component/Images/18.png"/>
                     </Grid>
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Source" Value="/Emplomania.UI;component/Images/16-a.png" TargetName="Image"/>
+                            <Setter Property="Source" Value="/Emplomania.UI;component/Images/18a.png" TargetName="Image"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

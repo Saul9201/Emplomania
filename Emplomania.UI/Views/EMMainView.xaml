@@ -143,7 +143,6 @@
                       Command="{Binding DisplayAccountingReportView}"/>
             
             <MenuItem Grid.Column="9"
-                      Command="{Binding DisplayBasicView}"
                       ItemsSource="{Binding OpenedTasks}"/>
         </Menu>
 
@@ -151,6 +150,7 @@
             <Label Style="{StaticResource EMHeaderLabelStyle}" 
                    Content="{Binding CurrentViewModel.Subtitle}"/>
             <Button HorizontalAlignment="Right" Style="{StaticResource EMCloseIconButtonStyle2}"
+                    Command="{Binding CloseButtomCommand}"
                     Margin="8,2" Width="Auto" Height="Auto"/>
 
         </Grid>
