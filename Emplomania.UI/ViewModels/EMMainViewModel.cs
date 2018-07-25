@@ -32,14 +32,14 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Emplomania.UI.ViewModels
 {
-    //OJO: Enum que representa a las tareas que se puedan realizar, ej insertar un usuario, crear usuario administrativo etc.
-    public enum TaskType
-    {
-        [Description("Crear usuario Administrativo")]
-        CreateUser,
-        [Description("Insertar cliente")]
-        InsertClient,
-    }
+    ////OJO: Enum que representa a las tareas que se puedan realizar, ej insertar un usuario, crear usuario administrativo etc.
+    //public enum TaskType
+    //{
+    //    [Description("Crear usuario Administrativo")]
+    //    CreateUser,
+    //    [Description("Insertar cliente")]
+    //    InsertClient,
+    //}
 
 
     public class EMMainViewModel : ViewModelBase
@@ -98,7 +98,7 @@ namespace Emplomania.UI.ViewModels
         //Coleccion observable para bindear el menu de las tareas
         public ObservableCollection<MenuItem> OpenedTasks { get; set; }
         //Diccionario que representa cual user-control se esta mostrando en una tarea de un tipo determinado
-        public Dictionary<TaskType, EMViewModelBase> Tasks { get; set; }
+        //public Dictionary<string, EMViewModelBase> Tasks { get; set; }
 
         public EMMainViewModel(MainViewModel centralMain, UserAdminRole currentUser) : base(centralMain)
         {
@@ -106,7 +106,7 @@ namespace Emplomania.UI.ViewModels
             CentralMain.Title = "emplomania";
             this.CurrentViewModel = new BasicViewModel(this);
             this.OpenedTasks = new ObservableCollection<MenuItem>();
-            this.Tasks = new Dictionary<TaskType, EMViewModelBase>();
+            //this.Tasks = new Dictionary<string, EMViewModelBase>();
             //this.OpenedStacks.Add(new MenuItem() { Header = "Create User", Command = DisplayCreateUserView });
 
         }
@@ -195,28 +195,58 @@ namespace Emplomania.UI.ViewModels
             ResetScrollContent();
         }
 
-        private void DisplayEMRootView<T>(TaskType tt)
+        private void DisplayEMRootView<T>(params object[] p) where T : EMViewModelBase
         {
-            if (Tasks.ContainsKey(tt))
-                MessageBox.Show("Ya exciste una tarea de tipo. Debe terminar la misma.");
-            else
-                Tasks[tt] = typeof(T).GetConstructors().First().Invoke(new object[] { this }.ToArray()) as EMViewModelBase;
-            CurrentViewModel = Tasks[tt];
-            OpenedTasks.Add(new MenuItem() { Header = GetDescription(tt), Command = new RelayCommand(action => CurrentViewModel = Tasks[TaskType.CreateUser]) });
+            if(CurrentViewModel.GetType().Name != "BasicViewModel")
+            {
+                if (MessageBox.Show("Está actualmente en una tarea, ¿desea cambiar de ventana? Tenga en cuenta que, si no tiene otra ventana de este mismo tipo guardada en el acceso temporal entonces podrá guardar esta, de lo contrario intente terminar/cerrar la tarea actual antes de pasar a la siguiente.",
+                    "Pregunta", MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.No)
+                {
+                    return;
+                }
 
+                if (OpenedTasks.Any(x=>x.Header.ToString()==CurrentViewModel.Subtitle)) //Si contiene una llave con el mismo nombre es que tiene un mismo tipo de tarea sin terminar
+                {
+                    MessageBox.Show("Ya contiene una tarea con este nombre en las salvas temporales, termine la tarea actual antes de pasar a la siguiente.");
+                    return;
+                }
+                else
+                {
+                    //Tasks.Add(CurrentViewModel.Subtitle, CurrentViewModel);
+                    OpenedTasks.Add(new MenuItem()
+                    {
+                        Header = CurrentViewModel.Subtitle,
+                        Command = new RelayCommand(param => {
+                            //CurrentViewModel = Tasks[(string)param];
+                            //Tasks.Remove((string)param);
+                            if(CurrentViewModel.GetType().Name!="BasicViewModel")
+                            {
+                                MessageBox.Show("Esta trabajando actualmente en una tarea, terminela o cierrela.", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+                                return;
+                            }
+                            CurrentViewModel = (EMViewModelBase)param;
+                            OpenedTasks.Remove(OpenedTasks.Where(x => x.Header.ToString() == ((EMViewModelBase)param).Subtitle).FirstOrDefault());
+
+                        }),
+                        CommandParameter = CurrentViewModel,
+                    });
+                }
+            }
+            //TODO: BUSCAR COMO SE LE PUEDE PASAR COMO PARAMETRO EL ARRAY DESEMPAQUETADO
+            DisplayEMView<T>();
         }
-        private string GetDescription(object enumValue)
-        {
-            var descriptionAttribute = enumValue.GetType()
-              .GetField(enumValue.ToString())
-              .GetCustomAttributes(typeof(DescriptionAttribute), false)
-              .FirstOrDefault() as DescriptionAttribute;
+        //private string GetDescription(object enumValue)
+        //{
+        //    var descriptionAttribute = enumValue.GetType()
+        //      .GetField(enumValue.ToString())
+        //      .GetCustomAttributes(typeof(DescriptionAttribute), false)
+        //      .FirstOrDefault() as DescriptionAttribute;
 
 
-            return descriptionAttribute != null
-              ? descriptionAttribute.Description
-              : enumValue.ToString();
-        }
+        //    return descriptionAttribute != null
+        //      ? descriptionAttribute.Description
+        //      : enumValue.ToString();
+        //}
         
 
         //OJO: Si le llega como parametro algo distinto de null entonces asume que es de una vista que cierra una tarea
@@ -240,38 +270,32 @@ namespace Emplomania.UI.ViewModels
         public ICommand DisplayCreateUserView =>
             new RelayCommand(param =>
                 {
-                    DisplayEMRootView<CreateUserViewModel>(TaskType.CreateUser);
+                    DisplayEMRootView<CreateUserViewModel>(param);
                 });
 
         public ICommand DisplayInsertClientView =>
             new RelayCommand(param =>
             {
-                DisplayEMRootView<InsertClientViewModel>(TaskType.InsertClient);
+                DisplayEMRootView<InsertClientViewModel>(param);
             });
 
-        public ICommand DisplayAlterClientView
-        {
-            get
+        public ICommand DisplayAlterClientView =>
+            new RelayCommand(param => 
             {
-                return new RelayCommand(action => CurrentViewModel = new AlterClientViewModel(this));
-            }
-        }
+                DisplayEMRootView<AlterClientViewModel>(param);
+            });
 
-        public ICommand DisplaySaleCredCuponView
-        {
-            get
+        public ICommand DisplaySaleCredCuponView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(action => CurrentViewModel = new SaleCredCuponViewModel(this));
-            }
-        }
+                DisplayEMRootView<SaleCredCuponViewModel>(param);
+            });
 
-        public ICommand DisplayInsertRecomendationLevelView
-        {
-            get
+        public ICommand DisplayInsertRecomendationLevelView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(action => CurrentViewModel = new InsertRecomendationViewModel(this));
-            }
-        }
+                DisplayEMRootView<InsertRecomendationViewModel>(param);
+            });
 
         public ICommand DisplayPaymentGatewayView => new RelayCommand(paramEx =>
           {
@@ -289,7 +313,7 @@ namespace Emplomania.UI.ViewModels
                   CurrentViewModel = vm;
               }
               else
-                  DisplayEMView<PaymentGatewayViewModel>();
+                  DisplayEMRootView<PaymentGatewayViewModel>();
           });
 
 
@@ -470,16 +494,12 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
-        public ICommand DisplayQueryUserRecomendationLevelView
-        {
-            get
+        public ICommand DisplayQueryUserRecomendationLevelView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new QueryUserRecomendationLevelViewModel(this);
-                });
-            }
-        }
+                DisplayEMRootView<QueryUserRecomendationLevelViewModel>(param);
+            });
+        
 
         public ICommand DisplayQueryUserToRecomendationLevelView
         {
@@ -503,126 +523,86 @@ namespace Emplomania.UI.ViewModels
             }
         }
 
-        public ICommand DisplayQueryWorkerForPlaceView
-        {
-            get
+        public ICommand DisplayQueryWorkerForPlaceView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new QueryWorkerForPlaceViewModel(this);
-                });
-            }
-        }
+                DisplayEMRootView<QueryWorkerForPlaceViewModel>(param);
+            });
 
-        public ICommand DisplayQueryClientByUserView
-        {
-            get
+        public ICommand DisplayQueryClientByUserView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new QueryClientByUserViewModel(this);
-                });
-            }
-        }
+                DisplayEMRootView<QueryClientByUserViewModel>(param);
+            });
 
-        public ICommand DisplayInsertCoursView
-        {
-            get
+        public ICommand DisplayInsertCoursView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new InsertCoursViewModel(this);
-                    ResetScrollContent();
-                });
-            }
-        }
+                DisplayEMRootView<InsertCoursViewModel>(param);
+            });
 
-        public ICommand DisplayInsertOfferView
-        {
-            get
+        public ICommand DisplayInsertOfferView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new InsertOfferViewModel(this);
-                    ResetScrollContent();
-                });
-            }
-        }
+                DisplayEMRootView<InsertOfferViewModel>(param);
+            });
 
-        public ICommand DisplayInsertNeedView
-        {
-            get
+        public ICommand DisplayInsertNeedView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new InsertNeedViewModel(this);
-                    ResetScrollContent();
-                });
-            }
-        }
+                DisplayEMRootView<InsertNeedViewModel>(param);
+            });
 
-        public ICommand DisplayInsertJobVacanciesView
-        {
-            get
+        public ICommand DisplayInsertJobVacanciesView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new InsertJobVacanciesViewModel(this);
-                    ResetScrollContent();
-                });
-            }
-        }
+                DisplayEMRootView<InsertJobVacanciesViewModel>(param);
+            });
 
-        public ICommand DisplayInsertRafflesView
-        {
-            get
+        public ICommand DisplayInsertRafflesView =>
+            new RelayCommand(param =>
             {
-                return new RelayCommand(paramAction =>
-                {
-                    CurrentViewModel = new InsertRafflesViewModel(this);
-                    ResetScrollContent();
-                });
-            }
-        }
+                DisplayEMRootView<InsertRafflesViewModel>(param);
+            });
 
-        public ICommand DisplayNomenclatorsView => new RelayCommand(paramEx =>
-         {
-             CurrentViewModel = new NomenclatorsViewModel(this);
-             ResetScrollContent();
-         });
+        public ICommand DisplayNomenclatorsView =>
+            new RelayCommand(param =>
+            {
+                DisplayEMRootView<NomenclatorsViewModel>(param);
+            });
 
-        public ICommand DisplayAccountingReportView => new RelayCommand(paramEx =>
-        {
-            CurrentViewModel = new AccountingReportViewModel(this);
-            ResetScrollContent();
-        });
+        public ICommand DisplayAccountingReportView =>
+            new RelayCommand(param =>
+            {
+                DisplayEMRootView<AccountingReportViewModel>(param);
+            });
 
-        public ICommand DisplayQueryNoVerificUserView => new RelayCommand(paramEx =>
-        {
-            CurrentViewModel = new QueryNoVerificUserViewModel(this);
-            ResetScrollContent();
-        });
+        public ICommand DisplayQueryNoVerificUserView =>
+            new RelayCommand(param =>
+            {
+                DisplayEMRootView<QueryNoVerificUserViewModel>(param);
+            });
 
-        public ICommand DisplayRaffleWinnersView => new RelayCommand(paramEx =>
-        {
-            CurrentViewModel = new RaffleWinnersViewModel(this);
-            ResetScrollContent();
-        });
+        public ICommand DisplayRaffleWinnersView =>
+            new RelayCommand(param =>
+            {
+                DisplayEMRootView<RaffleWinnersViewModel>(param);
+            });
 
-        public ICommand DisplayBankDepositUserView => new RelayCommand(paramEx =>
-          {
-              CurrentViewModel = new BankDepositUserViewModel(this);
-              ResetScrollContent();
-          });
+        public ICommand DisplayBankDepositUserView =>
+            new RelayCommand(param =>
+            {
+                DisplayEMRootView<BankDepositUserViewModel>(param);
+            });
 
         public ICommand DisplayAllClientsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<AllClientsViewModel>();
+              DisplayEMRootView<AllClientsViewModel>();
           });
 
         public ICommand DisplayUserByMembresyView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<UserByMembresyViewModel>();
+              DisplayEMRootView<UserByMembresyViewModel>();
           });
 
         public ICommand DisplayUserByMembresy_DetailsView => new RelayCommand(paramEx =>
@@ -632,7 +612,7 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand DisplayEvaluatesPersonsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<EvaluatesPersonsViewModel>();
+              DisplayEMRootView<EvaluatesPersonsViewModel>();
           });
 
         public ICommand DisplayEvaluatesPersons_WorkerDetailsView => new RelayCommand(paramEx =>
@@ -642,12 +622,12 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand DisplayContractedWorkersView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<ContractedWorkersViewModel>();
+              DisplayEMRootView<ContractedWorkersViewModel>();
           });
 
         public ICommand DisplaySalledCuponsView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SalledCuponsViewModel>();
+              DisplayEMRootView<SalledCuponsViewModel>();
           });
 
         public ICommand DisplayClientContactWindowsView => new RelayCommand(paramEx =>
@@ -660,17 +640,17 @@ namespace Emplomania.UI.ViewModels
 
         public ICommand DisplayConnectedUsersView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<ConnectedUsersViewModel>();
+              DisplayEMRootView<ConnectedUsersViewModel>();
           });
 
         public ICommand DisplaySalesForWorkerView => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SalesForWorkerViewModel>();
+              DisplayEMRootView<SalesForWorkerViewModel>();
           });
 
         public ICommand DisplaySurveyAnalysisViewModel => new RelayCommand(paramEx =>
           {
-              DisplayEMView<SurveyAnalysisViewModel>();
+              DisplayEMRootView<SurveyAnalysisViewModel>();
           });
 
 
