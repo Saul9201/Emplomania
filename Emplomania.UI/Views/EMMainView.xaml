@@ -29,16 +29,16 @@
                 <ItemsPanelTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="0.8*"/>
+                            <ColumnDefinition Width="0.9*"/>
                             <ColumnDefinition />
+                            <ColumnDefinition Width="1.4*"/>
+                            <ColumnDefinition Width="1.1*"/>
                             <ColumnDefinition Width="1.0*"/>
                             <ColumnDefinition Width="1.4*"/>
                             <ColumnDefinition/>
                             <ColumnDefinition Width="1.4*"/>
-                            <ColumnDefinition Width="0.2*"/>
+                            <ColumnDefinition Width="1.0*"/>
                         </Grid.ColumnDefinitions>
                     </Grid>
                 </ItemsPanelTemplate>
@@ -143,6 +143,7 @@
                       Command="{Binding DisplayAccountingReportView}"/>
             
             <MenuItem Grid.Column="9"
+                      Header="PENDIENTE"
                       ItemsSource="{Binding OpenedTasks}"/>
         </Menu>
 
